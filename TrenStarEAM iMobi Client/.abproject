@@ -1,0 +1,37 @@
+{
+  "ProjectName": "TrenStarEAM iMobi Client",
+  "ProjectGuid": "95d8467b-e58d-4b94-bbde-1c8a0e52a194",
+  "projectVersion": 1,
+  "AppIdentifier": "com.telerik.TrenStarEAMiMobiClient",
+  "DisplayName": "TrenStarEAM iMobi Client",
+  "Author": "",
+  "Description": "",
+  "BundleVersion": "1.0",
+  "AndroidVersionCode": "1",
+  "iOSDeviceFamily": [
+    "1",
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
+  "FrameworkVersion": "3.5.0",
+  "AndroidPermissions": [],
+  "DeviceOrientations": [
+    "Portrait",
+    "Landscape"
+  ],
+  "AndroidHardwareAcceleration": "false",
+  "iOSStatusBarStyle": "Default",
+  "Framework": "Cordova",
+  "WP8TileTitle": "",
+  "WP8Publisher": "",
+  "WP8Capabilities": [],
+  "WP8Requirements": [],
+  "WP8PublisherID": "{aa00faa0-cf4e-4a4b-88fa-052688cf5aea}",
+  "WP8ProductID": "{e35860ba-b7d1-4690-9e14-01b8d037df1c}",
+  "WP8SupportedResolutions": [
+    "ID_RESOLUTION_WVGA",
+    "ID_RESOLUTION_WXGA",
+    "ID_RESOLUTION_HD720P"
+  ]
+}
