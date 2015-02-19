@@ -1,0 +1,28 @@
+<div data-role="view" data-title="Devices" id="devices" style="position:relative;" data-layout="main" data-model="app.Devices" data-init="app.Devices.init('userProfileNameDevices')" data-show="app.Devices.show">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='userProfileNameDevices' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='inventoryHeader'>
+                        <label style="font-size: 1em;">
+                            Current Devices
+                            <input type="text" id='numberOfDevices' readonly value=""/>
+                        </label>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <ul id="grouped-listviewsDevices"></ul>
+</div>
+
+<script type="text/x-kendo-template" id="customListViewTemplateProfileDevices">
+    <a class="scrollList" data-transition="slide" style="display:block; font-size: 1em;">${Scanner}</a>
+</script>

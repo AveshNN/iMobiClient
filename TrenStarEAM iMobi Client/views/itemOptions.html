@@ -1,0 +1,34 @@
+<div data-role="view" id="itemOptions" data-title="Item Options" data-layout="main" data-model="app.ItemOption" data-init="app.ItemOption.init('itemBarcode')" data-show="app.ItemOption.show">
+    <div data-role="content">
+        <ul data-role="listview" data-style="inset" data-type="group">
+                <li>
+                    <ul>
+                        <li id='headerProfile'>
+                            <div id='itemBarcode' style="display:block;font-size: 1.5em;color:white;text-align:center;"></div>
+                        </li>
+
+                    </ul>
+                </li>
+                
+                <li>
+                    Options
+                    <ul>
+                        <li>
+                            <a onclick="app.ItemOption.navigateItemOptions('views/quickItem.html?itemBarcode=')" >Quick Item</a>
+                        </li>
+                        <li>
+                            <a onclick="app.ItemOption.navigateItemOptions('views/quickHistory.html?itemBarcode=')">Quick History</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+    </div>
+     <div data-role="footer">
+        <div data-role="navbar">
+            <div id='resultHistoryRequest' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+        </div>
+    </div>
+</div>
+
+
+

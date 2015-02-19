@@ -1,0 +1,60 @@
+<div data-role="view" id="quickItem" data-title="Item Information" data-layout="main" data-model="app.QuickItem" data-init="app.QuickItem.init('itemBarcodeQI')" data-show="app.QuickItem.show">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            <ul>
+                <li id='headerProfile'>
+                    <div id='itemBarcodeQI' style="display:block;font-size: 1.5em;color:white;text-align:center;"></div>
+                </li>
+                <li id='itemStatus' style="background-color:rgba(36, 189, 255, 1)">
+                    <div id='onsiteStatusText' style="display:block;font-size: 1.5em;color:white; text-align:center"></div>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            Item Details
+            <ul>
+                <li style="font-size:.8em;">
+                    At Profile
+                    <input type="text" style="font-size:1em;" id="atProfileText" readonly/>
+                    <!--<div id='atProfileText' style="display:block;font-size:1em;text-align:right"></div>-->
+                </li>
+                <li style="font-size:.8em">
+                    At Profile Area
+                    <input type="text" style="font-size:1em;" id="atProfileAreaText" readonly/>
+                </li>
+                <li style="font-size:.8em">
+                    To Profile
+                    <input type="text" style="font-size:1em;" id="toProfileText" readonly/>
+                </li>
+                <li style="font-size:.8em">
+                    To Profile Area
+                    <input type="text" style="font-size:1em;" id="toProfileAreaText" readonly/>
+                </li>
+                <li style="font-size:.8em">
+                    Last Txn Date
+                    <input type="text" style="font-size:1em;" id="lastTxnDateText" readonly/>
+                </li>
+                <li style="font-size:.8em">
+                    Status
+                    <input type="text" style="font-size:1em;color:red" id="statusText" readonly/>
+                </li>
+                <li style="font-size:.8em">
+                    Condition
+                    <input type="text" style="font-size:1em;color:red" id="conditionText" readonly/>
+                </li>
+                <li style="font-size:.8em">
+                    Days
+                    <input type="text" style="font-size:1em;color:red" id="daysOnSiteText" readonly/>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+
+    <div data-role="footer">
+        <div data-role="navbar">
+            <div id='itemDetailStatus' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+        </div>
+    </div>
+</div>

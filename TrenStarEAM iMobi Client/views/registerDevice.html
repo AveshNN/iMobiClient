@@ -1,0 +1,50 @@
+<div data-role="view" id="register" data-title="Registration" style="position:relative;" data-layout="main" data-model="app.RegisterDevice" data-init="app.RegisterDevice.init('deviceName', 'deviceId', 'deviceOsVersion', 'deviceOs')" data-show="app.RegisterDevice.show">
+    <div data-role="content" >
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li style="background-color:white">
+                        <div id='divReg' style="display:block;font-size: 1em;color:red;font-weight:bold;text-align:center">EAM iMobi Device Registration</div>
+                        <div id='divRegStatus' style="display:block;font-size: .7em;color:red;font-weight:bold;text-align:center">You will receive an email on the status of application</div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Device Data
+                <ul>
+                    <li>
+                        Name
+                        <input type="text" style="font-size:.8em" id="deviceName" required="required" placeholder="Device Name" readonly/>
+                    </li>
+                    <li>
+                        Secure UDID
+                        <input type="text" style="font-size:.8em" id="deviceId" required="required" placeholder="Device Id" readonly/>
+                    </li>
+                    <li>
+                        OS Version
+                        <input type="text" style="font-size:.8em" id="deviceOsVersion" required="required" placeholder="Version" readonly/>
+                    </li>
+                    <li>
+                        Platform
+                        <input type="text" style="font-size:.8em" id="deviceOs" required="required" placeholder="Platform" readonly/>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                User Data
+                <ul>
+                    <li>
+                        Email
+                        <input type="email" style="font-size:.8em;" id="email" placeholder="Your Email Address" required/>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div data-role="footer">
+        <div data-role="navbar">
+            <div id='status' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+        </div>
+        <a data-role="button" id="SendDeviceData" style="display:block" onclick="app.RegisterDevice.sendDeviceData();">Send to Admin</a>
+    </div>
+</div>

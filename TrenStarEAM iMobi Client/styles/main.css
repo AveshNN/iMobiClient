@@ -1,1 +1,267 @@
-.km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
+.km-drawer-button:before, .km-drawer-button:after { content: "\E077"; }
+
+#view-transitions-content
+{
+    background-color: white;
+    overflow: hidden
+}
+
+#scanButton
+{
+    display: block;
+    background-color: Red;
+    text-align: center;
+    margin: 0em 1em 0em 0em;
+    font-size: 2.2em;
+    color: white;
+}
+
+.km-flat .km-footer .km-navbar
+{
+    border-width: 1px 0 0;
+    background-color: rgba(36, 189, 255, 1);
+}
+
+.km-icon .km-camera
+{
+    text-shadow: none;
+}
+
+#modalview-login-button
+{
+    display: block;
+    text-align: center;
+    margin: .6em .8em 0;
+    font-size: 1.2em;
+    background-color: rgba(36, 189, 255, 1);
+    color: white;
+}
+
+.km-footer
+{
+    background-color: gray;
+    
+}
+
+.inputBox
+{
+    font-family: Bookman Old Style;
+    background-color: #EFEFEF;
+    color: #A7A7A7;
+    width: 200px;
+    padding: 7px 10px;
+    border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(180, 180, 180);
+    border-bottom-color: rgb(255, 255, 255);
+    box-shadow: 0 -1px 0 #3C3C3C;
+    font-size: 2.0em;
+}
+
+#headerProfile
+{
+    background-color: black;
+    color: white;
+    font-weight: bold; 
+}
+
+#appDrawer [data-rel=drawer]
+{
+    display: none;
+}
+
+.km-android #view-transitions .connections-button
+{
+    background-color: rgba(228, 42, 42, 1);
+    text-align: center;
+    font-size: 0.7em; 
+    margin: .6em .8em 0.2em 1em;
+    display: block;
+    font-style: italic; 
+}
+
+.km-android #view-transitions .transitions-button,
+.km-android #view-transitions .transitions-cancel
+{
+    display: block;
+    text-align: center;
+    margin: .6em .8em 0;
+    font-size: 1.1em; 
+    background-color: rgba(68, 75, 78, 1);
+}
+.transitions-button 
+{
+    background-color: white !important;
+    text-align: center;
+    font-size: 1.0em; 
+    margin: .6em .8em 0.2em 1em;
+    display: block;
+}
+
+.connections-button 
+{
+    background-color: white !important;
+    text-align: center;
+    font-size: 1.0em; 
+    margin: .6em .8em 2.0em 1em;
+    display: block;
+}
+
+.details-link
+{
+    margin-top: -1em;
+    position: absolute;
+    right: 0.6em;
+    top: 43%; 
+    background-color: Green !important;
+    font-size: 0.9em;
+    color: white !important;
+    width: 20%;
+}
+
+.details-link2
+{
+    margin-top: -1em;
+    position: absolute;
+    right: 4.6em;
+    top: 43%; 
+    background-color: Red !important;
+    font-size: 0.9em;
+    color: white !important;
+}
+
+.connectionSelect
+{
+    margin-top: -1em;
+    position: absolute;
+    right: 0.6em;
+    top: 43%; 
+    background-color: red !important;
+    font-size: 0.9em;
+    color: white !important;
+    width: 20%;
+}
+
+.connectionSelected
+{
+    margin-top: -1em;
+    position: absolute;
+    right: 0.6em;
+    top: 43%; 
+    background-color: green !important;
+    font-size: 0.9em;
+    color: white !important;
+    width: 20%;
+}
+
+#appDrawer a
+{
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-weight: normal;
+    font-size: 1.1em;
+    padding: 0 15px;
+    line-height: 45px;
+    border-radius: 2px;
+}
+
+#appDrawer a:hover,
+#appDrawer a.active:hover
+{
+    color: white;
+    background-color: blue;
+}
+
+#appDrawer a.active
+{
+    color: #45719a;
+}
+
+#appDrawer-trigger span
+{
+    display: none;
+}
+
+.km-on-ios.km-black-translucent-status-bar.km-app .km-header .km-navbar
+{
+    padding-top: 1.3em;
+    background-clip: border-box;
+}
+
+.km-header .km-navbar
+{
+    
+    background-clip: border-box;
+    background-color: rgba(36, 189, 255, 1) !important;
+}
+
+#modelNavbar
+{
+    padding-top: 0.3em;
+}
+
+.km-view-title, .km-dialog-title
+{
+    position: relative;
+    visibility: visible;
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 2.3em;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+.km-flat .km-button
+{
+    background: white;
+    border-color: rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+#inventoryHeader
+{
+    color: white;
+    background-color: black; 
+    font-weight: bold; 
+}
+
+#sumOfItems, #numberOfDevices
+{
+    font-weight: bold;
+    font-size: 1em;
+    color: lightgreen;
+    text-align: right;
+}
+
+#inventoryQuantity
+{
+    color: white;
+    background-color: black; 
+    font-weight: bold; 
+}
+
+#quantity
+{
+    font-weight: bold; 
+    font-size: 1em;
+    color: lightgreen;
+    text-align: right
+}
+
+#chartdiv
+{
+    width: 100%;
+    height: 400px;
+    font-size: 11px;
+}		
+
+.loginStatusCondition
+{
+    display: block;
+    text-align: center;
+    font-size: 1.0em;
+    color: Green;
+}  					

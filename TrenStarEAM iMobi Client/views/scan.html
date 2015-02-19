@@ -1,0 +1,21 @@
+<div data-role="view" id="scanItem" data-title="Scan Barcode" data-layout="main" data-model="app.ScanBarcode" data-init="app.ScanBarcode.init('txtBarcode', 'resultScan')">
+    <div data-role="content">
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                Barcode
+                <input data-role="autocomplete" class="inputBox" type="text" id="txtBarcode" 
+                style="width:100%;background-color:white;color:black;text-transform:uppercase" onchange="app.ScanBarcode.validateBarcode(this);"  />
+            </li>
+        </ul>
+        <ul>
+            <a data-role="button" id="scanButton" data-icon="camera" data-click="app.ScanBarcode.scanItem">Scan</a>
+        </ul>
+    </div>
+    <div data-role="footer">
+        <div data-role="navbar">
+            <div id='resultScan' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+
+        </div>
+    </div>
+</div>
+

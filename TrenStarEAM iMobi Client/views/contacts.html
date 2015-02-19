@@ -1,5 +1,7 @@
-<div data-role="view" data-title="Contacts" data-layout="main" data-model="APP.models.contacts">
-  <ul data-role="listview" data-style="inset" data-template="contactsTemplate" data-bind="source: ds"></ul>
+<div data-role="view" data-title="Contacts" data-layout="main" data-model="app.Contacts">
+  
+    <ul id="contacts-listview" data-style="inset" data-role="listview" data-template="contactsTemplate"
+        data-bind="source: contacts"></ul>
 </div>
 
 <!-- this is the template used by the listview. template items are automatically

@@ -1,0 +1,106 @@
+<div data-role="view" data-title="Inventory" id="inventory" style="position:relative;" data-layout="main" data-model="app.Inventory" data-init="app.Inventory.init('userProfileNameInventory', 'userProfileNameInventoryType', 'userProfileNameInventoryProfile')" data-show="app.Inventory.show">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            <ul>
+                <li id='headerProfile'>
+                    <div id='userProfileNameInventory' style="display:block;font-size: 1em;color:white"></div>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Inbound
+            <ul>
+                <li>
+                    <a onclick="app.Inventory.navigateInventory('#view-inventory', 'INBOUND');" data-transition="slide">Expected Inventory</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Outbound
+            <ul>
+                <li>
+                    <a onclick="app.Inventory.navigateInventory('#view-inventory', 'OUTBOUND');" data-transition="slide">Dispatched Inventory</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Onsite
+            <ul>
+                <li>
+                    <a onclick="app.Inventory.navigateInventory('#view-inventory', 'ONSITE');" data-transition="slide">Onsite Volumes</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="view" id="view-inventory" data-title="Inventory" data-model="app.Inventory">
+    <header data-role="header">
+        <div data-role="navbar">
+            <div id='navbarInventory' style="display:block;font-size: 1em;color:white"></div>
+            <a data-align="right" data-role="button" href="#inventory" data-icon="drawer-button"></a>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            <ul>
+                <li id='headerProfile'>
+                    <div id='userProfileNameInventoryType' style="display:block;font-size: 1em;color:white"></div>
+                </li>
+                <li id='inventoryHeader'>
+                    <label style="font-size: 1em;">
+                        Item Types & Quantity
+                        <input type="text" id='sumOfItems' readonly value=""/>
+                    </label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    </header>
+    
+    <ul id="grouped-listviewsInventory"></ul>
+
+    <div data-role="footer">
+        <a onclick="app.Inventory.loadMore();" style="display:block;text-align: center;" data-role="button" >Load More</a>
+    </div>
+</div>
+
+<div data-role="view" id="view-inventory-profiles" data-title="Inventory" data-model="app.Inventory" >
+    <header data-role="header">
+        <div data-role="navbar" id="navbarProfileInventory">
+            <a data-align="right" data-role="button" href="#view-inventory" data-icon="drawer-button"></a>
+            <div id='pType' style="display:block;font-size: 1em;color:white"></div>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            <ul>
+                <li id='headerProfile'>
+                    <div id='userProfileNameInventoryProfile' style="display:block;font-size: 1em;"></div>
+                </li>
+                <li id='inventoryHeader'>
+                    <div id='selectedItemType' style="display:block;font-size: 1em;">
+                    </div>
+                </li>
+                <li id='inventoryQuantity'>
+                    <label style="font-size: 1em;">
+                        Quantity
+                        <input type="text" id="quantity" readonly/>
+                    </label>
+
+                </li>
+            </ul>
+        </li>
+    </ul>
+    </header>
+    
+    <ul id="grouped-listviewsInventoryProfiles"></ul>
+</div>
+
+<script type="text/x-kendo-template" id="customListViewInventoryItemTypes">
+    <a class="scrollList" style="display:block; font-size: .8em;">${ItemType}</a>
+    <a data-role="button" onclick="app.Inventory.navigateInventoryProfile('${ItemTypeId}', '${ItemType}', '${Type}', '${Count}');" class="details-link">${Count}</a>
+</script>
+
+<script type="text/x-kendo-template" id="customListViewInventoryProfileItemTypes">
+    <a class="scrollList" style="display:block; font-size: .8em;">${TProfile}</a>
+    <a data-role="button" class="details-link">${Count}</a>
+</script>

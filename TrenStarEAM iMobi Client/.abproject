@@ -2,9 +2,9 @@
   "ProjectName": "TrenStarEAM iMobi Client",
   "ProjectGuid": "95d8467b-e58d-4b94-bbde-1c8a0e52a194",
   "projectVersion": 1,
-  "AppIdentifier": "com.telerik.TrenStarEAMiMobiClient",
+  "AppIdentifier": "za.co.trenstar.iMobi.TrenStarEAMiMobiClient",
   "DisplayName": "TrenStarEAM iMobi Client",
-  "Author": "",
+  "Author": "TrenStar SA (Pty) Ltd",
   "Description": "",
   "BundleVersion": "1.0",
   "AndroidVersionCode": "1",
@@ -33,5 +33,30 @@
     "ID_RESOLUTION_WVGA",
     "ID_RESOLUTION_WXGA",
     "ID_RESOLUTION_HD720P"
-  ]
+  ],
+  "CorePlugins": [
+    "com.phonegap.plugins.barcodescanner",
+    "org.apache.cordova.battery-status",
+    "org.apache.cordova.camera",
+    "org.apache.cordova.media-capture",
+    "org.apache.cordova.console",
+    "org.apache.cordova.contacts",
+    "org.apache.cordova.device",
+    "org.apache.cordova.device-motion",
+    "org.apache.cordova.device-orientation",
+    "org.apache.cordova.file",
+    "org.apache.cordova.file-transfer",
+    "org.apache.cordova.geolocation",
+    "org.apache.cordova.globalization",
+    "org.apache.cordova.inappbrowser",
+    "org.apache.cordova.media",
+    "org.apache.cordova.network-information",
+    "org.apache.cordova.dialogs",
+    "com.phonegap.plugins.PushPlugin",
+    "org.apache.cordova.splashscreen",
+    "com.phonegap.plugins.sqlite",
+    "org.apache.cordova.statusbar",
+    "org.apache.cordova.vibration"
+  ],
+  "WPSdk": "8.0"
 }

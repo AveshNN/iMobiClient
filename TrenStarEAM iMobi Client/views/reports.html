@@ -1,0 +1,12 @@
+<div data-role="view" data-title="Request a Report" id="reports" style="position:relative;" data-layout="main" data-model="app.Reports" data-show="app.Reports.show">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+        </div>
+    </header>
+    <ul id="grouped-listviewsReports"></ul>
+</div>
+<script type="text/x-kendo-template" id="customListViewTemplateReports">
+    <a onclick="app.Reports.request('${Report}')" >${Report}</a>
+</script>

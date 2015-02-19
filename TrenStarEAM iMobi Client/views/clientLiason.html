@@ -1,0 +1,22 @@
+<div data-role="view" data-title="Client Liason" id="clientLiason" style="position:relative;" data-layout="main" data-model="app.ClientLiason" data-init="app.ClientLiason.init('profileName')" data-show="app.ClientLiason.show">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            <ul>
+                <li id='headerProfile'>
+                    <div id='profileName' style="display:block;font-size: 1em;color:white"></div>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            Client Liasons
+            <ul id="grouped-listviewsLiasons"></ul>
+        </li>
+    </ul>
+</div>
+
+<script type="text/x-kendo-template" id="customListViewTemplateProfileLiason">
+    <a class="scrollList" data-transition="slide" style="display:block; font-size: 1em;">${Name}</a>
+    <a data-role="button" onclick="location.href='tel:${Mobile}';return false;" class="details-link">Call</a>
+    <a data-role="button" onclick="location.href='mailto:${Email}';return false;" class="details-link2">Email</a>
+</script>

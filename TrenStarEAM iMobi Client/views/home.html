@@ -1,3 +1,19 @@
-<div data-role="view" data-title="Home" data-layout="main" data-model="APP.models.home">
-  <h1 data-bind="html: title"></h1>
+<div data-role="view" data-title="Home" id="home" style="position:relative;" data-layout="main" data-model="app.Home" data-init="app.Home.init('firstName', 'lastName', 'defaultProfile', 'emailAddress')" data-show="app.Home.show">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+        </div>
+    </header>
+    <div data-role="content">
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                10 Day - Daily Volume
+               <div id="chartdiv"></div>
+            </li>
+        </ul>
+    </div>
+    
+    <!--<div id="values"></div>-->
+    <!--<div id="chartContainer"></div>-->
 </div>

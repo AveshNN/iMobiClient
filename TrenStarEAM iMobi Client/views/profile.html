@@ -1,0 +1,33 @@
+<div data-role="view" data-title="Profile" id="profile" style="position:relative;" data-layout="main" data-model="app.Profile" data-init="app.Profile.init('firstName', 'lastName', 'defaultProfile', 'emailAddress')" data-show="app.Profile.show">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Profile
+            <ul>
+                <li>
+                    <h2>
+                        <div id='firstName' style="display:block;"></div>
+                        <span>
+                            <div id='lastName' style="display:block;"></div>
+                        </span>
+                    </h2>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li style="background-color:rgba(36, 189, 255, 1);">
+                    <div id='defaultProfile' style="display:block;font-size: 1em;color:white"></div>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Email
+            <ul>
+                <li>
+                    <div id='emailAddress' style="display:block;font-size: .8em;"></div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
