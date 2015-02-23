@@ -22,8 +22,9 @@
         <script src="scripts/database.js"></script>
         <script src="scripts/connections.js"></script>
         <script src="scripts/service.js"></script>
-
+        
         <script src="scripts/login.js"></script>
+        <script src="scripts/spinner.js"></script>
         <script src="scripts/registerDevice.js"></script>
 
         <script src="scripts/home.js"></script>
@@ -49,22 +50,29 @@
     <body>
 
         <!--WELCOME VIEW -->
-        <div data-role="view" id="view-transitions" data-show="app.AppicationMenuControl.drawerListPreLogin();" >
-            <div data-role="content" id="view-transitions-content">
-                <div style="background-color: rgba(228, 42, 42, 1);
-                     background-image: -webkit-gradient(linear,50% 0,50% 70%,color-stop(0, rgba(0,0,0,.2)),color-stop(1, rgba(0,0,0,.6)));
-                     background-image: -moz-linear-gradient(50% 0,50% 70%,rgba(0,0,0,.2),rgba(0,0,0,.6));
-                     background-image: -ms-linear-gradient(50% 0,50% 70%,rgba(0,0,0,.2),rgba(0,0,0,.6));font-weight: bold">
-                    <div id='deviceStatus' style="display:block;font-size: 2.5em;font-weight: bold;color:white;font-family:segoe ui;text-align:center"></div>
-                </div>
-                <div class="imageLocation">
-                    <img src="views/images/Splash.png"  />
-                </div>
+        <div data-role="view" id="view-transitions"  data-show="app.AppicationMenuControl.drawerListPreLogin();" >
+            <div data-role="header">
+                <ul data-role="listview" data-style="inset" data-type="group">
+                <li>
+                    <ul>
+                        <li style="background-color:rgba(36, 189, 255, 1);">
+                            <div id='head' style="display:block;font-size: 1.5em;color:white; text-align:center">EAM i-Mobi</div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </div>
+            
+            <div data-role="content" id="view-transitions-content" class="imageLocation">
+
+                <!--<div class="imageLocation">
+                <img src="views/images/Splash.png"  />
+                </div>-->
             </div>
             
             <a data-role="button" id="btnLogin" data-rel="modalview" data-click="app.Login.openLoginWindow" class="transitions-button">Login</a>
             <a data-role="button" id="btnConnections" data-rel="modalview" data-click="app.Login.openConnectionWindow" class="connections-button">Change Connection</a>
-            
+
         </div>
 
         <div data-role="modalview" id="modalview-login" style="width: 95%; " data-transition="overlay:up" data-init="app.Login.init">

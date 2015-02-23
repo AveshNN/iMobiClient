@@ -143,7 +143,7 @@ app.Connections = (function () {
         var getUserConnnections = function(secureUDID) {
             var data = "uuid=" + secureUDID; 
             
-            app.Service.ajaxCall("GetUserConnections", data, "app.Connections.setUserConnections");
+            app.Service.ajaxCall("GetUserConnections", data, "app.Connections.setUserConnections", "Getting Connections");
         };
     
         var setUserConnections = function(list) {

@@ -28,7 +28,7 @@ app.QuickHistory = (function () {
         var getItemHistory = function() {
             var data = "barcode=" + quickHistoryItemBarcode;  
             
-            app.Service.ajaxCall("GetBarcodeHistory", data, "app.QuickHistory.setItemHistory");
+            app.Service.ajaxCall("GetBarcodeHistory", data, "app.QuickHistory.setItemHistory", "Loading History");
         };
         
         var setItemHistory = function(list) {
@@ -69,7 +69,7 @@ app.QuickHistory = (function () {
         var requestHistory = function() {
             console.log(app.Home.userProfileEmail());
             var data = "items=" + quickHistoryItemBarcode + "&userEmail=" + app.Home.userProfileEmail();
-            app.Service.ajaxCall("RequestHistory", data, "app.QuickHistory.callBackHistory");
+            app.Service.ajaxCall("RequestHistory", data, "app.QuickHistory.callBackHistory", "Sending Request");
         };
         
         var callBackHistory = function(result) {

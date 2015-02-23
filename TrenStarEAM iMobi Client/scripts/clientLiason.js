@@ -26,7 +26,7 @@ app.ClientLiason = (function () {
         var getClientLiason = function(x) {
             var data = "tprofileId=" + x;  
             
-            app.Service.ajaxCall("GetTrackingProfileContacts", data, "app.ClientLiason.setClientLiason");
+            app.Service.ajaxCall("GetTrackingProfileContacts", data, "app.ClientLiason.setClientLiason", "Getting Client Liasons");
         };
         
         var setClientLiason = function(list) {

@@ -37,9 +37,15 @@
     color: white;
 }
 
+#view-transitions .km-header
+{
+    position:absolute;
+    z-index:1;
+}
 .km-footer
 {
     background-color: gray;
+    bottom:0px;
     
 }
 
@@ -265,3 +271,8 @@
     font-size: 1.0em;
     color: Green;
 }  					
+
+.imageLocation {
+    background:  transparent url(../views/images/iMobi.png) no-repeat center center fixed;
+    background-size: contain;    
+}

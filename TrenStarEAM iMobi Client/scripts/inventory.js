@@ -90,19 +90,19 @@ app.Inventory = (function () {
             var skip = 0;
             var data = "type=" + type + "&tprofileId=" + trackingProfileId + "&skip=" + skip;
             
-            app.Service.ajaxCall("GetInventoryItemTypes", data, "app.Inventory.setInventory");
+            app.Service.ajaxCall("GetInventoryItemTypes", data, "app.Inventory.setInventory", "Loading Inventory");
         };
         
         var getInventoryMore = function(type, trackingProfileId, skip) {
             var data = "type=" + type + "&tprofileId=" + trackingProfileId + "&skip=" + skip;
             
-            app.Service.ajaxCall("GetInventoryItemTypes", data, "app.Inventory.setInventory");
+            app.Service.ajaxCall("GetInventoryItemTypes", data, "app.Inventory.setInventory", "Loading Inventory");
         };
         
         var getInventoryProfile = function(type, trackingProfileId, itemTypeId) {
             var data = "type=" + type + "&tprofileId=" + trackingProfileId + "&itemTypeId=" + itemTypeId;
             
-            app.Service.ajaxCall("GetInventoryProfileItemTypes", data, "app.Inventory.setInventoryProfile");
+            app.Service.ajaxCall("GetInventoryProfileItemTypes", data, "app.Inventory.setInventoryProfile", "Loading Inventory");
         };
         
         var loadMore = function() {

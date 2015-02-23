@@ -25,7 +25,7 @@ app.Devices = (function () {
         var getProfileDevices = function(x) {
             var data = "tprofileId=" + x;  
             
-            app.Service.ajaxCall("GetProfileDevices", data, "app.Devices.setProfileDevices");
+            app.Service.ajaxCall("GetProfileDevices", data, "app.Devices.setProfileDevices", "Getting Devices");
         };
         
         var setProfileDevices = function(list) {

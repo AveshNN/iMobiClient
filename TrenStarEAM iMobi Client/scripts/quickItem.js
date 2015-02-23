@@ -28,7 +28,8 @@ app.QuickItem = (function () {
         var getItemDetails = function() {
             var data = "barcode=" + quickItemItemBarcode;  
             
-            app.Service.ajaxCall("GetBarcodeInformationJSONP", data, "app.QuickItem.setItemDetails");
+            app.Service.ajaxCall("GetBarcodeInformationJSONP", data, "app.QuickItem.setItemDetails", "Getting item info");
+
         };
         
         var setItemDetails = function(list) {

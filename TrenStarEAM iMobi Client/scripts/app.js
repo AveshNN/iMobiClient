@@ -159,6 +159,10 @@ var app = (function (win) {
         
     };
     
+    var showSpinner = function(message){
+        
+    };
+    
     return {
         prevent:prevent,
         onShow:onShow,

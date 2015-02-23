@@ -26,13 +26,13 @@ app.Login = (function () {
         var validateUDID = function(secureUDID) {
             var data = "uuid=" + secureUDID;
             
-            app.Service.ajaxCall("ValidateUUID", data, "app.Login.validateLogin");
+            app.Service.ajaxCall("ValidateUUID", data, "app.Login.validateLogin", "Validating Device");
         };
         
         var ValidateSecureUUID = function(secureUDID) {
             var data = "uuid=" + secureUDID;
             
-            app.Service.ajaxCall("ValidateSecureUUID", data, "app.Login.validateLogin");
+            app.Service.ajaxCall("ValidateSecureUUID", data, "app.Login.validateLogin", "Validating Device");
         };
         
         // Authenticate to use Everlive as a particular user
@@ -42,7 +42,7 @@ app.Login = (function () {
             var UDID = app.getDeviceSecureUDID();
             var data = "smartPhoneDeviceUUID=" + UDID + "&password=" + password;
             
-            app.Service.ajaxCall("ValidateLoginJSONP", data, "app.Login.setUserData");
+            app.Service.ajaxCall("ValidateLoginJSONP", data, "app.Login.setUserData","Validating Login");
         };
         
         var setUserData = function(list) {
@@ -52,7 +52,6 @@ app.Login = (function () {
                         var userProfile = list[i];
             
                         if (userProfile.SmartPhoneDeviceUDID == null) {
-                            document.getElementById('deviceStatus').innerHTML = "DEVICE NOT REGISTERED";
                             closeLoginWindow();
                         }
                         else {            
@@ -70,22 +69,17 @@ app.Login = (function () {
         };
         
         var validateLogin = function(list) {
-            var deviceStatusDescription = document.getElementById('deviceStatus');
-            
             navigator.notification.vibrate(3000);
             
             var secure = list[0];
             if (secure.IsValid == false){
-                    deviceStatusDescription.innerHTML = "Unknown Device"
                     $('#btnLogin').text('Register');
             }
             else{
                 if (secure.IsApproved == false){
-                        deviceStatusDescription.innerHTML = "Registration Pending"
-                        $('#btnLogin').text('Reload');
+                        $('#btnLogin').text('Reg Pending - Reload');
                 }
                 else{
-                    deviceStatusDescription.innerHTML = "";
                     $('#btnLogin').text('Login');
                     
                     //var connectionButton = document.getElementById("btnConnections");
@@ -136,8 +130,8 @@ app.Login = (function () {
                     app.mobileApp.navigate("views/registerDevice.html", "");
                 }
                 else {
-                    if (deviceStatus == "Reload") {
-                        $('#btnLogin').text('Reload');
+                    if (deviceStatus == "Reg Pending - Reload") {
+                        $('#btnLogin').text('Reg Pending - Reload');
                         
                         var UDID = app.getDeviceSecureUDID();
                                 app.Login.ValidateSecureUUID(UDID, "DEF");

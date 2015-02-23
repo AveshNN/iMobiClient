@@ -42,7 +42,7 @@ app.RegisterDevice = (function () {
             else {
                 var data = "uuid=" + app.getDeviceSecureUDID() + "&userEmail=" + userEmail + "&deviceType=" + app.deviceInfo.deviceplatform();
             
-                app.Service.ajaxCall("SendDeviceData", data, "app.RegisterDevice.callbackSendDeviceData");
+                app.Service.ajaxCall("SendDeviceData", data, "app.RegisterDevice.callbackSendDeviceData", "Sending Device Data");
             }
         };
         
@@ -65,8 +65,7 @@ app.RegisterDevice = (function () {
             $('#SendDeviceData').removeClass('ui-disabled');
             if (registrationSent) {
                 document.location.href = "#view-transitions";
-                document.getElementById('deviceStatus').innerHTML = "Registration Pending";
-                $('#btnLogin').text('Reload');
+                $('#btnLogin').text('Reg Pending - Reload');
                 
             }
         };

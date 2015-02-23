@@ -31,10 +31,21 @@ app.Service = (function () {
             console.log("serviceCode:" + serviceCode);
         };
         
-        var ajaxCall = function(method, data, callback) {
+        var ajaxCall = function(method, data, callback, spinnerText) {
             var wcfServiceUrl = getService();
             data = data + "&connectionCode=" + getServiceCode();
             console.log(data);
+            if (app.spinnerService.viewModel.checkSimulator() == false) {
+                if (spinnerText == null) {
+                    spinnerText = "Loading";
+                }
+                
+                if (spinnerText == "") {
+                    spinnerText = "Loading";
+                }
+                
+                app.spinnerService.viewModel.withMessage(spinnerText);
+            }
             $.ajax({
                        type:'POST',
                        url: wcfServiceUrl + method,
@@ -43,9 +54,15 @@ app.Service = (function () {
                        contentType: 'application/json; charset=utf-8',
                        dataType: "jsonp",
                        success: function(result) {
+                           if (app.spinnerService.viewModel.checkSimulator() == false) {
+                               app.spinnerService.viewModel.spinnerStop();
+                           }
                            return result;
                        },
                        error: function (result) {
+                           if (app.spinnerService.viewModel.checkSimulator() == false) {
+                               app.spinnerService.viewModel.spinnerStop();
+                           }
                            return result;
                        },
                    });

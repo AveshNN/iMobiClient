@@ -36,7 +36,7 @@ app.Home = (function () {
         var getEquipmentOnHand = function(trackingProfileId) {           
             var data = "tprofileId=" + trackingProfileId + "&lastDays=10";
             
-            app.Service.ajaxCall("GetOnsiteVolumesLastDays", data, "app.Home.setEquipmentOnHand");
+            app.Service.ajaxCall("GetOnsiteVolumesLastDays", data, "app.Home.setEquipmentOnHand", "Getting Inventory Data");
         };
         
         var randomColor = function() {
@@ -50,13 +50,21 @@ app.Home = (function () {
         
         var setEquipmentOnHand = function(list) {
             var eq = [];
+            var overAll;
             if (list != null) {	
                 for (var i = 0;i < list.length;i++) {
                     var inv = list[i];
-                    //eq.push({ y: inv.Count, label: inv.Count, indexLabel: inv.ItemType });
-                    eq.push({ Count: inv.Count, Date: inv.Date, Color: randomColor() });
+                    if (inv.Date != "-1") {
+                        eq.push({ Onsite: inv.Onsite, Dispatch: inv.Dispatch,  Date: inv.Date, ColorO: "#009900", ColorD: "#FF0000"  });
+                    }
+                    else{
+                        overAll = inv.Volume;
+                    }
                 }
             }
+            
+            var htmOverall = document.getElementById("overall");
+            htmOverall.innerHTML = "Current Onsite - " + overAll;
             
             var chart = AmCharts.makeChart("chartdiv", {
                "theme": "none",
@@ -67,14 +75,24 @@ app.Home = (function () {
                            "position": "left"
                            }],
                "graphs": [{
-                           "balloonText": "[[category]]:[[value]]",
-                           "colorField": "Color",
+                           "balloonText": "[[category]] Onsite:[[value]]",
+                           "colorField": "ColorO",
                            "fillAlphas": 1,
                            "lineAlpha": 0,
                            "title": "Date",
                            "type": "column",
-                           "valueField": "Count"
-                       }],
+                           "valueField": "Onsite"
+                       },
+                		{
+                			"balloonText": "[[category]] Dispatch:[[value]]",
+                            "colorField": "ColorD",
+                			"fillAlphas": 0.8,
+                			"id": "AmGraph-2",
+                			"lineAlpha": 0.2,
+                			"title": "Dispatch",
+                			"type": "column",
+                			"valueField": "Dispatch"
+                		}],
                "depth3D": 20,
                "angle": 40,
                "rotate": true,
