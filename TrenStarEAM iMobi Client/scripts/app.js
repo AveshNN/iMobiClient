@@ -7,6 +7,7 @@ var app = (function (win) {
         // Cordova will wait 5 very long seconds to do it for you.
         navigator.splashscreen.hide();
         
+        
         //Create the Database
         
         app.Database.openDB();
@@ -15,24 +16,54 @@ var app = (function (win) {
         
         console.log("ready");
         
-        app.Connections.setDefaultConnection("DEF");
+        deviceSecureUDID();
+        
+        var connectionType = app.deviceInfo.deviceConnection();
+        if (connectionType == "none") {
+            alert("No internet connection");
+        }
+        else {
+            app.Connections.setDefaultConnection("DEF");
+            
+        }
+        
         
         $(window).bind('orientationchange', _orientationHandler);
+        
+        document.addEventListener("offline", app.deviceInfo.deviceOffline, false);
+        document.addEventListener("online", app.deviceInfo.deviceOnline, false);
+        
     };
 
     // Handle "deviceready" event
     document.addEventListener('deviceready', onDeviceReady, false);  
-    
+
     var _orientationHandler = function() {
         switch (window.orientation) {  
             case -90:
             case 90:
                 currentOrientation = "LANDSCAPE";
+                /*console.log("landscape");
             
+                var c = document.getElementById("chartdiv");
+                console.log(c);
+                var a = c.getElementsByTagName('a');
+                console.log(a);
+                if (a.length > 0) {
+                    console.log(a[0].outerHTML);
+                    console.log(a[0].outerText);
+                    console.log(a[0].innerText);
+                    a.outerHTML = "";
+                    a.outerText = "";
+                    a.innerText = "";
+                    
+                    c.validateNow();
+                }*/
+                         
                 break; 
             default:
                 currentOrientation = "PORTRAIT"
-
+                console.log("portrait");
                 break; 
         }
     };
@@ -87,20 +118,48 @@ var app = (function (win) {
         
         deviceOrientation : function(){
             return currentOrientation;
+        },
+        
+        deviceConnection : function(){
+            return navigator.connection.type;
+        },
+        
+        deviceOffline : function(){
+            console.log("offline:" + navigator.connection.type);
+        },
+        
+        deviceOnline : function(){
+            console.log("online" + navigator.connection.type);
+        },
+        
+        deviceIsSimulator : function() {
+            if (window.navigator.simulator == undefined) {
+                return false;
+            }
+            else
+                return true;
         }
     };
     
     //UDID is deprecated in IOS. We know create our own
     var deviceSecureUDID = (function () {
-        if (window.navigator.simulator === false) {
+        var isSimulator = app.deviceInfo.deviceIsSimulator();
+        if (isSimulator === false) {
+        //if (window.navigator.simulator === false) {
             if (device.platform.toUpperCase() == "IOS") {
                 var secureDeviceIdentifier = window.plugins.secureDeviceIdentifier;
-                secureDeviceIdentifier.get({
-                                               domain: 'za.co.trenstar.iMobi.TrenStarEAMiMobi',
-                                               key: 'tr3nst@r'
-                                           }, function(udid) {
-                                               currentDeviceSecureUDID = udid;
-                                           });  
+                
+                if (secureDeviceIdentifier !==undefined) {
+                    secureDeviceIdentifier.get({
+                                                   domain: 'za.co.trenstar.iMobi.TrenStarEAMiMobi',
+                                                   key: 'tr3nst@r'
+                                               }, function(udid) {
+                                                   currentDeviceSecureUDID = udid;
+                                               });  
+                }
+                else {
+                    currentDeviceSecureUDID = device.uuid;
+                }
             }
             else{
                 currentDeviceSecureUDID = device.uuid;
@@ -109,6 +168,7 @@ var app = (function (win) {
         else {
             currentDeviceSecureUDID = device.uuid;  
         }
+        
     });
     
     var loadDeviceSecureUDID = function() {
@@ -116,8 +176,8 @@ var app = (function (win) {
     }
     
     var getDeviceSecureUDID = function() {
-        if (currentDeviceSecureUDID == null) {
-            deviceSecureUDID();
+        if (currentDeviceSecureUDID === undefined) {
+            currentDeviceSecureUDID = deviceSecureUDID();
         }
         return currentDeviceSecureUDID;
     };

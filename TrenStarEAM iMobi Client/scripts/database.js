@@ -17,11 +17,13 @@ app.Database = (function () {
         
         //DATABASE CONFIG
         var openDb = function() {
-            //if (window.sqlitePlugin !== undefined) {
-            if (window.navigator.simulator === false) {
+            var isSimulator = app.deviceInfo.deviceIsSimulator();
+            console.log("isSimulator:" + isSimulator);
+            if (isSimulator === false) {
                 app.db = window.sqlitePlugin.openDatabase("TrenStarEAMClient");
             }
             else {
+                console.log("Is Simu:" + "YES");
                 // For debugin in simulator fallback to native SQL Lite
                 console.log("Use built in SQL Lite");
                 app.db = window.openDatabase("TrenStarEAMClient", "1.0", "EAM iMobi", 200000);
@@ -46,6 +48,7 @@ app.Database = (function () {
             db().transaction(function(tx) {
                 tx.executeSql("CREATE TABLE IF NOT EXISTS Connection(ID INTEGER PRIMARY KEY ASC, ConnectionName varchar(10), ConnectionCode varchar(10), WCFConnection varchar(150), IsSet BOOLEAM)", []);
             });
+            
         };
             
         var updateUserProfile = function(Polling) {

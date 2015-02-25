@@ -13,16 +13,17 @@
         <script src="kendo/js/jquery.min.js"></script>
 
         <script src="kendo/js/kendo.mobile.min.js"></script>
-        <script src="canvasjs/canvasjs.min.js"></script>
-        <script src="amCharts/amcharts.js"></script>
-        <script src="amCharts/funnel.js"></script>
-        <script src="amCharts/serial.js"></script>
+
+        <script src="scripts/../Plugins/cordova-secureudid-master/www/SecureDeviceIdentifier.js"></script>
 
         <script src="scripts/app.js"></script>
+
         <script src="scripts/database.js"></script>
+
         <script src="scripts/connections.js"></script>
+
         <script src="scripts/service.js"></script>
-        
+
         <script src="scripts/login.js"></script>
         <script src="scripts/spinner.js"></script>
         <script src="scripts/registerDevice.js"></script>
@@ -44,35 +45,28 @@
         <script src="scripts/devices.js"></script>
         <script src="scripts/reports.js"></script>
 
-        <script type="text/javascript" src="Plugins/cordova-secureudid-master/www/SecureDeviceIdentifier.js"></script>
+        <script src="canvasjs/canvasjs.min.js"></script>
+        <script src="amCharts/amcharts.js"></script>
+        <script src="amCharts/funnel.js"></script>
+        <script src="amCharts/serial.js"></script>
 
     </head>
     <body>
 
         <!--WELCOME VIEW -->
-        <div data-role="view" id="view-transitions"  data-show="app.AppicationMenuControl.drawerListPreLogin();" >
-            <div data-role="header">
-                <ul data-role="listview" data-style="inset" data-type="group">
-                <li>
-                    <ul>
-                        <li style="background-color:rgba(36, 189, 255, 1);">
-                            <div id='head' style="display:block;font-size: 1.5em;color:white; text-align:center">EAM i-Mobi</div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            </div>
-            
-            <div data-role="content" id="view-transitions-content" class="imageLocation">
+        <div data-role="view" id="view-transitions" data-title="EAM i-Mobi" data-show="app.AppicationMenuControl.drawerListPreLogin();" >
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
 
-                <!--<div class="imageLocation">
-                <img src="views/images/Splash.png"  />
-                </div>-->
-            </div>
-            
-            <a data-role="button" id="btnLogin" data-rel="modalview" data-click="app.Login.openLoginWindow" class="transitions-button">Login</a>
-            <a data-role="button" id="btnConnections" data-rel="modalview" data-click="app.Login.openConnectionWindow" class="connections-button">Change Connection</a>
+                </div>
+            </header>
 
+            <div data-role="content" id="view-transitions-content" class="imageLocation"></div>
+            <footer data-role="footer">
+                <a data-role="button" id="btnLogin" data-rel="modalview" data-click="app.Login.openLoginWindow" class="transitions-button">Login</a>
+                <a data-role="button" id="btnConnections" data-rel="modalview" data-click="app.Login.openConnectionWindow" class="connections-button">Change Connection</a>
+            </footer>
         </div>
 
         <div data-role="modalview" id="modalview-login" style="width: 95%; " data-transition="overlay:up" data-init="app.Login.init">
@@ -123,7 +117,7 @@
         </div>
 
         <!-- application drawer and contents -->
-        <div data-role="drawer" id="appDrawer" style="width: 270px" data-title="TrenStar EAM iMobi" data-view="['/views/landingPage.html']">
+        <div data-role="drawer" id="appDrawer" style="width: 270px" data-title="TrenStar EAM iMobi" data-view="['/views/home.html']" data-swipe-to-open="false">
             <div data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>

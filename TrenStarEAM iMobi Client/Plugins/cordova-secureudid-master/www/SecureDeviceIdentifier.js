@@ -18,7 +18,7 @@
 			domain: options.domain || 'com.example.myapp',
 			key: options.key || 'difficult-to-guess-key'
 		};
-
+        
 		var _callback = function() {
 			if(typeof callback == 'function') callback.apply(scope, arguments);
 		};

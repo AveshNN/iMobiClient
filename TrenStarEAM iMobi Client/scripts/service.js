@@ -19,7 +19,6 @@ app.Service = (function () {
     
         var setService = function(service) {
             wcfService = service;
-            
         };
         
         var getServiceCode = function() {
@@ -27,6 +26,7 @@ app.Service = (function () {
         };
     
         var setServiceCode = function(serviceCode) {
+            
             wcfConnectionCode = serviceCode;
             console.log("serviceCode:" + serviceCode);
         };
@@ -34,13 +34,13 @@ app.Service = (function () {
         var ajaxCall = function(method, data, callback, spinnerText) {
             var wcfServiceUrl = getService();
             data = data + "&connectionCode=" + getServiceCode();
-            console.log(data);
+            
             if (app.spinnerService.viewModel.checkSimulator() == false) {
-                if (spinnerText == null) {
+                if (spinnerText === undefined) {
                     spinnerText = "Loading";
                 }
                 
-                if (spinnerText == "") {
+                if (spinnerText === "") {
                     spinnerText = "Loading";
                 }
                 

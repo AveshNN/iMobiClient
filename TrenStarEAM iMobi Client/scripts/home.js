@@ -24,6 +24,7 @@ app.Home = (function () {
                 hiddenControlDefaultProfile = e.view.params.defaultProfile;
                 hiddenControlEmail = e.view.params.emailAddress;
                 hiddenControlDefaultTProfileId = e.view.params.defaultProfileId;
+                document.getElementById('userProfileNameHome').innerHTML = hiddenControlDefaultProfile;
                 console.log("homeshow");
                 chartData();
             }
@@ -109,7 +110,8 @@ app.Home = (function () {
                                     "format": 'png'	  
                                 }]  
                 }
-                                           });
+           });
+            
             jQuery('.chart-input').off().on('input change', function() {
                 var property = jQuery(this).data('property');
                 var target = chart;

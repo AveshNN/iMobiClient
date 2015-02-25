@@ -22,6 +22,11 @@
     background-color: rgba(36, 189, 255, 1);
 }
 
+#view-transitions .km-footer
+{
+    background-color: white;
+}
+
 .km-icon .km-camera
 {
     text-shadow: none;
@@ -274,5 +279,5 @@
 
 .imageLocation {
     background:  transparent url(../views/images/iMobi.png) no-repeat center center fixed;
-    background-size: contain;    
+    /*background-size: contain;*/
 }

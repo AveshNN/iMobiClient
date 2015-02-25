@@ -70,13 +70,28 @@
         },
 
         checkSimulator: function() {
-            if (window.navigator.simulator === true) {
+            var isSimulator = app.deviceInfo.deviceIsSimulator();
+            
+            if (isSimulator === false){
+                if (window.plugins.spinnerDialog === undefined){
+                    isSimulator = true;
+                }
+                else{
+                    isSimulator = false;
+                }
+            }
+            
+            return isSimulator;
+            
+            /*if (window.navigator.simulator === true) {
                 return true;
             } else if (window.plugins.spinnerDialog === undefined) {
+                
                 return true;
             } else {
+                
                 return false;
-            }
+            }*/
         }
     });
 

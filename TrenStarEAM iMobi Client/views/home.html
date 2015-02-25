@@ -7,14 +7,22 @@
     </header>
     <div data-role="content">
         <ul data-role="listview" data-style="inset" data-type="group">
-            <li style="background-color:maroon;">
-                            <div id='overall' style="display:block;font-size: 1.3em;color:white; text-align:center"></div>
-             </li>
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='userProfileNameHome' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='overall' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                </ul>
+            </li>
             <li>
                 10 Day - Volume Changes
                <div id="chartdiv"></div>
             </li>
         </ul>
+      
     </div>
     
     <!--<div id="values"></div>-->

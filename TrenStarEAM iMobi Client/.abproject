@@ -3,10 +3,10 @@
   "ProjectGuid": "95d8467b-e58d-4b94-bbde-1c8a0e52a194",
   "projectVersion": 1,
   "AppIdentifier": "za.co.trenstar.iMobi.TrenStarEAMiMobiClient",
-  "DisplayName": "TrenStarEAM iMobi Client",
+  "DisplayName": "iMobi Client",
   "Author": "TrenStar SA (Pty) Ltd",
   "Description": "",
-  "BundleVersion": "1.1",
+  "BundleVersion": "1.3.0.1",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
@@ -15,7 +15,11 @@
   "iOSBackgroundMode": [],
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
   "FrameworkVersion": "3.5.0",
-  "AndroidPermissions": [],
+  "AndroidPermissions": [
+    "android.permission.CAMERA",
+    "android.permission.INTERNET",
+    "android.permission.VIBRATE"
+  ],
   "DeviceOrientations": [
     "Portrait",
     "Landscape"

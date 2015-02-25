@@ -24,7 +24,7 @@ app.Connections = (function () {
                         var connectionName = rs.rows.item(i).ConnectionName;
                         connectionSet = rs.rows.item(i).IsSet;
                         console.log(connectionName + ":" + connectionSet);
-                        if (connectionSet == "true") {
+                        if ((connectionSet == "true") || (connectionSet == "1")) {
                             app.Service.setServiceCode(rs.rows.item(i).ConnectionCode); 
                             //app.Service.setService(rs.rows.item(i).WCFConnection); 
                             //wcfServiceUrl = rs.rows.item(i).WCFConnection;
@@ -43,23 +43,20 @@ app.Connections = (function () {
         
         var setDefaultConnection = function(connectionCode) {
             var db = app.Database.db();
-       
+               
             db.transaction(function(tx) {
                 tx.executeSql("SELECT * FROM Connection", [], render, app.onError);
             });
             
             var render = function (tx, rs) {
                 if (rs.rows.length > 0) {
-                    
                     for (var i = 0; i < rs.rows.length; i++) {
-                        
-                        
                         if (rs.rows.item(i).ConnectionCode == connectionCode) {
-                            
                             app.Service.setService(rs.rows.item(i).WCFConnection); 
                             console.log(app.Service.getService());
                             
                             var UDID = app.getDeviceSecureUDID();
+                            
                             app.Login.ValidateSecureUUID(UDID);
                         }
                     }
@@ -110,17 +107,18 @@ app.Connections = (function () {
                 var render = function (tx, rs) {
                     console.log("(rs.rows.length=" + rs.rows.length);
                     if (rs.rows.length > 0) {
-                        for (var i = 0; i < rs.rows.length; i++) {
+                        /*for (var i = 0; i < rs.rows.length; i++) {
                             if (rs.rows.item(i).ConnectionCode == connectionCode) {
                                 $('#' + connectionCode).removeClass('connectionSelect');    
                                 $('#' + connectionCode).addClass('connectionSelected');
+                                alert(connectionName);
                             }
                             else {
                                 $('#' + rs.rows.item(i).ConnectionCode).removeClass('connectionSelected');    
                                 $('#' + rs.rows.item(i).ConnectionCode).addClass('connectionSelect');
                             }
-                        }
-                    
+                        }*/
+                        
                         db.transaction(function(tx) {
                             tx.executeSql("UPDATE Connection SET IsSet = ? WHERE ConnectionName <> ?",
                                           [false, connectionName],
@@ -152,10 +150,14 @@ app.Connections = (function () {
             var db = app.Database.db();
             var found = false;
             
+            if (app.spinnerService.viewModel.checkSimulator() == false) {
+                app.spinnerService.viewModel.withMessage("Applying User Connections");
+            }
+            
             db.transaction(function(tx) {
                 tx.executeSql("SELECT * FROM Connection", [], render, app.onError);
             });
-    
+            
             var render = function (tx, rs) {
                 if (rs.rows.length > 0) {
                     var connectionSet = false;
@@ -200,7 +202,9 @@ app.Connections = (function () {
                     var renderUpdate = function (txn, rss) {
                         if (rss.rows.length > 0) {
                             for (var i = 0; i < rss.rows.length; i++) {
-                                if (rss.rows.item(i).IsSet == "true") {
+                                
+                                if ((rss.rows.item(i).IsSet == "true") || (rss.rows.item(i).IsSet == "1")) {
+                                   
                                     console.log("Current set:" +rss.rows.item(i).ConnectionCode);
                                     $('#' + rss.rows.item(i).ConnectionCode).removeClass('connectionSelect');    
                                     $('#' + rss.rows.item(i).ConnectionCode).addClass('connectionSelected');
@@ -212,7 +216,12 @@ app.Connections = (function () {
                         }
                     }
                 }
+                
+                if (app.spinnerService.viewModel.checkSimulator() == false) {
+                    app.spinnerService.viewModel.spinnerStop();
+                }
             };
+            
         };
         
         var insertConnection = function(connectionName, connectionCode) {
@@ -233,6 +242,7 @@ app.Connections = (function () {
         }
         
         var onConnectionSuccess = function(tx, r) {
+            
             connection(); 
         };
         

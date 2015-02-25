@@ -50,7 +50,6 @@ app.Login = (function () {
                 if (list.length > 0) {
                     for (var i = 0;i < list.length;i++) {
                         var userProfile = list[i];
-            
                         if (userProfile.SmartPhoneDeviceUDID == null) {
                             closeLoginWindow();
                         }
@@ -69,6 +68,7 @@ app.Login = (function () {
         };
         
         var validateLogin = function(list) {
+            
             navigator.notification.vibrate(3000);
             
             var secure = list[0];
@@ -89,34 +89,6 @@ app.Login = (function () {
                     //app.Connections.connection();
                 }
             }
-            
-           /* if (result == false) {
-                
-                
-                if (deviceStatus == "Login") {
-                    deviceStatusDescription.innerHTML = "Unknown Device"
-                    //document.getElementById("view-transitions").style.border ="1px solid red";
-                    $('#btnLogin').text('Register');
-                    //$('#btnLogin').addClass('ui-disabled');
-                }
-                else {
-                    if (deviceStatus == "Register") {
-                        deviceStatusDescription.innerHTML = "Registration Pending"
-                        $('#btnLogin').text('Reload');
-                        //$('#btnLogin').addClass('ui-disabled');
-                    }
-                    else {
-                        if (deviceStatus == "Reload") {
-                            $('#btnLogin').text('Reload');
-                            //$('#btnLogin').addClass('ui-disabled');
-                        }
-                    }
-                }
-            }
-            else {
-                deviceStatusDescription.innerHTML = "";
-                $('#btnLogin').text('Login');
-            }*/
         };
         
         var openLoginWindow = function() {
