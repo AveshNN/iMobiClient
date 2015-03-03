@@ -73,21 +73,23 @@ app.QuickHistory = (function () {
         };
         
         var callBackHistory = function(result) {
-            var response = document.getElementById('resultHistoryRequest');
+            //var response = document.getElementById('resultHistoryRequest');
             
-            if (result == true) {
-                response.innerHTML = "Report will be emailed";
-                alert("Report will be emailed");
-            }
-            else {
-                response.innerHTML = "Error. Please try again";
-            }  
-            
-            var el = response;
+            /*var el = response;
             var effect = kendo.fx(el).fadeOut().duration(6000);
-            effect.play();
+            effect.play();*/
             
             app.mobileApp.navigate('views/itemOptions.html?itemBarcode=' + quickHistoryItemBarcode);
+            
+            if (result == true) {
+                //response.innerHTML = "Report will be emailed";
+                //alert("Report will be emailed");
+                app.Alert.openAlertWindow("Report History", "Report will be emailed");
+            }
+            else {
+                //response.innerHTML = "Error. Please try again";
+                app.Alert.openAlertWindow("Error", "Please try again");
+            }  
         };
         
         return {

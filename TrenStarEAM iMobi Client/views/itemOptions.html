@@ -1,4 +1,11 @@
-<div data-role="view" id="itemOptions" data-title="Item Options" data-layout="main" data-model="app.ItemOption" data-init="app.ItemOption.init('itemBarcode')" data-show="app.ItemOption.show">
+<div data-role="view" id="itemOptions" data-title="Item Options" data-model="app.ItemOption" data-init="app.ItemOption.init('itemBarcode')" data-show="app.ItemOption.show">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <div id='navbarInventory' style="display:block;font-size: 1em;color:white"></div>
+            <a data-align="right" data-role="button" href="#scanItem" data-icon="drawer-button" data-transition="slide"></a>
+        </div>
+    </header>
     <div data-role="content">
         <ul data-role="listview" data-style="inset" data-type="group">
                 <li>

@@ -1,15 +1,15 @@
 var app = (function (win) {
     'use strict';
+    
     var currentDeviceSecureUDID;
     var currentOrientation;
+    
     var onDeviceReady = function() {
         // hide the splash screen as soon as the app is ready. otherwise
         // Cordova will wait 5 very long seconds to do it for you.
         navigator.splashscreen.hide();
-        
-        
+
         //Create the Database
-        
         app.Database.openDB();
         //app.Database.deleteTable();
         app.Database.createTable();
@@ -20,24 +20,31 @@ var app = (function (win) {
         
         var connectionType = app.deviceInfo.deviceConnection();
         if (connectionType == "none") {
-            alert("No internet connection");
+            //alert("No internet connection");
+            app.Alert.openAlertWindow("Connection Error", "No internet connection");
+            
         }
         else {
             app.Connections.setDefaultConnection("DEF");
             
         }
         
-        
         $(window).bind('orientationchange', _orientationHandler);
         
         document.addEventListener("offline", app.deviceInfo.deviceOffline, false);
         document.addEventListener("online", app.deviceInfo.deviceOnline, false);
+        document.addEventListener("resume", app.deviceInfo.deviceResume, false);
         
     };
-
+    
+    
+    
+    
     // Handle "deviceready" event
     document.addEventListener('deviceready', onDeviceReady, false);  
 
+    
+    
     var _orientationHandler = function() {
         switch (window.orientation) {  
             case -90:
@@ -132,6 +139,19 @@ var app = (function (win) {
             console.log("online" + navigator.connection.type);
         },
         
+        deviceResume : function() {
+            app.mobileApp.navigate('index.html', 'LOGOUT');
+            app.Login.show();
+            var connectionType = app.deviceInfo.deviceConnection();
+            if (connectionType == "none") {
+                //alert("No internet connection");
+                app.Alert.openAlertWindow("Connection Error", "No internet connection");
+            }
+            else {
+                app.Connections.setDefaultConnection("DEF");
+            }
+        },
+        
         deviceIsSimulator : function() {
             if (window.navigator.simulator == undefined) {
                 return false;
@@ -196,12 +216,12 @@ var app = (function (win) {
     
     // Navigate to app home
     var navigateOut = function () {
+        
         app.AppicationMenuControl.drawerListPreLogin();
     };
     
     // Logout user
     var logout = function () {
-        
         navigateOut();
     };
     

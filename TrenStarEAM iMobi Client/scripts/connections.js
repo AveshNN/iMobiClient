@@ -11,12 +11,12 @@ app.Connections = (function () {
     var connectionsViewModel = (function () {
         var connection = function() {
             var db = app.Database.db();
-       
+            
             db.transaction(function(tx) {
-                tx.executeSql("SELECT * FROM Connection", [], render, app.onError);
+                tx.executeSql("SELECT * FROM Connection", [], rendercon, app.onError);
             });
             
-            var render = function (tx, rs) {
+            var rendercon = function (tx, rs) {
                 var connectionSet = false;
                 
                 if (rs.rows.length > 0) {
@@ -45,18 +45,18 @@ app.Connections = (function () {
             var db = app.Database.db();
                
             db.transaction(function(tx) {
-                tx.executeSql("SELECT * FROM Connection", [], render, app.onError);
+                tx.executeSql("SELECT * FROM Connection", [], renderdef, app.onError);
             });
             
-            var render = function (tx, rs) {
+            var renderdef = function (tx, rs) {
+                
                 if (rs.rows.length > 0) {
                     for (var i = 0; i < rs.rows.length; i++) {
                         if (rs.rows.item(i).ConnectionCode == connectionCode) {
+                            
                             app.Service.setService(rs.rows.item(i).WCFConnection); 
                             console.log(app.Service.getService());
-                            
                             var UDID = app.getDeviceSecureUDID();
-                            
                             app.Login.ValidateSecureUUID(UDID);
                         }
                     }
@@ -66,10 +66,10 @@ app.Connections = (function () {
                     setDefaultConnection(connectionCode);
                 }
             }
+            
         };
         
         var defaultConnection = function(db) {
-            
             db.transaction(function(tx) {
                 tx.executeSql("INSERT INTO Connection(ConnectionName, ConnectionCode, WCFConnection, IsSet) VALUES (?,?,?,?)",
                               ["DEFAULT", "DEF", "http://trenstareamtest.trenstar.co.za/TrenstarEAM.iMobile.Service.Client/Service1.svc/", true],
@@ -99,12 +99,12 @@ app.Connections = (function () {
             var db = app.Database.db();
     
             db.transaction(function(tx) {
-                tx.executeSql("SELECT * FROM Connection", [], render, app.onError);
+                tx.executeSql("SELECT * FROM Connection", [], rendernew, app.onError);
             });
             
             if (connectionCode != null) {
                 console.log("setNewConnection= " + connectionCode);
-                var render = function (tx, rs) {
+                var rendernew = function (tx, rs) {
                     console.log("(rs.rows.length=" + rs.rows.length);
                     if (rs.rows.length > 0) {
                         /*for (var i = 0; i < rs.rows.length; i++) {
@@ -155,10 +155,10 @@ app.Connections = (function () {
             }
             
             db.transaction(function(tx) {
-                tx.executeSql("SELECT * FROM Connection", [], render, app.onError);
+                tx.executeSql("SELECT * FROM Connection", [], renders, app.onError);
             });
             
-            var render = function (tx, rs) {
+            var renders = function (tx, rs) {
                 if (rs.rows.length > 0) {
                     var connectionSet = false;
                     for (var i = 0;i < list.length;i++) {
@@ -187,6 +187,7 @@ app.Connections = (function () {
 
                     app.ListControl.applyDataTemplate(listviewAvailableConnections, availableConnections, "#customListViewConnections");
                 }
+                
                 
                 if (list.length == 0) {
                     app.Connections.deleteConnections(db);   

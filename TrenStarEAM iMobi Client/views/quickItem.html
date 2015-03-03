@@ -1,4 +1,11 @@
-<div data-role="view" id="quickItem" data-title="Item Information" data-layout="main" data-model="app.QuickItem" data-init="app.QuickItem.init('itemBarcodeQI')" data-show="app.QuickItem.show">
+<div data-role="view" id="quickItem" data-title="Item Information" data-model="app.QuickItem" data-init="app.QuickItem.init('itemBarcodeQI')" data-show="app.QuickItem.show">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <div id='navbarInventory' style="display:block;font-size: 1em;color:white"></div>
+            <a data-align="right" data-role="button" href="#itemOptions" data-icon="drawer-button" data-transition="slide"></a>
+        </div>
+    </header>
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
             <ul>

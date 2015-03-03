@@ -42,7 +42,7 @@ app.Reports = (function () {
         };
         
         var request = function(report){
-          alert("Would you like this feature?? Maybe limit to x requests per report in a x amount of time..." );  
+            app.Alert.openAlertWindow("Request Report", "Would you like this feature?? Maybe limit to x requests per report in a x amount of time..." );
         };
         
         return {

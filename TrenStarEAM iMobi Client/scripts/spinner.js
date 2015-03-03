@@ -31,7 +31,7 @@
                 window.plugins.spinnerDialog.show(
                   null,
                   message,
-                  null
+                  true
                 );
             }
         },

@@ -35,37 +35,44 @@ app.Service = (function () {
             var wcfServiceUrl = getService();
             data = data + "&connectionCode=" + getServiceCode();
             
-            if (app.spinnerService.viewModel.checkSimulator() == false) {
-                if (spinnerText === undefined) {
-                    spinnerText = "Loading";
-                }
-                
-                if (spinnerText === "") {
-                    spinnerText = "Loading";
-                }
-                
-                app.spinnerService.viewModel.withMessage(spinnerText);
+            var connectionType = app.deviceInfo.deviceConnection();
+            if (connectionType == "none") {
+                //alert("No internet connection");
+                app.Alert.openAlertWindow("Connection Error", "No internet connection");
             }
-            $.ajax({
-                       type:'POST',
-                       url: wcfServiceUrl + method,
-                       data: data,
-                       jsonpCallback: callback,
-                       contentType: 'application/json; charset=utf-8',
-                       dataType: "jsonp",
-                       success: function(result) {
-                           if (app.spinnerService.viewModel.checkSimulator() == false) {
-                               app.spinnerService.viewModel.spinnerStop();
-                           }
-                           return result;
-                       },
-                       error: function (result) {
-                           if (app.spinnerService.viewModel.checkSimulator() == false) {
-                               app.spinnerService.viewModel.spinnerStop();
-                           }
-                           return result;
-                       },
-                   });
+            else {
+                if (app.spinnerService.viewModel.checkSimulator() == false) {
+                    if (spinnerText === undefined) {
+                        spinnerText = "Loading";
+                    }
+                
+                    if (spinnerText === "") {
+                        spinnerText = "Loading";
+                    }
+                
+                    app.spinnerService.viewModel.withMessage(spinnerText);
+                }
+                $.ajax({
+                           type:'POST',
+                           url: wcfServiceUrl + method,
+                           data: data,
+                           jsonpCallback: callback,
+                           contentType: 'application/json; charset=utf-8',
+                           dataType: "jsonp",
+                           success: function(result) {
+                               if (app.spinnerService.viewModel.checkSimulator() == false) {
+                                   app.spinnerService.viewModel.spinnerStop();
+                               }
+                               return result;
+                           },
+                           error: function (result) {
+                               if (app.spinnerService.viewModel.checkSimulator() == false) {
+                                   app.spinnerService.viewModel.spinnerStop();
+                               }
+                               return result;
+                           },
+                       });
+            }
         };
         
         return {

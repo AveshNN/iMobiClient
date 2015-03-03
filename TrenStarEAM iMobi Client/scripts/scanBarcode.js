@@ -8,6 +8,7 @@ app.ScanBarcode = (function () {
 
     var displayControl;
     var errorControl;
+    var $scannedBarcode;
     
     // Navigate to app home
     var navigateItemOptions = function (barcode) {
@@ -38,7 +39,6 @@ app.ScanBarcode = (function () {
                         if (ValidateBarcode(result.text)) {
                             var scanned = document.getElementById(displayControl);
                             scanned.value = result.text;
-                            
                             navigateItemOptions(scanned.value);
                         }
                         else {
@@ -59,15 +59,22 @@ app.ScanBarcode = (function () {
                 );
         };
         
+         var show = function () {
+             $scannedBarcode = $('#txtBarcode');
+             $scannedBarcode.val('');
+        };
+        
         var initial = function(x, y) {
             displayControl = x;
             errorControl = y;
+            
         };
         
         return {
             scanItem: scanItem,
             validateBarcode: validate,
-            init : initial
+            init : initial,
+            show : show
             
         };
     }());

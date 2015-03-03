@@ -225,6 +225,18 @@
     color: white;
 }
 
+#modalview-Alert .km-view-title, .km-dialog-title
+{
+    position: relative;
+    visibility: visible;
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 0.4em;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
 .km-flat .km-button
 {
     background: white;
@@ -281,3 +293,10 @@
     background:  transparent url(../views/images/iMobi.png) no-repeat center center fixed;
     /*background-size: contain;*/
 }
+
+h4.time
+    {
+        color: #369;
+        float: left;
+        margin-right: 10px;
+    }

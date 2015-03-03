@@ -12,7 +12,7 @@ app.AppicationMenuControl = (function () {
         var drawerListPreLogin = function() {
             var groupedData = [];
    
-            groupedData.push({ Description: "Login", Id: "index.html", Code:"LOGIN"});
+            groupedData.push({ Description: "Login", Id: "#view-transitions", Code:"LOGIN"});
     
             var control = $("#listviewsMenu");            
             app.ListControl.removeListViewWrapper(control);

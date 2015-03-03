@@ -19,6 +19,7 @@ app.Database = (function () {
         var openDb = function() {
             var isSimulator = app.deviceInfo.deviceIsSimulator();
             console.log("isSimulator:" + isSimulator);
+             
             if (isSimulator === false) {
                 app.db = window.sqlitePlugin.openDatabase("TrenStarEAMClient");
             }

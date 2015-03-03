@@ -1,10 +1,10 @@
-<div data-role="view" id="register" data-title="Registration" style="position:relative;"  data-model="app.RegisterDevice" data-init="app.RegisterDevice.init('deviceName', 'deviceId', 'deviceOsVersion', 'deviceOs')" data-show="app.RegisterDevice.show">
+<div data-role="view" id="register" data-title="EAM i-Mobi" style="position:relative;"  data-model="app.RegisterDevice" data-init="app.RegisterDevice.init('deviceName', 'deviceId', 'deviceOsVersion', 'deviceOs')" data-show="app.RegisterDevice.show">
     <header data-role="header">
-    <div data-role="navbar" id="regHead">
-         <span data-role="view-title"></span>
+        <div data-role="navbar" id="regHead">
+            <span data-role="view-title"></span>
             <a data-align="right" data-role="button" href="#view-transitions" data-icon="drawer-button"></a>
         </div>
-     </header>   
+    </header>
     <div data-role="content" >
         <ul data-role="listview" data-style="inset" data-type="group">
             <li>
@@ -51,6 +51,6 @@
         <div data-role="navbar">
             <div id='status' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
         </div>
-        <a data-role="button" id="SendDeviceData" style="display:block" onclick="app.RegisterDevice.sendDeviceData();">Send to Admin</a>
+        <a data-role="button" id="SendDeviceData" style="display:block" onclick="app.RegisterDevice.sendDeviceData();">Register</a>
     </div>
 </div>

@@ -14,7 +14,7 @@
 
         <script src="kendo/js/kendo.mobile.min.js"></script>
 
-        <script src="scripts/../Plugins/cordova-secureudid-master/www/SecureDeviceIdentifier.js"></script>
+        
 
         <script src="scripts/app.js"></script>
 
@@ -49,7 +49,8 @@
         <script src="amCharts/amcharts.js"></script>
         <script src="amCharts/funnel.js"></script>
         <script src="amCharts/serial.js"></script>
-
+        <script src="scripts/modalAlert.js"></script>
+        <script src="scripts/../Plugins/cordova-secureudid-master/www/SecureDeviceIdentifier.js"></script>
     </head>
     <body>
 
@@ -103,6 +104,16 @@
                 </div>
             </div>
             <ul id="grouped-listviewsAvailableConnections"></ul>
+        </div>
+
+        <div data-role="modalview" id="modalview-Alert" style="width: 95%;" data-model="app.Alert" data-transition="overlay:up">
+            <p id="alertStatus"></p>
+            <div data-role="header">
+                <div data-role="navbar" id="modelNavbar">
+                    <p id="alertTitle"></p>
+                    <a data-click="app.Alert.closeAlertWindow" data-role="button" data-align="right">OK</a>
+                </div>
+            </div>
         </div>
 
         <div data-role="layout" data-id="main">

@@ -14,9 +14,11 @@ app.ItemOption = (function () {
         var itemOptionItemBarcode;
         
         var show = function (e) {
-            itemOptionItemBarcode = e.view.params.itemBarcode;
-            var scanned = document.getElementById(displayControl);
-            scanned.innerHTML = itemOptionItemBarcode;
+            if (e.view.params.itemBarcode !== undefined) {
+                itemOptionItemBarcode = e.view.params.itemBarcode;
+                var scanned = document.getElementById(displayControl);
+                scanned.innerHTML = itemOptionItemBarcode;
+            }
         };
         
         var initial = function(x) {
