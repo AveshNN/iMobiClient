@@ -12,6 +12,7 @@ app.Home = (function () {
     var hiddenControlDefaultProfile;
     var hiddenControlEmail;
     var hiddenControlDefaultTProfileId;
+    var hiddenControlIsMobiClientAdmin;
     
     var chart;
     
@@ -24,8 +25,11 @@ app.Home = (function () {
                 hiddenControlDefaultProfile = e.view.params.defaultProfile;
                 hiddenControlEmail = e.view.params.emailAddress;
                 hiddenControlDefaultTProfileId = e.view.params.defaultProfileId;
+                hiddenControlIsMobiClientAdmin = e.view.params.isMobiClientAdmin;
                 document.getElementById('userProfileNameHome').innerHTML = hiddenControlDefaultProfile;
                 console.log("homeshow");
+                
+                app.Alert.openAlertWindow("Proposed Feature", "Allow user to switch profiles if configured in the EAM IMOBI CLIENT ADMIN role?");
                 chartData();
             }
         };
@@ -163,6 +167,10 @@ app.Home = (function () {
             return hiddenControlDefaultProfile;
         };
         
+        var userIsMobiClientAdmin = function() {
+            return hiddenControlIsMobiClientAdmin;
+        };
+        
         return {
             init : initial,
             show : show,
@@ -171,6 +179,7 @@ app.Home = (function () {
             userProfileDefaultTProfile: userProfileDefaultTProfile,
             userProfileFirstName: userProfileFirstName,
             userProfileLastName: userProfileLastName,
+            userIsMobiClientAdmin: userIsMobiClientAdmin,
             chartData: chartData,
             setEquipmentOnHand: setEquipmentOnHand,
             randomColor: randomColor

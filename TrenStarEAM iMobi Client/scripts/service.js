@@ -32,19 +32,26 @@ app.Service = (function () {
         };
         
         var ajaxCall = function(method, data, callback, spinnerText) {
+            /*if (app.spinnerService.viewModel.checkSimulator() == false) {
+                app.spinnerService.viewModel.spinnerStop();
+            }*/
+            
             var wcfServiceUrl = getService();
             data = data + "&connectionCode=" + getServiceCode();
             
             var connectionType = app.deviceInfo.deviceConnection();
+            
             if (connectionType == "none") {
                 //alert("No internet connection");
                 app.Alert.openAlertWindow("Connection Error", "No internet connection");
             }
             else {
+                
                 if (app.spinnerService.viewModel.checkSimulator() == false) {
                     if (spinnerText === undefined) {
                         spinnerText = "Loading";
                     }
+                    
                 
                     if (spinnerText === "") {
                         spinnerText = "Loading";

@@ -37,14 +37,9 @@ var app = (function (win) {
         
     };
     
-    
-    
-    
     // Handle "deviceready" event
     document.addEventListener('deviceready', onDeviceReady, false);  
 
-    
-    
     var _orientationHandler = function() {
         switch (window.orientation) {  
             case -90:
@@ -133,31 +128,47 @@ var app = (function (win) {
         
         deviceOffline : function(){
             console.log("offline:" + navigator.connection.type);
+            app.Alert.openAlertWindow("Connection Error", "Internet connection lost");
         },
         
         deviceOnline : function(){
             console.log("online" + navigator.connection.type);
+            app.Alert.openAlertWindow("Connection", "Internet connection established");
+            app.Connections.setDefaultConnection("DEF");
         },
         
         deviceResume : function() {
-            app.mobileApp.navigate('index.html', 'LOGOUT');
-            app.Login.show();
-            var connectionType = app.deviceInfo.deviceConnection();
-            if (connectionType == "none") {
-                //alert("No internet connection");
-                app.Alert.openAlertWindow("Connection Error", "No internet connection");
+            if (app.deviceInfo.deviceIsScanning() === false) {
+                app.mobileApp.navigate('#view-transitions');
+                app.AppicationMenuControl.drawerListPreLogin();
+            
+                var connectionType = app.deviceInfo.deviceConnection();
+                if (connectionType == "none") {
+                    //alert("No internet connection");
+                    app.Alert.openAlertWindow("Connection Error", "No internet connection");
+                }
+                else {
+                    app.Alert.openAlertWindow("Welcome Back", "Please Login");   
+                
+                    app.Connections.setDefaultConnection("DEF");
+                }
             }
-            else {
-                app.Connections.setDefaultConnection("DEF");
+            else{
+                app.ScanBarcode.setScanning(false);
             }
         },
         
         deviceIsSimulator : function() {
+            
             if (window.navigator.simulator == undefined) {
                 return false;
             }
             else
                 return true;
+        },
+        
+        deviceIsScanning : function() {
+            return app.ScanBarcode.getScanning();
         }
     };
     

@@ -42,6 +42,11 @@ app.Connections = (function () {
         };
         
         var setDefaultConnection = function(connectionCode) {
+            //Create the Database
+            app.Database.openDB();
+            //app.Database.deleteTable();
+            app.Database.createTable();
+            
             var db = app.Database.db();
                
             db.transaction(function(tx) {
@@ -49,14 +54,14 @@ app.Connections = (function () {
             });
             
             var renderdef = function (tx, rs) {
-                
                 if (rs.rows.length > 0) {
                     for (var i = 0; i < rs.rows.length; i++) {
                         if (rs.rows.item(i).ConnectionCode == connectionCode) {
-                            
                             app.Service.setService(rs.rows.item(i).WCFConnection); 
+                            
                             console.log(app.Service.getService());
                             var UDID = app.getDeviceSecureUDID();
+                            
                             app.Login.ValidateSecureUUID(UDID);
                         }
                     }
@@ -66,31 +71,14 @@ app.Connections = (function () {
                     setDefaultConnection(connectionCode);
                 }
             }
-            
         };
         
         var defaultConnection = function(db) {
             db.transaction(function(tx) {
                 tx.executeSql("INSERT INTO Connection(ConnectionName, ConnectionCode, WCFConnection, IsSet) VALUES (?,?,?,?)",
-                              ["DEFAULT", "DEF", "http://trenstareamtest.trenstar.co.za/TrenstarEAM.iMobile.Service.Client/Service1.svc/", true],
+                              ["DEFAULT", "DEF", "http://trenstaream.trenstar.co.za/TrenstarEAM.iMobile.Service.Client/Service1.svc/", true],
                               app.onSuccess,
                               app.onError);
-                /* tx.executeSql("INSERT INTO Connection(ConnectionName, ConnectionCode, WCFConnection, IsSet) VALUES (?,?,?)",
-                ["EAM SA", "EAMSA", "http://trenstaream.trenstar.co.za/TrenstarEAM.iMobile.Service/Service1.svc/", false],
-                app.onSuccess,
-                app.onError);
-                tx.executeSql("INSERT INTO Connection(ConnectionName, ConnectionCode, WCFConnection, IsSet) VALUES (?,?,?)",
-                ["EAMSAQA", "http://trenstareamtest.trenstar.co.za/TrenstarEAM.iMobile.Service/Service1.svc/", false],
-                app.onSuccess,
-                app.onError);
-                tx.executeSql("INSERT INTO Connection(ConnectionName, ConnectionCode, WCFConnection, IsSet) VALUES (?,?,?)",
-                ["EAMEU", "http://eameu.trenstar.co.za/TrenstarEAM.iMobile.Service/Service1.svc/", false],
-                app.onSuccess,
-                app.onError);
-                tx.executeSql("INSERT INTO Connection(ConnectionName, ConnectionCode, WCFConnection, IsSet) VALUES (?,?,?)",
-                ["EAMEUQA", "http://europeqa.trenstar.co.za/TrenstarEAM.iMobile.Service/Service1.svc/", false],
-                app.onSuccess,
-                app.onError);*/
             });
         };
         
@@ -108,17 +96,16 @@ app.Connections = (function () {
                     console.log("(rs.rows.length=" + rs.rows.length);
                     if (rs.rows.length > 0) {
                         /*for (var i = 0; i < rs.rows.length; i++) {
-                            if (rs.rows.item(i).ConnectionCode == connectionCode) {
-                                $('#' + connectionCode).removeClass('connectionSelect');    
-                                $('#' + connectionCode).addClass('connectionSelected');
-                                alert(connectionName);
-                            }
-                            else {
-                                $('#' + rs.rows.item(i).ConnectionCode).removeClass('connectionSelected');    
-                                $('#' + rs.rows.item(i).ConnectionCode).addClass('connectionSelect');
-                            }
+                        if (rs.rows.item(i).ConnectionCode == connectionCode) {
+                        $('#' + connectionCode).removeClass('connectionSelect');    
+                        $('#' + connectionCode).addClass('connectionSelected');
+                        alert(connectionName);
+                        }
+                        else {
+                        $('#' + rs.rows.item(i).ConnectionCode).removeClass('connectionSelected');    
+                        $('#' + rs.rows.item(i).ConnectionCode).addClass('connectionSelect');
+                        }
                         }*/
-                        
                         db.transaction(function(tx) {
                             tx.executeSql("UPDATE Connection SET IsSet = ? WHERE ConnectionName <> ?",
                                           [false, connectionName],
@@ -147,11 +134,17 @@ app.Connections = (function () {
         var setUserConnections = function(list) {
             var availableConnections = [];
             
+            //Create the Database
+            app.Database.openDB();
+            //app.Database.deleteTable();
+            app.Database.createTable();
+            
             var db = app.Database.db();
+            
             var found = false;
             
             if (app.spinnerService.viewModel.checkSimulator() == false) {
-                app.spinnerService.viewModel.withMessage("Applying User Connections");
+            app.spinnerService.viewModel.withMessage("Applying User Connections");
             }
             
             db.transaction(function(tx) {
@@ -188,7 +181,6 @@ app.Connections = (function () {
                     app.ListControl.applyDataTemplate(listviewAvailableConnections, availableConnections, "#customListViewConnections");
                 }
                 
-                
                 if (list.length == 0) {
                     app.Connections.deleteConnections(db);   
                     app.Connections.defaultConnection(db);
@@ -203,10 +195,8 @@ app.Connections = (function () {
                     var renderUpdate = function (txn, rss) {
                         if (rss.rows.length > 0) {
                             for (var i = 0; i < rss.rows.length; i++) {
-                                
                                 if ((rss.rows.item(i).IsSet == "true") || (rss.rows.item(i).IsSet == "1")) {
-                                   
-                                    console.log("Current set:" +rss.rows.item(i).ConnectionCode);
+                                    console.log("Current set:" + rss.rows.item(i).ConnectionCode);
                                     $('#' + rss.rows.item(i).ConnectionCode).removeClass('connectionSelect');    
                                     $('#' + rss.rows.item(i).ConnectionCode).addClass('connectionSelected');
                                 
@@ -217,12 +207,10 @@ app.Connections = (function () {
                         }
                     }
                 }
-                
                 if (app.spinnerService.viewModel.checkSimulator() == false) {
-                    app.spinnerService.viewModel.spinnerStop();
+                app.spinnerService.viewModel.spinnerStop();
                 }
             };
-            
         };
         
         var insertConnection = function(connectionName, connectionCode) {
@@ -236,14 +224,13 @@ app.Connections = (function () {
             });
         };
         
-         var deleteConnections = function(db) {
+        var deleteConnections = function(db) {
             db.transaction(function(ctx) {
                 ctx.executeSql('DELETE FROM Connection', [], app.onSuccess, app.onError); 
             });
         }
         
         var onConnectionSuccess = function(tx, r) {
-            
             connection(); 
         };
         

@@ -9,6 +9,7 @@ app.ScanBarcode = (function () {
     var displayControl;
     var errorControl;
     var $scannedBarcode;
+    var iAmScanning;
     
     // Navigate to app home
     var navigateItemOptions = function (barcode) {
@@ -33,6 +34,7 @@ app.ScanBarcode = (function () {
         };
         
         var scanItem = function() {
+            setScanning(true);
             cordova.plugins.barcodeScanner.scan(
                 function(result) {
                     if (!result.cancelled) {
@@ -46,6 +48,8 @@ app.ScanBarcode = (function () {
                             clearControl.value = "";
                             navigator.notification.vibrate(3000);
                             document.getElementById(errorControl).innerHTML = "Invalid Barcode";
+                            
+                            
 					
                             var el = document.getElementById(errorControl);
                             var effect = kendo.fx(el).fadeOut().duration(6000);
@@ -70,11 +74,21 @@ app.ScanBarcode = (function () {
             
         };
         
+        var setScanning = function(isScanning) {
+            iAmScanning = isScanning;
+        };
+        
+         var getScanning = function() {
+            return iAmScanning;
+        };
+        
         return {
             scanItem: scanItem,
             validateBarcode: validate,
             init : initial,
-            show : show
+            show : show,
+            setScanning : setScanning,
+            getScanning : getScanning
             
         };
     }());

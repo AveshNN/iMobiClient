@@ -40,6 +40,7 @@ app.Inventory = (function () {
             var trackingProfileId = app.Home.userProfileDefaultTProfileId();
             inventoryType = type;
             
+            console.log(document.getElementById("navbarInventory"));
             if (type == "INBOUND") {
                 document.getElementById("navbarInventory").innerHTML = "Inbound Inventory";
             }
@@ -127,7 +128,7 @@ app.Inventory = (function () {
         var setInventory = function(list) {
             var type = null;
             var sumOfItems = 0;
-            
+           
             if (list != null) {	
                 for (var i = 0;i < list.length;i++) {
                     var inv = list[i];
@@ -137,21 +138,26 @@ app.Inventory = (function () {
                     sumOfItems = inv.TotalCount;
                 }
     
-                if (type == "Onsite Volumes Inventory") {
-                    var OnsiteVolume = $("#grouped-listviewsvolumetypesareaonsite");
-                    app.ListControl.removeListViewWrapper(OnsiteVolume);
+                console.log("type:" + type);
+                
+                var newSum = 0;
+                if (type !== null) {
+                    if (type == "Onsite Volumes Inventory") {
+                        var OnsiteVolume = $("#grouped-listviewsvolumetypesareaonsite");
+                        app.ListControl.removeListViewWrapper(OnsiteVolume);
             
-                    app.ListControl.applyDataTemplate(OnsiteVolume, groupedData, "#customListViewInventoryItemTypesOnsite");
+                        app.ListControl.applyDataTemplate(OnsiteVolume, groupedData, "#customListViewInventoryItemTypesOnsite");
         
-                    document.getElementById('sumOfItems').value = sumOfItems;
-                }
-                else {
-                    var retInventory = $("#grouped-listviewsInventory");            
-                    app.ListControl.removeListViewWrapper(retInventory);
+                        document.getElementById('sumOfItems').value = sumOfItems;
+                    }
+                    else {
+                        var retInventory = $("#grouped-listviewsInventory");            
+                        app.ListControl.removeListViewWrapper(retInventory);
             
-                    app.ListControl.applyDataTemplate(retInventory, groupedData, "#customListViewInventoryItemTypes");
+                        app.ListControl.applyDataTemplate(retInventory, groupedData, "#customListViewInventoryItemTypes");
            
-                    document.getElementById('sumOfItems').value = sumOfItems;
+                        document.getElementById('sumOfItems').value = sumOfItems;
+                    }
                 }
             }
         };

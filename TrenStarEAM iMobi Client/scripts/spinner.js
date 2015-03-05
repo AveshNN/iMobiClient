@@ -27,12 +27,15 @@
         },
 
         withMessage: function (message) {
+            
             if (!this.checkSimulator()) {
+                
                 window.plugins.spinnerDialog.show(
                   null,
                   message,
                   true
                 );
+                
             }
         },
 
@@ -71,7 +74,6 @@
 
         checkSimulator: function() {
             var isSimulator = app.deviceInfo.deviceIsSimulator();
-            
             if (isSimulator === false){
                 if (window.plugins.spinnerDialog === undefined){
                     isSimulator = true;
@@ -82,16 +84,6 @@
             }
             
             return isSimulator;
-            
-            /*if (window.navigator.simulator === true) {
-                return true;
-            } else if (window.plugins.spinnerDialog === undefined) {
-                
-                return true;
-            } else {
-                
-                return false;
-            }*/
         }
     });
 

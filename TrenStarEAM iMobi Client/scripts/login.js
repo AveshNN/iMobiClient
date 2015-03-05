@@ -54,7 +54,7 @@ app.Login = (function () {
                             closeLoginWindow();
                         }
                         else {            
-                            app.mobileApp.navigate('views/home.html?firstName=' + userProfile.FirstName + '&lastName=' + userProfile.LastName + '&defaultProfile=' + userProfile.DefaultProfile + '&emailAddress=' + userProfile.Email + '&defaultProfileId=' + userProfile.DefaultProfileId);
+                            app.mobileApp.navigate('views/home.html?firstName=' + userProfile.FirstName + '&lastName=' + userProfile.LastName + '&defaultProfile=' + userProfile.DefaultProfile + '&emailAddress=' + userProfile.Email + '&defaultProfileId=' + userProfile.DefaultProfileId + '&isMobiClientAdmin=' + userProfile.IsMobiClientAdmin);
                             app.AppicationMenuControl.drawerListPostLogin();
                         }
                     }
