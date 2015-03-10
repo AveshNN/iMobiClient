@@ -29,9 +29,20 @@ app.ListControl = (function () {
                                                        });   
         };
         
+        var applyDataTemplateEndlessScroll = function(control, data, template) {
+            var listView = control.kendoMobileListView({
+                                                           dataSource: kendo.data.DataSource.create({data: data}),       
+        
+                                                           template: $(template).html(),
+                                                           endlessScroll: true,
+                                                           virtualViewSize: 50
+                                                       });   
+        };
+        
         return {
             removeListViewWrapper: removeListViewWrapper,
-            applyDataTemplate: applyDataTemplate
+            applyDataTemplate: applyDataTemplate,
+            applyDataTemplateEndlessScroll : applyDataTemplateEndlessScroll
             
         };
     }());

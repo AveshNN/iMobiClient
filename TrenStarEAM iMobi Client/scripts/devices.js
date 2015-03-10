@@ -12,9 +12,9 @@ app.Devices = (function () {
     // Devices view model
     var devicesViewModel = (function () {
         var show = function (e) {
-            document.getElementById(displayControl).innerHTML = app.Home.userProfileDefaultTProfile();
+            document.getElementById(displayControl).innerHTML = app.User.userProfileDefaultTProfile();
             
-            var trackingProfileId = app.Home.userProfileDefaultTProfileId();
+            var trackingProfileId = app.User.userProfileDefaultTProfileId();
             getProfileDevices(trackingProfileId);
         };
         

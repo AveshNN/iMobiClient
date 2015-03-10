@@ -29,5 +29,40 @@
                 </li>
             </ul>
         </li>
+        <li>
+            My Tracking Profiles
+            <ul>
+                <li>
+                    Switch Profiles
+                    <input id="switch" data-change="app.Profile.switchChange"/>
+                </li>
+            </ul>
+        </li>
     </ul>
 </div>
+
+<div data-role="modalview" id="modalview-Profiles" style="width: 95%; height:75%; opacity: 0.9;" data-transition="overlay:up">
+
+    <div data-role="header">
+        <div data-role="navbar" id="modelNavbar">
+            <span>Available Profiles</span>
+            <a data-align="left" data-role="button" data-icon="reply" onclick="app.Profile.cancelProfilesWindow();"></a>
+            <a data-align="right" data-role="button" data-icon="search" onclick="app.Profile.searchProfileClick();"></a>
+        </div>
+        <div id="search" style="display:block">
+            <input data-role="autocomplete" autofocus="autofocus" class="inputBoxSearch" type="text" id="txtSearch" placeholder="Search Profile"
+                   style="width:100%;background-color:white;color:black;text-transform:uppercase"/>
+        </div>
+    </div>
+    <ul id="grouped-listviewsProfiles"></ul>
+    
+    <div data-role="footer">
+        <a onclick="app.Profile.getProfiles();" style="display:block;text-align: center;" data-role="button" >Load More</a>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="customListViewProfiles">
+    <a class="scrollList" style="display:block; font-size: 0.8em;">#:TProfile#</a>
+    <a data-role="button" id='#:TProfileId#' onclick="app.Profile.closeProfilesWindow('#:TProfileId#', '#:TProfile#');" data-icon="action" class="connectionSelect"></a>
+</script>
+

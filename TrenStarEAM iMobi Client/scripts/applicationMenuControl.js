@@ -12,7 +12,7 @@ app.AppicationMenuControl = (function () {
         var drawerListPreLogin = function() {
             var groupedData = [];
    
-            groupedData.push({ Description: "Login", Id: "#view-transitions", Code:"LOGIN"});
+            groupedData.push({ Description: "Login", icon:"play", Id: "#view-transitions", Code:"LOGIN"});
     
             var control = $("#listviewsMenu");            
             app.ListControl.removeListViewWrapper(control);
@@ -25,14 +25,14 @@ app.AppicationMenuControl = (function () {
         var drawerListPostLogin = function() {
             var groupedData = [];
    
-            groupedData.push({ Description: "Home", Id: "views/home.html", Code:"HOME"});
-            groupedData.push({ Description: "Devices", Id: "views/devices.html", Code:"DEV"});
-            groupedData.push({ Description: "Inventory", Id: "views/inventory.html", Code:"INV"});
-            groupedData.push({ Description: "My Client Liason", Id: "views/clientLiason.html", Code:"CLO"});
-            groupedData.push({ Description: "My Profile", Id: "views/profile.html", Code:"PRO"});
-            groupedData.push({ Description: "Scan Barcode", Id: "views/scan.html", Code:"SCAN"});
-            groupedData.push({ Description: "Request Report", Id: "views/reports.html", Code:"REP"});
-            groupedData.push({ Description: "Logout", Id: "index.html", Code:"LOGOUT"});
+            groupedData.push({ Description: "Home", icon:"home", Id: "views/home.html", Code:"HOME"});
+            groupedData.push({ Description: "Devices", icon:"toprated", Id: "views/devices.html", Code:"DEV"});
+            groupedData.push({ Description: "Inventory", icon:"globe", Id: "views/inventory.html", Code:"INV"});
+            groupedData.push({ Description: "My Client Liason",icon:"contacts",  Id: "views/clientLiason.html", Code:"CLO"});
+            groupedData.push({ Description: "My Profile", icon:"settings", Id: "views/profile.html", Code:"PRO"});
+            groupedData.push({ Description: "Scan Barcode", icon:"camera", Id: "views/scan.html", Code:"SCAN"});
+            groupedData.push({ Description: "Request Report", icon:"bookmarks", Id: "views/reports.html", Code:"REP"});
+            groupedData.push({ Description: "Logout", icon:"stop", Id: "index.html", Code:"LOGOUT"});
     
             var control = $("#listviewsMenu");            
             app.ListControl.removeListViewWrapper(control);

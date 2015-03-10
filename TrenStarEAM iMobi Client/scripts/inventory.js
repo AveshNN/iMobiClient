@@ -23,7 +23,7 @@ app.Inventory = (function () {
         };
         
         var show = function (e) {
-            var defaultTrackingProfile = app.Home.userProfileDefaultTProfile();
+            var defaultTrackingProfile = app.User.userProfileDefaultTProfile();
             document.getElementById(displayControl).innerHTML = defaultTrackingProfile
             document.getElementById(displayControlInventoryType).innerHTML = defaultTrackingProfile;
             document.getElementById(displayControlInventoryProfile).innerHTML = defaultTrackingProfile;
@@ -37,7 +37,7 @@ app.Inventory = (function () {
             app.Inventory.scrollToTop();
             
             groupedData = [];
-            var trackingProfileId = app.Home.userProfileDefaultTProfileId();
+            var trackingProfileId = app.User.userProfileDefaultTProfileId();
             inventoryType = type;
             
             console.log(document.getElementById("navbarInventory"));
@@ -59,7 +59,7 @@ app.Inventory = (function () {
         };
         
         var navigateInventoryProfile = function(itemTypeId, itemType, type, count) {
-            var trackingProfileId = app.Home.userProfileDefaultTProfileId();
+            var trackingProfileId = app.User.userProfileDefaultTProfileId();
             
             document.getElementById("pType").innerHTML = type;
             document.getElementById("selectedItemType").innerHTML = itemType;
@@ -107,7 +107,7 @@ app.Inventory = (function () {
         };
         
         var loadMore = function() {
-            var trackingProfileId = app.Home.userProfileDefaultTProfileId();
+            var trackingProfileId = app.User.userProfileDefaultTProfileId();
             getInventoryMore(inventoryType, trackingProfileId, groupedData.length);
         };
         

@@ -13,9 +13,9 @@ app.ClientLiason = (function () {
     // ClientLiason view model
     var clientLiasonViewModel = (function () {
         var show = function (e) {
-            document.getElementById(displayControl).innerHTML = app.Home.userProfileDefaultTProfile();
+            document.getElementById(displayControl).innerHTML = app.User.userProfileDefaultTProfile();
             
-            var trackingProfileId = app.Home.userProfileDefaultTProfileId();
+            var trackingProfileId = app.User.userProfileDefaultTProfileId();
             getClientLiason(trackingProfileId);
         };
         

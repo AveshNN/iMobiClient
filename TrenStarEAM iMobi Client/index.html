@@ -25,6 +25,7 @@
         <script src="scripts/service.js"></script>
 
         <script src="scripts/login.js"></script>
+        <script src="scripts/user.js"></script>
         <script src="scripts/spinner.js"></script>
         <script src="scripts/registerDevice.js"></script>
 
@@ -138,7 +139,7 @@
         </div>
 
         <script type="text/x-kendo-template" id="templatelistviewsMenu">
-            <a onclick="app.navigate('${Id}', '${Code}')">${Description}</a>
+            <a data-icon="${icon}" onclick="app.navigate('${Id}', '${Code}')">${Description}</a>
         </script>
 
         <script type="text/x-kendo-template" id="customListViewConnections">

@@ -70,6 +70,23 @@
     font-size: 2.0em;
 }
 
+.inputBoxSearch
+{
+    font-family: Bookman Old Style;
+    background-color: #EFEFEF;
+    color: #A7A7A7;
+    width: 200px;
+    padding: 7px 10px;
+    border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(180, 180, 180);
+    border-bottom-color: rgb(255, 255, 255);
+    box-shadow: 0 -1px 0 #3C3C3C;
+    font-size: 1.0em;
+     font-style: italic;
+}
+
 #headerProfile
 {
     background-color: black;
@@ -300,3 +317,10 @@ h4.time
         float: left;
         margin-right: 10px;
     }
+
+#modalview-Profiles .km-virtual-list>li {
+width: 100%;
+position: relative;
+top: 0;
+-webkit-transform: translateZ(0);
+}

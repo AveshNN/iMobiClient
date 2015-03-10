@@ -6,36 +6,25 @@ var app = app || {};
 
 app.Home = (function () {
     'use strict'
-
-    var hiddenControlFirstName;
-    var hiddenControlLastName;
-    var hiddenControlDefaultProfile;
-    var hiddenControlEmail;
-    var hiddenControlDefaultTProfileId;
-    var hiddenControlIsMobiClientAdmin;
-    
     var chart;
     
     // Home view model
     var homeViewModel = (function () {
         var show = function (e) {
             if (e.view.params.firstName != null) {
-                hiddenControlFirstName = e.view.params.firstName;
-                hiddenControlLastName = e.view.params.lastName;
-                hiddenControlDefaultProfile = e.view.params.defaultProfile;
-                hiddenControlEmail = e.view.params.emailAddress;
-                hiddenControlDefaultTProfileId = e.view.params.defaultProfileId;
-                hiddenControlIsMobiClientAdmin = e.view.params.isMobiClientAdmin;
-                document.getElementById('userProfileNameHome').innerHTML = hiddenControlDefaultProfile;
+                document.getElementById('userProfileNameHome').innerHTML = e.view.params.defaultProfile;
                 console.log("homeshow");
-                
-                app.Alert.openAlertWindow("Proposed Feature", "Allow user to switch profiles if configured in the EAM IMOBI CLIENT ADMIN role?");
+                app.Alert.openAlertWindow("Proposed Feature", "Allow user to switch profiles if configured in the EAM IMOBI CLIENT PROFILES role?");
+                chartData();
+            }
+            else{
+                document.getElementById('userProfileNameHome').innerHTML = app.User.userProfileDefaultTProfile();
                 chartData();
             }
         };
         
         var chartData = function() {
-            getEquipmentOnHand(hiddenControlDefaultTProfileId);
+            getEquipmentOnHand(app.User.userProfileDefaultTProfileId());
         };
         
         var getEquipmentOnHand = function(trackingProfileId) {           
@@ -139,47 +128,12 @@ app.Home = (function () {
         };
         
         var initial = function(fname, lname, dprofile, email, dtprofileId) {
-            hiddenControlFirstName = fname;
-            hiddenControlLastName = lname;
-            hiddenControlDefaultProfile = dprofile;
-            displayControlEmail = email;
-            
             console.log("homeinit");
-        };
-        
-        var userProfileFirstName = function() {
-            return hiddenControlFirstName;
-        };
-        
-        var userProfileLastName = function() {
-            return hiddenControlLastName;
-        };
-        
-        var userProfileEmail = function() {
-            return hiddenControlEmail;
-        };
-        
-        var userProfileDefaultTProfileId = function() {
-            return hiddenControlDefaultTProfileId;
-        };
-        
-        var userProfileDefaultTProfile = function() {
-            return hiddenControlDefaultProfile;
-        };
-        
-        var userIsMobiClientAdmin = function() {
-            return hiddenControlIsMobiClientAdmin;
         };
         
         return {
             init : initial,
             show : show,
-            userProfileEmail: userProfileEmail,
-            userProfileDefaultTProfileId: userProfileDefaultTProfileId,
-            userProfileDefaultTProfile: userProfileDefaultTProfile,
-            userProfileFirstName: userProfileFirstName,
-            userProfileLastName: userProfileLastName,
-            userIsMobiClientAdmin: userIsMobiClientAdmin,
             chartData: chartData,
             setEquipmentOnHand: setEquipmentOnHand,
             randomColor: randomColor

@@ -6,7 +6,7 @@
   "DisplayName": "iMobi Client",
   "Author": "TrenStar SA (Pty) Ltd",
   "Description": "",
-  "BundleVersion": "1.4.1.2",
+  "BundleVersion": "1.6.0.0",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
@@ -66,5 +66,7 @@
     "org.apache.cordova.statusbar",
     "org.apache.cordova.vibration"
   ],
-  "WPSdk": "8.0"
+  "WPSdk": "8.0",
+  "WP8WindowsPublisherName": "CN=Telerik",
+  "WP8PackageIdentityName": "1234Telerik.undefined"
 }

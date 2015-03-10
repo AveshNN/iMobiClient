@@ -53,8 +53,10 @@ app.Login = (function () {
                         if (userProfile.SmartPhoneDeviceUDID == null) {
                             closeLoginWindow();
                         }
-                        else {            
-                            app.mobileApp.navigate('views/home.html?firstName=' + userProfile.FirstName + '&lastName=' + userProfile.LastName + '&defaultProfile=' + userProfile.DefaultProfile + '&emailAddress=' + userProfile.Email + '&defaultProfileId=' + userProfile.DefaultProfileId + '&isMobiClientAdmin=' + userProfile.IsMobiClientAdmin);
+                        else { 
+                            var defaultProfile = userProfile.DefaultProfile.replace("&", " \\ ");
+                            app.User.setUser(userProfile.FirstName, userProfile.LastName, defaultProfile, userProfile.Email, userProfile.DefaultProfileId, userProfile.IsMobiClientAdmin, userProfile.UserId);
+                            app.mobileApp.navigate('views/home.html?firstName=' + userProfile.FirstName + '&lastName=' + userProfile.LastName + '&defaultProfile=' + defaultProfile + '&emailAddress=' + userProfile.Email + '&defaultProfileId=' + userProfile.DefaultProfileId + '&isMobiClientAdmin=' + userProfile.IsMobiClientAdmin);
                             app.AppicationMenuControl.drawerListPostLogin();
                         }
                     }
