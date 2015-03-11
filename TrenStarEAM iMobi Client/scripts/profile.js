@@ -30,7 +30,7 @@ app.Profile = (function () {
             }
             
            service = app.Service.getService() + "GetUserTrackingProfilesByUserId";
-           console.log(service);
+           app.consoleLog(service);
         };
         
         var initial = function(fname, lname, dprofile, email, dtprofileId) {
@@ -73,10 +73,10 @@ app.Profile = (function () {
             var switchInstance = $("#switch").data("kendoMobileSwitch");
 
             // get the checked state of the switch.
-            console.log(switchInstance.check());
+            app.consoleLog(switchInstance.check());
             // set the checked state of the switch.
             switchInstance.check(false);
-            console.log(switchInstance.check());
+            app.consoleLog(switchInstance.check());
             
             app.Profile.scrollToTopProfile();
             
@@ -91,10 +91,10 @@ app.Profile = (function () {
             var switchInstance = $("#switch").data("kendoMobileSwitch");
 
             // get the checked state of the switch.
-            console.log(switchInstance.check());
+            app.consoleLog(switchInstance.check());
             // set the checked state of the switch.
             switchInstance.check(false);
-            console.log(switchInstance.check());
+            app.consoleLog(switchInstance.check());
             
             app.Profile.scrollToTopProfile();
         };
@@ -128,7 +128,7 @@ app.Profile = (function () {
             }
             else {
                 
-                console.log(searchString);    
+                app.consoleLog(searchString);    
                 var skip = 0;
                 var userId = app.User.userProfileUserId();
                 var data = "userId=" + userId + "&skip=" + skip + "&text=" + searchString;

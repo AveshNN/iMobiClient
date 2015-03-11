@@ -70,18 +70,18 @@ app.Login = (function () {
         };
         
         var validateLogin = function(list) {
-            
             navigator.notification.vibrate(3000);
             
             var secure = list[0];
-            if (secure.IsValid == false){
-                    $('#btnLogin').text('Register');
+           
+            if (secure.IsValid == false) {
+                $('#btnLogin').text('Register');
             }
-            else{
-                if (secure.IsApproved == false){
-                        $('#btnLogin').text('Reg Pending - Reload');
+            else {
+                if (secure.IsApproved == false) {
+                    $('#btnLogin').text('Reg Pending - Reload');
                 }
-                else{
+                else {
                     $('#btnLogin').text('Login');
                     
                     //var connectionButton = document.getElementById("btnConnections");

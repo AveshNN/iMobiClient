@@ -3,19 +3,89 @@ var app = (function (win) {
     
     var currentDeviceSecureUDID;
     var currentOrientation;
+    var applicationVersionNumber;
+    var databaseVersionNumber;
     
     var onDeviceReady = function() {
         // hide the splash screen as soon as the app is ready. otherwise
         // Cordova will wait 5 very long seconds to do it for you.
         navigator.splashscreen.hide();
-
+        
+        var isSimulator = app.deviceInfo.deviceIsSimulator();
+        
+        databaseVersionNumber = "1.0";
+        if (isSimulator === false) {
+            setApplicationVersion(getApplicationVersion);
+        }
+        else{
+            
+            applicationVersionNumber = "1.0.0.0";
+            document.getElementById('applicationVersion').innerHTML = "iMobi Client v" + applicationVersionNumber;
+        }
+        
         //Create the Database
         app.Database.openDB();
-        //app.Database.deleteTable();
         app.Database.createTable();
         
-        console.log("ready");
+        var db = app.Database.db();
         
+        
+        db.transaction(function(tx) {
+            tx.executeSql("SELECT * FROM AppVersion", [], renders, app.onError);
+        });
+        var renders = function (tx, rs) {
+            if (rs.rows.length > 0) {
+                var dbVersion = rs.rows.item(0).Version;
+                app.consoleLog("db v:" + dbVersion);
+                if (dbVersion !== databaseVersionNumber){
+                    app.consoleLog("delete");
+                    app.Database.deleteTable();
+                    app.consoleLog("Create");
+                    app.Database.createTable();
+                    app.consoleLog("add version");
+                    app.Database.addVersion(databaseVersionNumber);
+                   
+                }
+                else{
+                    
+                    postDeviceReady();
+                }
+            }
+            else{
+                app.Database.addVersion(databaseVersionNumber);
+            }
+        };
+        
+        //app.Database.deleteTable();
+        
+       app.consoleLog("ready");
+        
+        /*deviceSecureUDID();
+        
+        var connectionType = app.deviceInfo.deviceConnection();
+        if (connectionType == "none") {
+            //alert("No internet connection");
+            app.Alert.openAlertWindow("Connection Error", "No internet connection");
+            
+        }
+        else {
+            app.Connections.setDefaultConnection("DEF");
+            
+        }
+        
+        $(window).bind('orientationchange', _orientationHandler);
+        
+        document.addEventListener("offline", app.deviceInfo.deviceOffline, false);
+        document.addEventListener("online", app.deviceInfo.deviceOnline, false);
+        document.addEventListener("resume", app.deviceInfo.deviceResume, false);*/
+        
+    };
+    
+    // Handle "deviceready" event
+    document.addEventListener('deviceready', onDeviceReady, false);  
+
+    var postDeviceReady = function(){
+        app.consoleLog("i am running post");
         deviceSecureUDID();
         
         var connectionType = app.deviceInfo.deviceConnection();
@@ -34,27 +104,23 @@ var app = (function (win) {
         document.addEventListener("offline", app.deviceInfo.deviceOffline, false);
         document.addEventListener("online", app.deviceInfo.deviceOnline, false);
         document.addEventListener("resume", app.deviceInfo.deviceResume, false);
-        
     };
     
-    // Handle "deviceready" event
-    document.addEventListener('deviceready', onDeviceReady, false);  
-
     var _orientationHandler = function() {
         switch (window.orientation) {  
             case -90:
             case 90:
                 currentOrientation = "LANDSCAPE";
-                /*console.log("landscape");
+                /*app.consoleLog("landscape");
             
                 var c = document.getElementById("chartdiv");
-                console.log(c);
+                app.consoleLog(c);
                 var a = c.getElementsByTagName('a');
-                console.log(a);
+                app.consoleLog(a);
                 if (a.length > 0) {
-                    console.log(a[0].outerHTML);
-                    console.log(a[0].outerText);
-                    console.log(a[0].innerText);
+                    app.consoleLog(a[0].outerHTML);
+                    app.consoleLog(a[0].outerText);
+                    app.consoleLog(a[0].innerText);
                     a.outerHTML = "";
                     a.outerText = "";
                     a.innerText = "";
@@ -65,7 +131,7 @@ var app = (function (win) {
                 break; 
             default:
                 currentOrientation = "PORTRAIT"
-                console.log("portrait");
+                app.consoleLog("portrait");
                 break; 
         }
     };
@@ -105,6 +171,29 @@ var app = (function (win) {
         //app.refresh();
     };
     
+    var onVersionSuccess = function(tx, r){
+         postDeviceReady();
+    };
+    
+    var getApplicationVersion = function(){
+        document.getElementById('applicationVersion').innerHTML = applicationVersionNumber;
+        return applicationVersionNumber;
+    };
+    
+    var setApplicationVersion = function(callback_getApplicationVersion) {
+        cordova.getAppVersion(function(version) {
+            applicationVersionNumber = version;
+            callback_getApplicationVersion();
+        });
+    };
+    
+    var consoleLog = function(message){
+        var isSimulator = app.deviceInfo.deviceIsSimulator();
+        if (isSimulator === true){
+            console.log(message);
+        }
+    }
+    
     var deviceInfo = {
         deviceOsVersion : function() {
             return device.version;   
@@ -127,12 +216,12 @@ var app = (function (win) {
         },
         
         deviceOffline : function(){
-            console.log("offline:" + navigator.connection.type);
+            app.consoleLog("offline:" + navigator.connection.type);
             app.Alert.openAlertWindow("Connection Error", "Internet connection lost");
         },
         
         deviceOnline : function(){
-            console.log("online" + navigator.connection.type);
+            app.consoleLog("online" + navigator.connection.type);
             app.Alert.openAlertWindow("Connection", "Internet connection established");
             app.Connections.setDefaultConnection("DEF");
         },
@@ -227,7 +316,6 @@ var app = (function (win) {
     
     // Navigate to app home
     var navigateOut = function () {
-        
         app.AppicationMenuControl.drawerListPreLogin();
     };
     
@@ -237,16 +325,16 @@ var app = (function (win) {
     };
     
     var prevent = function(e) {
-        console.log(e);
+        app.consoleLog(e);
         e.preventDefault();
     };
     
     var onShow = function(e) {
-        console.log("onShow");
+        app.consoleLog("onShow");
     };
     
     var onInit = function(e){
-        console.log("onInit");
+        app.consoleLog("onInit");
         
     };
     
@@ -269,6 +357,11 @@ var app = (function (win) {
         logout: logout,
         onError:onError,
         onSuccess:onSuccess,
-        deviceInfo: deviceInfo
+        deviceInfo: deviceInfo,
+        setApplicationVersion: setApplicationVersion,
+        getApplicationVersion: getApplicationVersion,
+        postDeviceReady: postDeviceReady,
+        onVersionSuccess: onVersionSuccess,
+        consoleLog: consoleLog
     };
 }(window));

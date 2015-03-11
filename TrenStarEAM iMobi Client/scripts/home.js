@@ -13,7 +13,7 @@ app.Home = (function () {
         var show = function (e) {
             if (e.view.params.firstName != null) {
                 document.getElementById('userProfileNameHome').innerHTML = e.view.params.defaultProfile;
-                console.log("homeshow");
+                app.consoleLog("homeshow");
                 app.Alert.openAlertWindow("Proposed Feature", "Allow user to switch profiles if configured in the EAM IMOBI CLIENT PROFILES role?");
                 chartData();
             }
@@ -128,7 +128,7 @@ app.Home = (function () {
         };
         
         var initial = function(fname, lname, dprofile, email, dtprofileId) {
-            console.log("homeinit");
+            app.consoleLog("homeinit");
         };
         
         return {

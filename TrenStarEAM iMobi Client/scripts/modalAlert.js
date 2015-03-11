@@ -18,7 +18,7 @@ app.Alert = (function () {
         var closeAlertWindow = function() {
             
             $("#modalview-Alert").kendoMobileModalView("close");  
-            console.log("close");
+            app.consoleLog("close");
         };
        
         return {

@@ -67,7 +67,7 @@ app.QuickHistory = (function () {
         };
         
         var requestHistory = function() {
-            console.log(app.User.userProfileEmail());
+            app.consoleLog(app.User.userProfileEmail());
             var data = "items=" + quickHistoryItemBarcode + "&userEmail=" + app.User.userProfileEmail();
             app.Service.ajaxCall("RequestHistory", data, "app.QuickHistory.callBackHistory", "Sending Request");
         };

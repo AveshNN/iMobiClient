@@ -23,7 +23,7 @@ app.Connections = (function () {
                     for (var i = 0; i < rs.rows.length; i++) {
                         var connectionName = rs.rows.item(i).ConnectionName;
                         connectionSet = rs.rows.item(i).IsSet;
-                        console.log(connectionName + ":" + connectionSet);
+                        app.consoleLog(connectionName + ":" + connectionSet);
                         if ((connectionSet == "true") || (connectionSet == "1")) {
                             app.Service.setServiceCode(rs.rows.item(i).ConnectionCode); 
                             //app.Service.setService(rs.rows.item(i).WCFConnection); 
@@ -43,9 +43,9 @@ app.Connections = (function () {
         
         var setDefaultConnection = function(connectionCode) {
             //Create the Database
-            app.Database.openDB();
+            //app.Database.openDB();
             //app.Database.deleteTable();
-            app.Database.createTable();
+            //app.Database.createTable();
             
             var db = app.Database.db();
                
@@ -59,7 +59,7 @@ app.Connections = (function () {
                         if (rs.rows.item(i).ConnectionCode == connectionCode) {
                             app.Service.setService(rs.rows.item(i).WCFConnection); 
                             
-                            console.log(app.Service.getService());
+                            app.consoleLog(app.Service.getService());
                             var UDID = app.getDeviceSecureUDID();
                             
                             app.Login.ValidateSecureUUID(UDID);
@@ -91,9 +91,9 @@ app.Connections = (function () {
             });
             
             if (connectionCode != null) {
-                console.log("setNewConnection= " + connectionCode);
+                app.consoleLog("setNewConnection= " + connectionCode);
                 var rendernew = function (tx, rs) {
-                    console.log("(rs.rows.length=" + rs.rows.length);
+                    app.consoleLog("(rs.rows.length=" + rs.rows.length);
                     if (rs.rows.length > 0) {
                         /*for (var i = 0; i < rs.rows.length; i++) {
                         if (rs.rows.item(i).ConnectionCode == connectionCode) {
@@ -135,9 +135,9 @@ app.Connections = (function () {
             var availableConnections = [];
             
             //Create the Database
-            app.Database.openDB();
+            //app.Database.openDB();
             //app.Database.deleteTable();
-            app.Database.createTable();
+            //app.Database.createTable();
             
             var db = app.Database.db();
             
@@ -160,7 +160,7 @@ app.Connections = (function () {
                         for (var j = 0; j < rs.rows.length; j++) {
                             if (rs.rows.item(j).ConnectionCode == list[i].ConnectionCode) {
                                 found = true;
-                                console.log("Found: " + list[i].ConnectionCode);
+                                app.consoleLog("Found: " + list[i].ConnectionCode);
                                 
                                 break;
                             }
@@ -168,7 +168,7 @@ app.Connections = (function () {
                         if (found == false) {
                             app.Connections.insertConnection(list[i].Connection, list[i].ConnectionCode);
                             if (connectionSet == false) {
-                                console.log("set" + list[i].Connection);
+                                app.consoleLog("set" + list[i].Connection);
                                 app.Connections.setNewConnection(list[i].Connection, list[i].ConnectionCode);
                                 connectionSet = true;
                             }
@@ -196,7 +196,7 @@ app.Connections = (function () {
                         if (rss.rows.length > 0) {
                             for (var i = 0; i < rss.rows.length; i++) {
                                 if ((rss.rows.item(i).IsSet == "true") || (rss.rows.item(i).IsSet == "1")) {
-                                    console.log("Current set:" + rss.rows.item(i).ConnectionCode);
+                                    app.consoleLog("Current set:" + rss.rows.item(i).ConnectionCode);
                                     $('#' + rss.rows.item(i).ConnectionCode).removeClass('connectionSelect');    
                                     $('#' + rss.rows.item(i).ConnectionCode).addClass('connectionSelected');
                                 
@@ -205,6 +205,17 @@ app.Connections = (function () {
                                 }
                             }
                         }
+                        
+                        /*app.consoleLog(availableConnections.length);
+                        if (availableConnections.length === 1) {
+                            app.consoleLog("hide connections");
+                            $('#btnConnections').removeClass('connections-button');
+                            $('#btnConnections').addClass('connections-button_hide');
+                        }
+                        else {
+                            $('#btnConnections').removeClass('connections-button_hide');
+                            $('#btnConnections').addClass('connections-button');
+                        }*/
                     }
                 }
                 if (app.spinnerService.viewModel.checkSimulator() == false) {
@@ -214,7 +225,7 @@ app.Connections = (function () {
         };
         
         var insertConnection = function(connectionName, connectionCode) {
-            console.log("insertConnection:" + connectionName);
+            app.consoleLog("insertConnection:" + connectionName);
             var db = app.Database.db();
             db.transaction(function(tx) {
                 tx.executeSql("INSERT INTO Connection(ConnectionName, ConnectionCode, WCFConnection, IsSet) VALUES (?,?,?,?);" ,

@@ -58,7 +58,7 @@ app.ScanBarcode = (function () {
                     }
                 }, 
                 function(error) {
-                    console.log("Scanning failed: " + error);
+                    app.consoleLog("Scanning failed: " + error);
                 }
                 );
         };

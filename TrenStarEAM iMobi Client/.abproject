@@ -6,7 +6,7 @@
   "DisplayName": "iMobi Client",
   "Author": "TrenStar SA (Pty) Ltd",
   "Description": "",
-  "BundleVersion": "1.6.0.0",
+  "BundleVersion": "1.7.0.0",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
@@ -48,6 +48,7 @@
     "ID_RESOLUTION_HD720P"
   ],
   "CorePlugins": [
+    "uk.co.whiteoctober.cordova.appversion@0.1.5",
     "com.phonegap.plugins.barcodescanner",
     "org.apache.cordova.camera",
     "org.apache.cordova.media-capture",

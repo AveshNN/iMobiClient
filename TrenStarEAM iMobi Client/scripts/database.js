@@ -18,15 +18,15 @@ app.Database = (function () {
         //DATABASE CONFIG
         var openDb = function() {
             var isSimulator = app.deviceInfo.deviceIsSimulator();
-            console.log("isSimulator:" + isSimulator);
+             app.consoleLog("isSimulator:" + isSimulator);
              
             if (isSimulator === false) {
                 app.db = window.sqlitePlugin.openDatabase("TrenStarEAMClient");
             }
             else {
-                console.log("Is Simu:" + "YES");
+                 app.consoleLog("Is Simu:" + "YES");
                 // For debugin in simulator fallback to native SQL Lite
-                console.log("Use built in SQL Lite");
+                 app.consoleLog("Use built in SQL Lite");
                 app.db = window.openDatabase("TrenStarEAMClient", "1.0", "EAM iMobi", 200000);
             }
         };
@@ -37,6 +37,9 @@ app.Database = (function () {
             });
             db().transaction(function(tx) {
                 tx.executeSql("DROP TABLE IF EXISTS Connection");
+            });
+            db().transaction(function(tx) {
+                tx.executeSql("DROP TABLE IF EXISTS AppVersion");
             });
         };
             
@@ -50,8 +53,22 @@ app.Database = (function () {
                 tx.executeSql("CREATE TABLE IF NOT EXISTS Connection(ID INTEGER PRIMARY KEY ASC, ConnectionName varchar(10), ConnectionCode varchar(10), WCFConnection varchar(150), IsSet BOOLEAM)", []);
             });
             
+            db().transaction(function(tx) {
+                tx.executeSql("CREATE TABLE IF NOT EXISTS AppVersion(ID INTEGER PRIMARY KEY ASC, Version varchar(10))", []);
+                
+            });
         };
-            
+        
+        var addVersion = function (version) {
+            db().transaction(function(tx) {
+                 app.consoleLog(version);
+                tx.executeSql("INSERT INTO AppVersion(Version) VALUES (?)",
+                              [version],
+                              app.onVersionSuccess,
+                              app.onError);
+            });            
+        };
+        
         var updateUserProfile = function(Polling) {
             db.transaction(function(tx) {
                 var createDate = new Date();
@@ -78,7 +95,8 @@ app.Database = (function () {
             createTable:createTable,
             updateUserProfile:updateUserProfile,
             updateRecord:updateRecord,
-            db:db
+            db:db,
+            addVersion:addVersion
         }
     }());
     

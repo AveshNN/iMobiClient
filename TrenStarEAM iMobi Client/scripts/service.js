@@ -28,7 +28,7 @@ app.Service = (function () {
         var setServiceCode = function(serviceCode) {
             
             wcfConnectionCode = serviceCode;
-            console.log("serviceCode:" + serviceCode);
+            app.consoleLog("serviceCode:" + serviceCode);
         };
         
         var ajaxCall = function(method, data, callback, spinnerText) {

@@ -26,13 +26,13 @@ app.User = (function () {
             userIsMobiClientAdmin = isClientAdmin;
             userUserId = userId;
             
-            console.log("set User");
+            app.consoleLog("set User");
         };
         
         var setUserProfile = function(dprofile, dtprofileId) {
             userDefaultProfile = dprofile;
             userDefaultTProfileId = dtprofileId;
-            console.log("setUserProfile");
+            app.consoleLog("setUserProfile");
         };
         
         var userProfileFirstName = function() {

@@ -40,7 +40,7 @@ app.Inventory = (function () {
             var trackingProfileId = app.User.userProfileDefaultTProfileId();
             inventoryType = type;
             
-            console.log(document.getElementById("navbarInventory"));
+            app.consoleLog(document.getElementById("navbarInventory"));
             if (type == "INBOUND") {
                 document.getElementById("navbarInventory").innerHTML = "Inbound Inventory";
             }
@@ -138,7 +138,7 @@ app.Inventory = (function () {
                     sumOfItems = inv.TotalCount;
                 }
     
-                console.log("type:" + type);
+                app.consoleLog("type:" + type);
                 
                 var newSum = 0;
                 if (type !== null) {

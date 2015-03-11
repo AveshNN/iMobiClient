@@ -56,18 +56,18 @@
     <body>
 
         <!--WELCOME VIEW -->
-        <div data-role="view" id="view-transitions" data-title="EAM i-Mobi" data-show="app.AppicationMenuControl.drawerListPreLogin();" >
+        <div data-role="view" id="view-transitions" data-title="EAM i-Mobi" app.Model="app.AppicationMenuControl" data-show="app.AppicationMenuControl.drawerListPreLogin();">
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
-
                 </div>
             </header>
 
             <div data-role="content" id="view-transitions-content" class="imageLocation"></div>
             <footer data-role="footer">
                 <a data-role="button" id="btnLogin" data-rel="modalview" data-click="app.Login.openLoginWindow" class="transitions-button">Login</a>
-                <a data-role="button" id="btnConnections" data-rel="modalview" data-click="app.Login.openConnectionWindow" class="connections-button">Change Connection</a>
+                <a data-role="button" id="btnConnections" data-rel="modalview" data-click="app.Login.openConnectionWindow" class="connections-button">Available Systems</a>
+                <div id='applicationVersion' style="display:block;font-size: 0.7em; font-style:italic;text-align:left;padding-left:3px"></div>
             </footer>
         </div>
 
@@ -100,7 +100,7 @@
 
             <div data-role="header">
                 <div data-role="navbar" id="modelNavbar">
-                    <span>Connections</span>
+                    <span>Systems</span>
                     <a data-click="app.Login.closeConnectionWindow" data-role="button" data-align="right">Accept</a>
                 </div>
             </div>

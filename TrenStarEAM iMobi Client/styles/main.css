@@ -134,6 +134,7 @@
     font-size: 1.0em; 
     margin: .6em .8em 2.0em 1em;
     display: block;
+    margin-bottom: 5px;
 }
 
 .details-link

@@ -39,7 +39,6 @@ app.AppicationMenuControl = (function () {
         
             app.ListControl.applyDataTemplate(control, groupedData, "#templatelistviewsMenu");
         };
-       
         
         return {
             drawerListPostLogin : drawerListPostLogin,
