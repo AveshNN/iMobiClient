@@ -22,7 +22,8 @@ app.Profile = (function () {
             document.getElementById(displayControlDefaultProfile).innerHTML = app.User.userProfileDefaultTProfile();
             document.getElementById(displayControlEmail).innerHTML = app.User.userProfileEmail();
             
-            if (app.User.userProfileIsMobiClientAdmin() === "false") {
+            if (app.User.userProfileIsMobiClientAdmin() === false) {
+                
                 disableSwitchProfile(false);
             }
             else {
@@ -101,6 +102,7 @@ app.Profile = (function () {
         
         var disableSwitchProfile = function(enable) {
             var switchInstance = $("#switch").data("kendoMobileSwitch");
+            app.consoleLog("disableSwitchProfile: " + enable);
             switchInstance.enable(enable);
         };
         
