@@ -42,7 +42,7 @@ app.Reports = (function () {
         };
         
         var request = function(report){
-            app.Alert.openAlertWindow("Proposed Feature", "Would you like this feature?? Maybe limit to x requests per report in a x amount of time..." );
+            app.Alert.openAlertWindow("Report", report + " unavailable" );
         };
         
         return {
