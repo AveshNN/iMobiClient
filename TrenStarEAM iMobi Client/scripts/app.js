@@ -176,7 +176,7 @@ var app = (function (win) {
     };
     
     var getApplicationVersion = function(){
-        document.getElementById('applicationVersion').innerHTML = applicationVersionNumber;
+        document.getElementById('applicationVersion').innerHTML = "iMobi Client v" + applicationVersionNumber;
         return applicationVersionNumber;
     };
     
