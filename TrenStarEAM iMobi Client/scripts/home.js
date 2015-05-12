@@ -14,7 +14,6 @@ app.Home = (function () {
             if (e.view.params.firstName != null) {
                 document.getElementById('userProfileNameHome').innerHTML = e.view.params.defaultProfile;
                 app.consoleLog("homeshow");
-                app.Alert.openAlertWindow("Proposed Feature", "Allow user to switch profiles if configured in the EAM IMOBI CLIENT PROFILES role?");
                 chartData();
             }
             else{
