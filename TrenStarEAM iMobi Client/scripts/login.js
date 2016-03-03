@@ -46,16 +46,18 @@ app.Login = (function () {
         };
         
         var setUserData = function(list) {
+            window.mySwipe.stop();
             if (list != null) {
                 if (list.length > 0) {
                     for (var i = 0;i < list.length;i++) {
                         var userProfile = list[i];
+                        console.log(userProfile);
                         if (userProfile.SmartPhoneDeviceUDID == null) {
                             closeLoginWindow();
                         }
                         else { 
                             var defaultProfile = userProfile.DefaultProfile.replace("&", " \\ ");
-                            app.User.setUser(userProfile.FirstName, userProfile.LastName, defaultProfile, userProfile.Email, userProfile.DefaultProfileId, userProfile.IsMobiClientAdmin, userProfile.UserId);
+                            app.User.setUser(userProfile.LoginName, userProfile.FirstName, userProfile.LastName, defaultProfile, userProfile.Email, userProfile.DefaultProfileId, userProfile.IsMobiClientAdmin, userProfile.UserId);
                             app.mobileApp.navigate('views/home.html?firstName=' + userProfile.FirstName + '&lastName=' + userProfile.LastName + '&defaultProfile=' + defaultProfile + '&emailAddress=' + userProfile.Email + '&defaultProfileId=' + userProfile.DefaultProfileId + '&isMobiClientAdmin=' + userProfile.IsMobiClientAdmin);
                             app.AppicationMenuControl.drawerListPostLogin();
                         }

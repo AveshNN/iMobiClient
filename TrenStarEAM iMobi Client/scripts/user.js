@@ -14,10 +14,12 @@ app.User = (function () {
     var userDefaultTProfileId;
     var userIsMobiClientAdmin;
     var userUserId;
+    var userLoginName;
     
     // User view model
     var userViewModel = (function () {
-        var setUser = function(fname, lname, dprofile, email, dtprofileId, isClientAdmin, userId) {
+        var setUser = function(loginName, fname, lname, dprofile, email, dtprofileId, isClientAdmin, userId) {
+            userLoginName = loginName;
             userFirstName = fname;
             userLastName = lname;
             userDefaultProfile = dprofile;
@@ -26,13 +28,18 @@ app.User = (function () {
             userIsMobiClientAdmin = isClientAdmin;
             userUserId = userId;
             
-            app.consoleLog("set User");
+            app.consoleLog("set User" + userUserId);
         };
         
         var setUserProfile = function(dprofile, dtprofileId) {
             userDefaultProfile = dprofile;
             userDefaultTProfileId = dtprofileId;
             app.consoleLog("setUserProfile");
+        };
+        
+        
+        var userProfileLoginName = function() {
+            return userLoginName;
         };
         
         var userProfileFirstName = function() {
@@ -76,7 +83,8 @@ app.User = (function () {
             userProfileFirstName: userProfileFirstName,
             userProfileLastName: userProfileLastName,
             userProfileIsMobiClientAdmin: userProfileIsMobiClientAdmin,
-            userProfileUserId: userProfileUserId
+            userProfileUserId: userProfileUserId,
+            userProfileLoginName : userProfileLoginName
         };
     }());
     

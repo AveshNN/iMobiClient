@@ -10,88 +10,89 @@ app.ScanBarcode = (function () {
     var errorControl;
     var $scannedBarcode;
     var iAmScanning;
+	var itemScanned;
     
     // Navigate to app home
     var navigateItemOptions = function (barcode) {
         app.mobileApp.navigate('views/itemOptions.html?itemBarcode=' + barcode);
     };
-    
+
     // ScanBarcode view model
     var scanBarcodeViewModel = (function () {
-        var validate = function(e) {
+        var validate = function (e) {
             var scanned = e.value.toUpperCase();
             if (ValidateBarcode(scanned) == false) {
                 navigator.notification.vibrate(3000);
                 document.getElementById(errorControl).innerHTML = "Invalid Barcode";
-					
+
                 var el = document.getElementById(errorControl);
                 var effect = kendo.fx(el).fadeOut().duration(6000);
                 effect.play();
-            }
-            else {
+            } else {
                 navigateItemOptions(scanned);
             }
         };
-        
-        var scanItem = function() {
+
+        var scanItem = function () {
             setScanning(true);
             cordova.plugins.barcodeScanner.scan(
-                function(result) {
+                function (result) {
                     if (!result.cancelled) {
                         if (ValidateBarcode(result.text)) {
                             var scanned = document.getElementById(displayControl);
                             scanned.value = result.text;
                             navigateItemOptions(scanned.value);
-                        }
-                        else {
+                        } else {
                             var clearControl = document.getElementById(displayControl);
                             clearControl.value = "";
                             navigator.notification.vibrate(3000);
                             document.getElementById(errorControl).innerHTML = "Invalid Barcode";
-                            
-                            
-					
+
+
+
                             var el = document.getElementById(errorControl);
                             var effect = kendo.fx(el).fadeOut().duration(6000);
                             effect.play();
                         }
                     }
-                }, 
-                function(error) {
+                },
+                function (error) {
                     app.consoleLog("Scanning failed: " + error);
                 }
-                );
+            );
         };
-        
-         var show = function () {
-             $scannedBarcode = $('#txtBarcode');
-             $scannedBarcode.val('');
+
+       
+
+        var show = function () {
+            $scannedBarcode = $('#txtBarcode');
+            $scannedBarcode.val('');
         };
-        
-        var initial = function(x, y) {
+
+        var initial = function (x, y) {
             displayControl = x;
             errorControl = y;
-            
+
         };
-        
-        var setScanning = function(isScanning) {
+
+        var setScanning = function (isScanning) {
             iAmScanning = isScanning;
         };
-        
-         var getScanning = function() {
+
+        var getScanning = function () {
             return iAmScanning;
         };
-        
+
         return {
             scanItem: scanItem,
             validateBarcode: validate,
-            init : initial,
-            show : show,
-            setScanning : setScanning,
-            getScanning : getScanning
-            
+            init: initial,
+            show: show,
+            setScanning: setScanning,
+            getScanning: getScanning
+
         };
     }());
-    
+
     return scanBarcodeViewModel;
 }());

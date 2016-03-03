@@ -1,19 +1,56 @@
-.km-drawer-button:before, .km-drawer-button:after { content: "\E077"; }
 
+
+.km-drawer-button:before, .km-drawer-button:after { content: "\E077"; }
+.km-transaction-e:after,
+    .km-transaction-e:before
+    {
+        content: "\e04f";
+    }
 #view-transitions-content
 {
     background-color: white;
-    overflow: hidden
+    overflow: hidden;
+    /*margin-top:9em;*/
+    
 }
 
 #scanButton
 {
     display: block;
-    background-color: Red;
+    background-color: Green;
     text-align: center;
-    margin: 0em 1em 0em 0em;
-    font-size: 2.2em;
+    margin: .6em 1.2em 0 0em;
+    font-size: 2.0em;
     color: white;
+}
+
+#scanCam
+{
+    background-color: white;
+    text-align: center;
+    color: black;
+}
+
+.screenName
+{
+    background-color: rgba(36, 189, 255, 1);;
+    text-align: center;
+    color: white;
+    line-height: 2em;
+    margin-left:1em;
+    margin-right:1em;
+}
+
+.summaryMain{
+    display:inline;font-size: 1.1em;font-weight:bold;text-align:left;
+}
+
+.summarySub{
+    display:block;font-size: 1em;text-align:center;
+}
+
+.summaryQty{
+    display:inline;font-size: 1em;color:green;text-align:right
 }
 
 .km-flat .km-footer .km-navbar
@@ -22,31 +59,32 @@
     background-color: rgba(36, 189, 255, 1);
 }
 
-#view-transitions .km-footer
-{
-    background-color: white;
-}
 
 .km-icon .km-camera
 {
     text-shadow: none;
 }
 
-#modalview-login-button
-{
-    display: block;
-    text-align: center;
-    margin: .6em .8em 0;
-    font-size: 1.2em;
-    background-color: rgba(36, 189, 255, 1);
-    color: white;
-}
+
 
 #view-transitions .km-header
 {
     position:absolute;
     z-index:1;
+    background-color: white;
 }
+#view-transitions .km-content
+{
+    top: 9.5em;
+    background-color: white;
+}
+#view-transitions .km-footer
+{
+    background-color: white;
+    position:fixed;
+}
+
+
 .km-footer
 {
     background-color: gray;
@@ -262,6 +300,16 @@
     color: black;
 }
 
+.modalview-login-button
+{
+    display: block;
+    text-align: center;
+    margin: .6em .8em 0;
+    font-size: 1.2em;
+    background-color: rgba(36, 189, 255, 1) !important;
+    color: white!important;
+}
+
 #inventoryHeader
 {
     color: white;
@@ -312,6 +360,113 @@
     /*background-size: contain;*/
 }
 
+
+/* iphone 4 -5, Samsumg*/
+@media screen and (min-width:320px)
+{ 
+    .innovationImage
+    {
+    
+        width: 20em;
+        height: auto;
+        margin: auto;
+        margin-top: 1em;
+        display: block;
+    }
+
+}
+
+
+/* iphone6*/
+@media screen and (min-width:375px)
+{ 
+    .innovationImage
+    {
+    
+        width: 23em;
+        height: auto;
+        margin: auto;
+        margin-top: 1em;
+        display: block;
+    }
+
+}
+
+/*iphone6 plus*/
+@media screen and (min-width:414px)
+{ 
+    .innovationImage
+    {
+        width: 25em;
+        height: auto;
+        margin: auto;
+        margin-top: 1em;
+        display: block;
+    }
+    
+    #view-transitions .km-content
+    {
+        top: 10.5em;
+        background-color: white;
+    }
+    
+    .km-flat .km-button
+    {
+        background: white;
+        border-color: rgba(0, 0, 0, 0.1);
+        color: black;
+        font-size:larger;
+    }
+
+}
+
+/*samsung tablet*/
+@media screen and (min-width:600px)
+{ 
+    .innovationImage
+    {
+        width: 35em;
+        height: auto;
+        margin: auto;
+        margin-top: 1em;
+        display: block;
+    }
+    
+    #view-transitions .km-content
+    {
+        top: 11.5em;
+        background-color: white;
+    }
+
+}
+
+/*IPAD*/
+@media screen and (min-width: 700px)
+{ 
+    .innovationImage
+    {
+        width: 45em;
+        height: auto;
+        margin: auto;
+        margin-top: 1em;
+        display: block;
+    }
+
+    #view-transitions .km-content
+    {
+        top: 13.5em;
+        background-color: white;
+    }
+    
+    .km-flat .km-button
+    {
+        background: white;
+        border-color: rgba(0, 0, 0, 0.1);
+        color: black;
+        font-size:xx-large;
+    }
+}
+
 h4.time
     {
         color: #369;
@@ -319,9 +474,30 @@ h4.time
         margin-right: 10px;
     }
 
-#modalview-Profiles .km-virtual-list>li {
-width: 100%;
-position: relative;
-top: 0;
--webkit-transform: translateZ(0);
+#modalview-Profiles .km-virtual-list>li
+{
+    width: 100%;
+    position: relative;
+    top: 0;
+    -webkit-transform: translateZ(0);
+}
+
+.swipe
+{
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+}
+
+.swipe-wrap
+{
+    overflow: hidden;
+    position: relative;
+}
+
+.swipe-wrap > div
+{
+    float: left;
+    width: 100%;
+    position: relative;
 }

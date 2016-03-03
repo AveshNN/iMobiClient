@@ -10,6 +10,8 @@ app.AppicationMenuControl = (function () {
     // AppicationMenuControl view model
     var appicationMenuControl = (function () {
         var drawerListPreLogin = function() {
+            
+            
             var groupedData = [];
    
             groupedData.push({ Description: "Login", icon:"play", Id: "#view-transitions", Code:"LOGIN"});
@@ -20,6 +22,7 @@ app.AppicationMenuControl = (function () {
             app.ListControl.applyDataTemplate(control, groupedData, "#templatelistviewsMenu");
             
             app.Login.show();
+            
         };
         
         var drawerListPostLogin = function() {
@@ -31,6 +34,7 @@ app.AppicationMenuControl = (function () {
             groupedData.push({ Description: "My Client Liason",icon:"contacts",  Id: "views/clientLiason.html", Code:"CLO"});
             groupedData.push({ Description: "My Profile", icon:"settings", Id: "views/profile.html", Code:"PRO"});
             groupedData.push({ Description: "Scan Barcode", icon:"camera", Id: "views/scan.html", Code:"SCAN"});
+            groupedData.push({ Description: "Transactions", icon:"transaction-e", Id: "views/transactions.html", Code:"TRAN"});
             groupedData.push({ Description: "Request Report", icon:"bookmarks", Id: "views/reports.html", Code:"REP"});
             groupedData.push({ Description: "Logout", icon:"stop", Id: "index.html", Code:"LOGOUT"});
     

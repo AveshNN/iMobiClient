@@ -29,6 +29,17 @@ app.ListControl = (function () {
                                                        });   
         };
         
+        var applyDataTemplateGroupBy = function(control, data, template, groupBy) {
+            var listView = control.kendoMobileListView({
+                                                           dataSource: kendo.data.DataSource.create({data: data, group: groupBy}),       
+        
+                                                           template: $(template).html(),
+                                                           fixedHeaders: true,
+                                                           scrollThreshold: 30, //threshold in pixels
+                                                           endlessScroll: false
+                                                       });   
+        };
+        
         var applyDataTemplateEndlessScroll = function(control, data, template) {
             var listView = control.kendoMobileListView({
                                                            dataSource: kendo.data.DataSource.create({data: data}),       
@@ -42,7 +53,8 @@ app.ListControl = (function () {
         return {
             removeListViewWrapper: removeListViewWrapper,
             applyDataTemplate: applyDataTemplate,
-            applyDataTemplateEndlessScroll : applyDataTemplateEndlessScroll
+            applyDataTemplateEndlessScroll : applyDataTemplateEndlessScroll,
+            applyDataTemplateGroupBy : applyDataTemplateGroupBy
             
         };
     }());

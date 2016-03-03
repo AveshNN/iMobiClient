@@ -6,7 +6,7 @@
   "DisplayName": "iMobi Client",
   "Author": "TrenStar SA (Pty) Ltd",
   "Description": "iMobi Client",
-  "BundleVersion": "1.9.0.3",
+  "BundleVersion": "1.9.0.7",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
@@ -14,16 +14,21 @@
   ],
   "iOSBackgroundMode": [],
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
-  "FrameworkVersion": "3.5.0",
+  "FrameworkVersion": "3.8.0",
   "AndroidPermissions": [
+    "android.permission.ACCESS_FINE_LOCATION",
     "android.permission.ACCESS_NETWORK_STATE",
     "android.permission.ACCESS_WIFI_STATE",
     "android.permission.BIND_DEVICE_ADMIN",
+    "android.permission.BLUETOOTH",
+    "android.permission.BLUETOOTH_ADMIN",
     "android.permission.CALL_PHONE",
     "android.permission.CAMERA",
     "android.permission.CHANGE_NETWORK_STATE",
     "android.permission.CHANGE_WIFI_STATE",
+    "android.permission.FLASHLIGHT",
     "android.permission.INTERNET",
+    "android.permission.LOCATION_HARDWARE",
     "android.permission.NFC",
     "android.permission.SET_ORIENTATION",
     "android.permission.STATUS_BAR",
@@ -33,8 +38,8 @@
     "Portrait",
     "Landscape"
   ],
-  "AndroidHardwareAcceleration": "false",
-  "iOSStatusBarStyle": "Default",
+  "AndroidHardwareAcceleration": "true",
+  "iOSStatusBarStyle": "BlackOpaque",
   "Framework": "Cordova",
   "WP8TileTitle": "",
   "WP8Publisher": "",
@@ -47,8 +52,23 @@
     "ID_RESOLUTION_WXGA",
     "ID_RESOLUTION_HD720P"
   ],
-  "CorePlugins": [],
+  "CorePlugins": [
+    "com.phonegap.plugins.barcodescanner@2.0.0",
+    "com.phonegap.plugins.sqlite@1.0.6",
+    "hu.dpal.phonegap.plugins.SpinnerDialog@1.3.1",
+    "org.apache.cordova.camera",
+    "org.apache.cordova.device",
+    "org.apache.cordova.device-orientation",
+    "org.apache.cordova.dialogs",
+    "org.apache.cordova.geolocation",
+    "org.apache.cordova.network-information",
+    "org.apache.cordova.splashscreen",
+    "org.apache.cordova.statusbar",
+    "org.apache.cordova.vibration",
+    "uk.co.whiteoctober.cordova.appversion@0.1.7"
+  ],
   "WPSdk": "8.0",
   "WP8WindowsPublisherName": "CN=Telerik",
-  "WP8PackageIdentityName": "1234Telerik.undefined"
+  "WP8PackageIdentityName": "1234Telerik.undefined",
+  "iOSDeploymentTarget": "6.0"
 }

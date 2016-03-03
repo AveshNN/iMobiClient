@@ -5,6 +5,10 @@ var app = (function (win) {
     var currentOrientation;
     var applicationVersionNumber;
     var databaseVersionNumber;
+    var deviceWidth;
+    var longitude;
+    var latitude;
+    var mySwipe;
     
     var onDeviceReady = function() {
         // hide the splash screen as soon as the app is ready. otherwise
@@ -14,13 +18,16 @@ var app = (function (win) {
         var isSimulator = app.deviceInfo.deviceIsSimulator();
         
         databaseVersionNumber = "1.0";
-        if (isSimulator === false) {
-            setApplicationVersion(getApplicationVersion);
+        try {
+            if (isSimulator === false) {
+                setApplicationVersion(getApplicationVersion);
+            }
+            else {
+                applicationVersionNumber = "1.0.0.0";
+                document.getElementById('applicationVersion').innerHTML = "iMobi Client v" + applicationVersionNumber;
+            }
         }
-        else{
-            
-            applicationVersionNumber = "1.0.0.0";
-            document.getElementById('applicationVersion').innerHTML = "iMobi Client v" + applicationVersionNumber;
+        catch (err) {
         }
         
         //Create the Database
@@ -29,7 +36,6 @@ var app = (function (win) {
         
         var db = app.Database.db();
         
-        
         db.transaction(function(tx) {
             tx.executeSql("SELECT * FROM AppVersion", [], renders, app.onError);
         });
@@ -37,54 +43,52 @@ var app = (function (win) {
             if (rs.rows.length > 0) {
                 var dbVersion = rs.rows.item(0).Version;
                 app.consoleLog("db v:" + dbVersion);
-                if (dbVersion !== databaseVersionNumber){
+                if (dbVersion !== databaseVersionNumber) {
                     app.consoleLog("delete");
                     app.Database.deleteTable();
                     app.consoleLog("Create");
                     app.Database.createTable();
                     app.consoleLog("add version");
                     app.Database.addVersion(databaseVersionNumber);
-                   
                 }
-                else{
-                    
+                else {
                     postDeviceReady();
                 }
             }
-            else{
+            else {
                 app.Database.addVersion(databaseVersionNumber);
             }
         };
         
         //app.Database.deleteTable();
         
-       app.consoleLog("ready");
-        
+        app.consoleLog("ready");
+        deviceWidth = $(window).width();
         /*deviceSecureUDID();
-        
         var connectionType = app.deviceInfo.deviceConnection();
         if (connectionType == "none") {
-            //alert("No internet connection");
-            app.Alert.openAlertWindow("Connection Error", "No internet connection");
-            
+        //alert("No internet connection");
+        app.Alert.openAlertWindow("Connection Error", "No internet connection");
         }
         else {
-            app.Connections.setDefaultConnection("DEF");
-            
+        app.Connections.setDefaultConnection("DEF");
         }
-        
         $(window).bind('orientationchange', _orientationHandler);
-        
         document.addEventListener("offline", app.deviceInfo.deviceOffline, false);
         document.addEventListener("online", app.deviceInfo.deviceOnline, false);
         document.addEventListener("resume", app.deviceInfo.deviceResume, false);*/
+        
+        app.deviceInfo.deviceGetCurrentPosition();
+        StatusBar.overlaysWebView(true); //Turns off web view overlay.
+        
+                    
         
     };
     
     // Handle "deviceready" event
     document.addEventListener('deviceready', onDeviceReady, false);  
 
-    var postDeviceReady = function(){
+    var postDeviceReady = function() {
         app.consoleLog("i am running post");
         deviceSecureUDID();
         
@@ -92,46 +96,68 @@ var app = (function (win) {
         if (connectionType == "none") {
             //alert("No internet connection");
             app.Alert.openAlertWindow("Connection Error", "No internet connection");
-            
         }
         else {
             app.Connections.setDefaultConnection("DEF");
-            
         }
+        
         
         $(window).bind('orientationchange', _orientationHandler);
         
         document.addEventListener("offline", app.deviceInfo.deviceOffline, false);
         document.addEventListener("online", app.deviceInfo.deviceOnline, false);
         document.addEventListener("resume", app.deviceInfo.deviceResume, false);
+        
+        app.slideShow();
+    };
+    
+    var slideShow = function(){
+        window.mySwipe = new Swipe(document.getElementById('slider'), {
+                                       startSlide: 0,
+                                       speed: 400,
+                                       auto: 3000,
+                                       continuous: true,
+                                       disableScroll: false,
+                                       stopPropagation: false,
+                                       callback: function(index, elem) {
+                                       },
+                                       transitionEnd: function(index, elem) {
+                                       }
+                                   });
+        
     };
     
     var _orientationHandler = function() {
         switch (window.orientation) {  
             case -90:
             case 90:
+                deviceWidth = $(window).width();
+                console.log("LANDSCAPE" + deviceWidth);
                 currentOrientation = "LANDSCAPE";
-                /*app.consoleLog("landscape");
+                app.consoleLog("landscape");
+                /*
             
                 var c = document.getElementById("chartdiv");
                 app.consoleLog(c);
                 var a = c.getElementsByTagName('a');
                 app.consoleLog(a);
                 if (a.length > 0) {
-                    app.consoleLog(a[0].outerHTML);
-                    app.consoleLog(a[0].outerText);
-                    app.consoleLog(a[0].innerText);
-                    a.outerHTML = "";
-                    a.outerText = "";
-                    a.innerText = "";
+                app.consoleLog(a[0].outerHTML);
+                app.consoleLog(a[0].outerText);
+                app.consoleLog(a[0].innerText);
+                a.outerHTML = "";
+                a.outerText = "";
+                a.innerText = "";
                     
-                    c.validateNow();
+                c.validateNow();
                 }*/
                          
                 break; 
             default:
                 currentOrientation = "PORTRAIT"
                 app.consoleLog("portrait");
+                deviceWidth = $(window).width();
+                console.log("PORTRAIT" + deviceWidth);
                 break; 
         }
     };
@@ -171,11 +197,11 @@ var app = (function (win) {
         //app.refresh();
     };
     
-    var onVersionSuccess = function(tx, r){
-         postDeviceReady();
+    var onVersionSuccess = function(tx, r) {
+        postDeviceReady();
     };
     
-    var getApplicationVersion = function(){
+    var getApplicationVersion = function() {
         document.getElementById('applicationVersion').innerHTML = "iMobi Client v" + applicationVersionNumber;
         return applicationVersionNumber;
     };
@@ -187,14 +213,50 @@ var app = (function (win) {
         });
     };
     
-    var consoleLog = function(message){
+    var consoleLog = function(message) {
         var isSimulator = app.deviceInfo.deviceIsSimulator();
-        if (isSimulator === true){
+        if (isSimulator === true) {
             console.log(message);
         }
     }
     
     var deviceInfo = {
+        deviceGetCurrentPosition : function() {
+            var options = {
+                enableHighAccuracy: true
+            },
+                that = this;
+        
+            console.log("Waiting for geolocation information...");
+        
+            navigator.geolocation.getCurrentPosition(function() {
+                that.onGeoLocationSuccess.apply(that, arguments);
+            }, function() {
+                onError.apply(that, arguments);
+            }, options);
+        },
+        
+        onGeoLocationSuccess : function(position) {
+            latitude = position.coords.latitude ;
+            longitude = position.coords.longitude;
+            /*alert('Latitude: ' + position.coords.latitude + '\n' +
+            'Longitude: ' + position.coords.longitude + '\n' +
+            'Altitude: ' + position.coords.altitude + '\n' +
+            'Accuracy: ' + position.coords.accuracy + '\n' +
+            'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+            'Heading: ' + position.coords.heading + '\n' +
+            'Speed: ' + position.coords.speed + '\n' +
+            'Timestamp: ' + position.timestamp + '\n');*/
+        },
+            
+        deviceGetCurrentLatitude : function() {
+            return latitude;
+        },
+        
+        deviceGetCurrentLongitude : function() {
+            return longitude;
+        },
+        
         deviceOsVersion : function() {
             return device.version;   
         },
@@ -207,26 +269,39 @@ var app = (function (win) {
             return device.platform
         },
         
-        deviceOrientation : function(){
+        deviceOrientation : function() {
             return currentOrientation;
         },
         
-        deviceConnection : function(){
+        deviceWidth : function() {
+            return deviceWidth;  
+        },
+        
+        deviceConnection : function() {
             return navigator.connection.type;
         },
         
-        deviceOffline : function(){
+        deviceOffline : function() {
+            if (app.spinnerService.viewModel.checkSimulator() == false) {
+                app.spinnerService.viewModel.spinnerStop();
+            }
             app.consoleLog("offline:" + navigator.connection.type);
             app.Alert.openAlertWindow("Connection Error", "Internet connection lost");
         },
         
-        deviceOnline : function(){
+        deviceOnline : function() {
+            if (app.spinnerService.viewModel.checkSimulator() == false) {
+                app.spinnerService.viewModel.spinnerStop();
+            }
             app.consoleLog("online" + navigator.connection.type);
             app.Alert.openAlertWindow("Connection", "Internet connection established");
             app.Connections.setDefaultConnection("DEF");
         },
         
         deviceResume : function() {
+            if (app.spinnerService.viewModel.checkSimulator() == false) {
+                app.spinnerService.viewModel.spinnerStop();
+            }
             if (app.deviceInfo.deviceIsScanning() === false) {
                 app.mobileApp.navigate('#view-transitions');
                 app.AppicationMenuControl.drawerListPreLogin();
@@ -242,13 +317,12 @@ var app = (function (win) {
                     app.Connections.setDefaultConnection("DEF");
                 }
             }
-            else{
+            else {
                 app.ScanBarcode.setScanning(false);
             }
         },
         
         deviceIsSimulator : function() {
-            
             if (window.navigator.simulator == undefined) {
                 return false;
             }
@@ -265,7 +339,7 @@ var app = (function (win) {
     var deviceSecureUDID = (function () {
         var isSimulator = app.deviceInfo.deviceIsSimulator();
         if (isSimulator === false) {
-        //if (window.navigator.simulator === false) {
+            //if (window.navigator.simulator === false) {
             if (device.platform.toUpperCase() == "IOS") {
                 var secureDeviceIdentifier = window.plugins.secureDeviceIdentifier;
                 
@@ -281,14 +355,13 @@ var app = (function (win) {
                     currentDeviceSecureUDID = device.uuid;
                 }
             }
-            else{
+            else {
                 currentDeviceSecureUDID = device.uuid;
             }
         }
         else {
             currentDeviceSecureUDID = device.uuid;  
         }
-        
     });
     
     var loadDeviceSecureUDID = function() {
@@ -299,14 +372,20 @@ var app = (function (win) {
         if (currentDeviceSecureUDID === undefined) {
             currentDeviceSecureUDID = deviceSecureUDID();
         }
+        console.log(currentDeviceSecureUDID);
         return currentDeviceSecureUDID;
     };
     
-    var navigate = function(e, code){
-        if (code == "LOGOUT"){
+    var navigate = function(e, code) {
+        if (code == "LOGOUT") {
             logout();
         }
         app.mobileApp.navigate(e);
+    };
+
+    // Logout user
+    var logout = function () {
+        navigateOut();
     };
     
     // Navigate to app home
@@ -316,12 +395,11 @@ var app = (function (win) {
     
     // Navigate to app home
     var navigateOut = function () {
+        if (app.spinnerService.viewModel.checkSimulator() == false) {
+            app.spinnerService.viewModel.spinnerStop();
+        }
         app.AppicationMenuControl.drawerListPreLogin();
-    };
-    
-    // Logout user
-    var logout = function () {
-        navigateOut();
+        
     };
     
     var prevent = function(e) {
@@ -333,13 +411,11 @@ var app = (function (win) {
         app.consoleLog("onShow");
     };
     
-    var onInit = function(e){
+    var onInit = function(e) {
         app.consoleLog("onInit");
-        
     };
     
-    var showSpinner = function(message){
-        
+    var showSpinner = function(message) {
     };
     
     return {
@@ -362,6 +438,7 @@ var app = (function (win) {
         getApplicationVersion: getApplicationVersion,
         postDeviceReady: postDeviceReady,
         onVersionSuccess: onVersionSuccess,
+        slideShow : slideShow,
         consoleLog: consoleLog
     };
 }(window));

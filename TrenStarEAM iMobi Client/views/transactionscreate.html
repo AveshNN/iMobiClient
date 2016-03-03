@@ -1,0 +1,410 @@
+<!--Select the current area-->
+<div data-role="view" id="transactionsCurrentArea" data-title="Transactions" data-model="app.TransactionsCreate" data-init="app.TransactionsCreate.init('userProfileNameTransactionsCurrentArea')" data-show="app.TransactionsCreate.show">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="left" data-role="button" href="#transactions" data-icon="drawer-button" data-transition="slide"></a>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='userProfileNameTransactionsCurrentArea' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='transactionTypeCurrentArea' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+
+    <div data-role="content">
+        <div class="screenName" style="display:block;font-size: 1em;color:white">Select Current Area</div>
+        <ul id="grouped-listviewsCurrentArea"></ul>
+
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="customListViewTemplateCurrentArea">
+    <a onclick="app.TransactionsCreate.selectCurrentArea('${TProfileId}', '${Description}')" >${Description}</a>
+</script>
+
+<!--Select the Next area-->
+<div data-role="view" id="transactionsNextArea" data-title="Transactions" data-model="app.TransactionsCreate">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsCurrentArea?type=')" data-icon="drawer-button" data-transition="slide"></a>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='userProfileNametransactionsNextArea' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='userCurrentAreatransactionsNextArea' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='transactionTypeNextArea' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <div data-role="content">
+        <div class="screenName" style="display:block;font-size: 1em;color:white">Select Next Area</div>
+        <ul id="grouped-listviewsNextArea"></ul>
+    </div>
+
+    <div data-role="footer">
+        <a onclick="app.TransactionsCreate.selectNextArea('${TProfileId}', '${Description}')" style="display:block;text-align: center;background-color:red; color:white" data-role="button" >Skip</a>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="customListViewTemplateNextArea">
+    <a onclick="app.TransactionsCreate.selectNextArea('${TProfileId}', '${Description}')" >${Description}</a>
+</script>
+
+<!--Select the Details, Order Number, Vehicle Registration etc-->
+<div data-role="view" id="transactionsDetails" data-title="Transactions" data-model="app.TransactionsCreate">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsNextArea?type=')" data-icon="drawer-button" data-transition="slide"></a>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='userProfileNametransactionsDetails' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='userCurrentAreatransactionsDetails' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='userNextAreatransactionsDetails' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='transactionTypeDetails' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <div data-role="content">
+        <div class="screenName" style="display:block;font-size: 1em;color:white">Transaction Details</div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li>
+                        Order Number
+                        <input type="text" style="font-size:.8em" id="orderNumber" placeholder="Order Number"/>
+                    </li>
+                    <li>
+                        Vehicle Registration
+                        <input type="text" style="font-size:.8em" id="vehicleReg" placeholder="Vehicle Registration"/>
+                    </li>
+                    <li>
+                        Waybill
+                        <input type="text" style="font-size:.8em" id="waybill" placeholder="Waybill"/>
+                    </li>
+                    <li>
+                        Pick Slip Number
+                        <input type="text" style="font-size:.8em" id="pickSlip" placeholder="Pick Slip Number"/>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <a onclick="app.TransactionsCreate.selectTransactionDetails()" style="display:block;text-align: center;;background-color:red; color:white" data-role="button" >Next</a>
+    </div>
+</div>
+
+<!--Scan containers\main items -->
+<div data-role="view" id="transactionsScan" data-title="Transactions" data-model="app.TransactionsCreate" data-init="app.TransactionsCreate.transactionsScanInit('txttransactionsScanBarcode')">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsDetails?type=')" data-icon="drawer-button" data-transition="slide"></a>
+            <a data-align="right" data-role="button" id="scanCam" data-icon="camera" data-click="app.TransactionsCreate.scanCameraMain;">Scan</a>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='userProfileNametransactionsScan' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='userCurrentAreatransactionsScan' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='userNextAreatransactionsScan' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='transactionTypeScan' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                Barcode
+                <input data-role="autocomplete" class="inputBox" type="text" id="txttransactionsScanBarcode" 
+                       style="width:100%;background-color:white;color:black;text-transform:uppercase" onchange="app.TransactionsCreate.validateItem(this, true);"  />
+            </li>
+        </ul>
+    </header>
+    <div data-role="content">
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li style="background-color:black">
+                        <label style="font-size: 1em;color:white">
+                            Scanned Items
+                            <input type="text" id="sumOfScannedItems" style="font-weight:bold; font-size: 1em;color:lightgreen;text-align: right" readonly value="0"/>
+                        </label>
+                    </li>
+
+                </ul>
+            </li>
+            <li id='itemscannedlist'>
+                <ul id="grouped-Barcodes"></ul>
+            </li>
+            <li>
+                <a onclick="app.TransactionsCreate.clearAllScannedItems(true);" style="display:block;text-align: center; color:black" data-role="button" >Clear All</a>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <a onclick="app.TransactionsCreate.selectTransactionSummary()" style="display:block;text-align: center;;background-color:red; color:white" data-role="button" >Scanning Complete</a>
+        <div data-role="navbar">
+            <div id='displayValidation' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="customListBarcodeScanned">
+    <a onclick="app.TransactionsCreate.navigatetoLink('${Item}', true)">${Item} </a>
+    <a data-role="detailbutton" onclick="app.TransactionsCreate.removeScannedItem('${Item}', true)" data-style="rowdelete"></a>
+</script>
+
+<!--Scan products\link items -->
+<div data-role="view" id="transactionsScanLinks" data-title="Transactions" data-model="app.TransactionsCreate">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" id="scanCam" data-icon="camera" data-click="app.TransactionsCreate.scanCameraLink">Scan</a>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='mainItem' style="display:block;font-size: 1.5em;color:white; text-align:center"></div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Sub-Items
+                <input data-role="autocomplete" class="inputBox" type="text" id="txttransactionsScanLink" 
+                       style="width:100%;background-color:white;color:black;text-transform:uppercase" onchange="app.TransactionsCreate.validateItem(this, false);"  />
+            </li>
+        </ul>
+    </header>
+
+    <div data-role="content">
+        <ul>
+            <a data-role="button" id="scanButton" data-icon="camera" data-click="app.TransactionsCreate.scanCameraLink">Scan</a>
+        </ul>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+
+                    <li style="background-color:black">
+                        <label style="font-size: 1em;color:white">
+                            Scanned Items
+                            <input type="text" id="sumOfScannedItemsLinks" style="font-weight:bold; font-size: 1em;color:lightgreen;text-align: right" readonly value="0"/>
+                        </label>
+                    </li>
+
+                </ul>
+            </li>
+            <li id='itemscannedlist'>
+                <ul id="grouped-BarcodesLinks"></ul>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <a href="#transactionsScan" style="display:block;text-align: center;;background-color:red; color:white" data-role="button" >Next Item</a>
+        <div data-role="navbar">
+            <div id='displayValidationLinks' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="customListBarcodeScannedLinks">
+    <a>${Item}</a>
+    <a data-role="detailbutton" onclick="app.TransactionsCreate.removeScannedItem('${Item}', false)" data-style="rowdelete"></a>
+
+</script>
+
+<div data-role="view" id="transactionsScanLinksQuantity" data-title="Transactions" data-model="app.TransactionsCreate">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='mainIteml' style="display:block;font-size: 1.5em;color:white; text-align:center"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='linkItem' style="display:block;font-size: 1.5em;color:white; text-align:center"></div>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Quantity
+                <input data-role="autocomplete" class="inputBox" type="number" id="txttransactionsScanLinkQuantity" 
+                       style="width:100%;background-color:white;color:black;" />
+            </li>
+        </ul>
+    </header>
+
+    <div data-role="footer">
+        <a data-role="button" style="display:block;text-align: center;;background-color:red; color:white"  onclick="app.TransactionsCreate.selectTransactionQuantity()" data-transition="slide">Done</a>
+        <div data-role="navbar">
+            <div id='numbericValidation' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+        </div>
+    </div>
+</div>
+
+<!--Summary of transactin-->
+<div data-role="view" id="transactionsSummary" data-title="Summary" data-model="app.TransactionsCreate">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsScan?type=')" data-icon="drawer-button" data-transition="slide"></a>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='userProfileNametransactionsSummary' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='userCurrentAreatransactionsSummary' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='userNextAreatransactionsSummary' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='transactionTypeSummary' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <div data-role="content">
+        <div class="screenName" style="display:block;font-size: 1em;color:white">Items Transacted</div>
+        <ul id="grouped-itemTransactionSummary"></ul>
+    </div>
+
+    <div data-role="footer">
+        <a onclick="app.TransactionsCreate.selectTransactionEnd()" style="display:block;text-align: center;background-color:red; color:white" data-role="button" >Next</a>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="customListItemTransactionSummary">
+    <div class="container">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="summarySub">
+                    ${Item}
+                    <div class="summaryQty">${Quantity}</div>
+                </div>
+            </li>
+        </ul>
+    </div>    
+</script>
+<script type="text/x-kendo-template" id="customListItemTransactionSummaryNoLink">
+
+</script>
+    
+<!--End Transaction-->
+<div data-role="view" id="transactionsEnd" data-title="Transactions" data-model="app.TransactionsCreate">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsSummary?type=')" data-icon="drawer-button" data-transition="slide"></a>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='userProfileNametransactionsSign' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='userCurrentAreatransactionsSign' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='userNextAreatransactionsSign' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='transactionTypeSign' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+        
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <div data-role="content">
+        <div class="screenName" style="display:block;font-size: 1em;color:white">Signatures</div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li>
+                        <a onclick="app.TransactionsCreate.selectTransactionSign('User Signature', 'USER')" style="display:block;text-align: left;" data-role="button" >User Signature</a>
+                    </li>
+                    <li>
+                        <a onclick="app.TransactionsCreate.selectTransactionSign('Client or Supervisor Signature', 'CLIENTSUPER')" style="display:block;text-align: left;" data-role="button" >Client\Supervisor Signature</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="footer">
+        <a onclick="app.TransactionsCreate.selectTransactionSubmit()" style="display:block;text-align: center;;background-color:red; color:white" data-role="button" >Submit Transaction</a>
+
+    </div>
+</div>
+    
+<!--Capture Signatures-->
+<div data-role="view" id="transactionsSignature" data-title="Transactions" data-model="app.TransactionsCreate">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+        </div>
+    </header>
+    <div data-role="content">
+        <div class="screenName" id="signTypeDescription" style="display:block;font-size: 1em;color:white; margin-top:1em"></div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                
+                <ul style="display:block;background-color:brown;">
+                    <canvas id="signature" style="border-left-style:none;border-right-style:none;border-bottom-style:solid;border-color:brown;border-width:thin;background-color:antiquewhite"/>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div data-role="footer">
+        <a  data-role="button" onclick="app.TransactionsCreate.selectTransactionSaveSignature();" style="display:block;text-align: center;;background-color:red; color:white" data-transition="slide">Done</a>
+    </div>
+</div>

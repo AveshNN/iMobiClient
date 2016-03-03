@@ -4,6 +4,19 @@
         <title></title>
         <meta charset="utf-8" />
 
+        <!-- shims for backwards compatibility -->
+        <script type="text/javascript" src="js/functionPrototypeBind.js"></script>
+        <script type="text/javascript" src="js/classList.js"></script>
+        <script type="text/javascript" src="js/requestAnimationFrame.js"></script>
+
+        <!-- famous -->
+        <link rel="stylesheet" type="text/css" href="styles/famous.css" />
+        <script type="text/javascript" src="js/famous-global.min.js"></script>
+
+        <!-- app code -->
+        <link rel="stylesheet" type="text/css" href="styles/app.css" />
+        <script type="text/javascript" src="js/main.js"></script>
+        
         <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 
         <link href="styles/main.css" rel="stylesheet" />
@@ -13,8 +26,8 @@
         <script src="kendo/js/jquery.min.js"></script>
 
         <script src="kendo/js/kendo.mobile.min.js"></script>
-
         
+        <script src="js/swipe.js"></script>
 
         <script src="scripts/app.js"></script>
 
@@ -45,13 +58,20 @@
         <script src="scripts/inventory.js"></script>
         <script src="scripts/devices.js"></script>
         <script src="scripts/reports.js"></script>
+        <script src="scripts/transactions.js"></script>
+        <script src="scripts/transactionscreate.js"></script>
 
+        <script src="js/modernizer.js"></script>
+        <script src="js/signatureCapture.js"></script>
         <script src="canvasjs/canvasjs.min.js"></script>
         <script src="amCharts/amcharts.js"></script>
         <script src="amCharts/funnel.js"></script>
         <script src="amCharts/serial.js"></script>
         <script src="scripts/modalAlert.js"></script>
         <script src="scripts/../Plugins/cordova-secureudid-master/www/SecureDeviceIdentifier.js"></script>
+        
+
+        
     </head>
     <body>
 
@@ -61,19 +81,64 @@
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
                 </div>
+                <div>
+                    <img id="img" class="innovationImage" src="views/images/Innovation.png" />
+                </div>
+
             </header>
 
-            <div data-role="content" id="view-transitions-content" class="imageLocation"></div>
-            <footer data-role="footer">
+            <!--<div data-role="content" id="view-transitions-content" class="imageLocation">
+               
+            </div>-->
+
+            <div data-role="content">
+
+                <!-- <img id="img" class="innovationImage" src="views/images/bridge.png" />-->
+
                 <a data-role="button" id="btnLogin" data-rel="modalview" data-click="app.Login.openLoginWindow" class="transitions-button">Login</a>
                 <a data-role="button" id="btnConnections" data-rel="modalview" data-click="app.Login.openConnectionWindow" class="connections-button">Available Systems</a>
+
+                <div id='slider' class='swipe'>
+                    <div class='swipe-wrap'>
+                        <div>
+                            <img id="img" class="innovationImage" src="views/images/slide/ALPAL_1024x640.png" />
+                        </div>
+                        <div>
+                            <img id="img" class="innovationImage" src="views/images/slide/KLTSeries_1024x640.png" />
+                        </div>
+                        <div>
+                            <img id="img" class="innovationImage" src="views/images/slide/Omega-Rigid_1024x640.png" />
+                        </div>
+                        <div>
+                            <img id="img" class="innovationImage" src="views/images/slide/plastic-bin-stacked_1024x640.png" />
+                        </div>
+                        <!--<div><img id="img" class="innovationImage" src="views/images/slide/rolltainers.png" /></div>-->
+                        <div>
+                            <img id="img" class="innovationImage" src="views/images/slide/solidsided_1024x640.png" />
+                        </div>
+                        <div>
+                            <img id="img" class="innovationImage" src="views/images/slide/Steel-Pallet_1024x640.png" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <footer data-role="footer">
+
                 <div id='applicationVersion' style="display:block;font-size: 0.7em; font-style:italic;text-align:left;padding-left:3px"></div>
             </footer>
+
+            <!--<footer data-role="footer">
+            <a data-role="button" id="btnLogin" data-rel="modalview" data-click="app.Login.openLoginWindow" class="transitions-button">Login</a>
+            <a data-role="button" id="btnConnections" data-rel="modalview" data-click="app.Login.openConnectionWindow" class="connections-button">Available Systems</a>
+            <div id='applicationVersion' style="display:block;font-size: 0.7em; font-style:italic;text-align:left;padding-left:3px"></div>
+            </footer>-->
         </div>
 
         <div data-role="modalview" id="modalview-login" style="width: 95%; " data-transition="overlay:up" data-init="app.Login.init">
-            <p id="loginStatus" > Please Login</p>
-            <p id="loginStatusConnection" class="loginStatusCondition"></p>
+               <p id="loginStatus" >Please Login
+                            <p id="loginStatusConnection" class="loginStatusCondition"></p>                 
             <div data-role="header">
                 <div data-role="navbar" id="modelNavbar">
 
@@ -92,7 +157,7 @@
                 </li>
             </ul>
 
-            <a id="modalview-login-button" data-click="app.Login.login"  data-role="button">Continue</a><br />
+            <a id="modalview-login-button" class="modalview-login-button" data-click="app.Login.login"  data-role="button">Continue</a><br />
 
         </div>
 

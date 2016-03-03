@@ -1,0 +1,42 @@
+<div data-role="view" id="transactions" data-title="Transactions" data-model="app.Transactions" data-init="app.Transactions.init('userProfileNameTransactions')" data-show="app.Transactions.show">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+        </div>
+    </header>
+    <div data-role="content">
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='userProfileNameTransactions' style="display:block;font-size: 1em;color:white"></div>
+                    </li>                   
+                </ul>
+            </li>
+
+            <li>
+                Transaction Type
+                <ul>
+                    <li>
+                        <a onclick="app.Transactions.navigateTransactions('views/transactionscreate.html?type=MOVEIN')" >Receive</a>
+                    </li>
+                    <li>
+                        <a onclick="app.Transactions.navigateTransactions('views/transactionscreate.html?type=LINKIN')" >Receive with Products</a>
+                    </li>
+                    <li>
+                        <a onclick="app.Transactions.navigateTransactions('views/transactionscreate.html?type=MOVEOUT')">Dispatch</a>
+                    </li>
+                    <li>
+                        <a onclick="app.Transactions.navigateTransactions('views/transactionscreate.html?type=LINKOUT')">Dispatch with Products</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div data-role="footer">
+        <div data-role="navbar">
+            <div id='resultHistoryRequest' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+        </div>
+    </div>
+</div>

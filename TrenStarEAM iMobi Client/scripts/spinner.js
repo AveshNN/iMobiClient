@@ -16,12 +16,12 @@
             }
         },
 
-        withCallback: function () {
+        withMessageCallback: function (message) {
             if (!this.checkSimulator()) {
                 window.plugins.spinnerDialog.show(
                     null,
-                    null,
-                    function(msg) {alert("Callback msg: " + msg)}
+                    message,
+                    function() {app.Service.abortAjaxCall()}
                 );
             }
         },
