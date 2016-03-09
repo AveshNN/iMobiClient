@@ -6,6 +6,12 @@
     {
         content: "\e04f";
     }
+
+#view-transitions
+{
+    overflow:auto;    
+    
+}
 #view-transitions-content
 {
     background-color: white;
@@ -78,11 +84,6 @@
     top: 9.5em;
     background-color: white;
 }
-#view-transitions .km-footer
-{
-    background-color: white;
-    position:fixed;
-}
 
 
 .km-footer
@@ -91,6 +92,13 @@
     bottom:0px;
     
 }
+
+#view-transitions .km-footer
+{
+    background-color: white;
+    position:fixed;
+}
+
 
 .inputBox
 {
@@ -374,6 +382,14 @@
         display: block;
     }
 
+    .swipe
+{
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+    top:1em;
+}
+
 }
 
 
@@ -389,6 +405,13 @@
         margin-top: 1em;
         display: block;
     }
+.swipe
+{
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+    top:4em;
+}
 
 }
 
@@ -418,6 +441,14 @@
         font-size:larger;
     }
 
+    .swipe
+{
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+    top:4em;
+}
+
 }
 
 /*samsung tablet*/
@@ -437,6 +468,14 @@
         top: 11.5em;
         background-color: white;
     }
+
+    .swipe
+{
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+    top:4em;
+}
 
 }
 
@@ -465,6 +504,15 @@
         color: black;
         font-size:xx-large;
     }
+    
+    .swipe
+{
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+    top:4em;
+}
+
 }
 
 h4.time
@@ -482,12 +530,6 @@ h4.time
     -webkit-transform: translateZ(0);
 }
 
-.swipe
-{
-    overflow: hidden;
-    visibility: hidden;
-    position: relative;
-}
 
 .swipe-wrap
 {

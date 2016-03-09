@@ -372,7 +372,6 @@ var app = (function (win) {
         if (currentDeviceSecureUDID === undefined) {
             currentDeviceSecureUDID = deviceSecureUDID();
         }
-        console.log(currentDeviceSecureUDID);
         return currentDeviceSecureUDID;
     };
     

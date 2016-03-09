@@ -28,11 +28,8 @@ app.TransactionsCreate = (function () {
             document.getElementById('userProfileNametransactionsSummary').innerHTML = app.User.userProfileDefaultTProfile(); 
             
             type = e.view.params.type;
-            
-            
-        
             app.TransactionsCreate.resetAllItems();
-            console.log(app.User.userProfileUserId());
+            
             var userDisplay;
             switch (type) {
                 case "MOVEIN":
@@ -81,11 +78,10 @@ app.TransactionsCreate = (function () {
             else {
                 getCurrentArea(trackingProfileId);
             }
-            
-            console.log(smartTransaction);
         };
         
         var initial = function(x) {
+            console.log("init");
             displayControl = x;
         }
         
@@ -155,10 +151,12 @@ app.TransactionsCreate = (function () {
             }
             
             document.getElementById('userCurrentAreatransactionsNextArea').innerHTML = smartTransaction.AtTProfileDescription;
-            app.TransactionsCreate.navigateTransactions("transactionsNextArea?type=");
+            
+            app.TransactionsCreate.navigateTransactions("transactionsNextArea");
         };
         
         var selectNextArea = function (nextTProfileId, nextDescription) {
+            console.log("hi");
             if ((nextTProfileId != "-1") && (nextTProfileId != "${TProfileId}")) {
                 smartTransaction.ToTProfileId = nextTProfileId;
                 smartTransaction.ToTProfileDescription = nextDescription;
@@ -180,7 +178,7 @@ app.TransactionsCreate = (function () {
             document.getElementById('waybill').value = "";
             document.getElementById('pickSlip').value = "";
             
-            app.TransactionsCreate.navigateTransactions("transactionsDetails?type=");
+            app.TransactionsCreate.navigateTransactions("transactionsDetails");
         };
         
         var selectTransactionDetails = function() {
@@ -198,9 +196,8 @@ app.TransactionsCreate = (function () {
                 nextAreaControl.innerHTML = smartTransaction.ToTProfileDescription;
             }
             
-            app.TransactionsCreate.resetAllItems();
-            
-            app.TransactionsCreate.navigateTransactions("transactionsScan?type=");
+            app.TransactionsCreate.resetAllItems();            
+            app.TransactionsCreate.navigateTransactions("transactionsScan");
         };
         
         var selectTransactionEnd = function() {
@@ -212,7 +209,7 @@ app.TransactionsCreate = (function () {
                 nextAreaControl.innerHTML = smartTransaction.ToTProfileDescription;
             }
             
-            app.TransactionsCreate.navigateTransactions("transactionsEnd?type=");
+            app.TransactionsCreate.navigateTransactions("transactionsEnd");
         };
         
         var selectTransactionSummary = function() {
@@ -246,7 +243,7 @@ app.TransactionsCreate = (function () {
                 app.ListControl.applyDataTemplateGroupBy(control, itemSummary, "#customListItemTransactionSummary", "MainItem");
             }
             
-            app.TransactionsCreate.navigateTransactions("transactionsSummary?type=");
+            app.TransactionsCreate.navigateTransactions("transactionsSummary");
         };
         
         var selectTransactionSign = function(signTypeDescription, signType) {
@@ -257,7 +254,7 @@ app.TransactionsCreate = (function () {
             sigCapture = new SignatureCapture("signature", signType);
             sigCapture.clear();
             
-            app.TransactionsCreate.navigateTransactions("transactionsSignature?type=");
+            app.TransactionsCreate.navigateTransactions("transactionsSignature");
         };
         
         var selectTransactionSaveSignature = function() {
@@ -270,7 +267,7 @@ app.TransactionsCreate = (function () {
                 smartTransaction.ClientSupervisorSignature = sigCapture.toString();
             }
             
-            app.TransactionsCreate.navigateTransactions("transactionsEnd?type=");
+            app.TransactionsCreate.navigateTransactions("transactionsEnd");
         };
         
         var selectTransactionSubmit = function(){
@@ -315,7 +312,7 @@ app.TransactionsCreate = (function () {
                 app.TransactionsCreate.displayItemsScanned(false, theMainItem);
                 console.log(itemScannedListLinks);
             
-                app.TransactionsCreate.navigateTransactions("transactionsScanLinks?type=");
+                app.TransactionsCreate.navigateTransactions("transactionsScanLinks");
             }  
             else {  
                 var validateQuantity = document.getElementById("numbericValidation");
@@ -332,15 +329,18 @@ app.TransactionsCreate = (function () {
             document.getElementById(txttransactionsScanBarcode).focus();
         };
         
-        var navigateTransactions = function (e) {                       
-            app.mobileApp.navigate("#" + e + type);
+        var navigateTransactions = function (e) {  
+            console.log("#" + e + "?type=" + type);
+            app.mobileApp.navigate("#" + e + "?type=" + type);
+            //app.mobileApp.navigate("#" + e);
+            
         };
         
         var navigatetoLink = function(item) {
             if (smartTransaction.Type === "SMARTLINK") {
                 document.getElementById("mainItem").innerHTML = item;
                 app.TransactionsCreate.displayItemsScanned(false, item);
-                app.TransactionsCreate.navigateTransactions("transactionsScanLinks?type=");
+                app.TransactionsCreate.navigateTransactions("transactionsScanLinks");
             }
         };
         
@@ -453,7 +453,7 @@ app.TransactionsCreate = (function () {
                         app.TransactionsCreate.displayItemsScanned(isMainItem, item);
                         app.TransactionsCreate.displayItemsScanned(false, item);
                         
-                        app.TransactionsCreate.navigateTransactions("transactionsScanLinks?type=");
+                        app.TransactionsCreate.navigateTransactions("transactionsScanLinks");
                     }
                 }
                 else {
@@ -463,7 +463,7 @@ app.TransactionsCreate = (function () {
                     document.getElementById("linkItem").innerHTML = item;
                     document.getElementById("txttransactionsScanLinkQuantity").value = 1;
                     
-                    app.TransactionsCreate.navigateTransactions("transactionsScanLinksQuantity?type=");
+                    app.TransactionsCreate.navigateTransactions("transactionsScanLinksQuantity");
                 }
             }
             else {

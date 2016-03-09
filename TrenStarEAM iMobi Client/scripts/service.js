@@ -79,8 +79,6 @@ app.Service = (function () {
             else {
                 data = data + "&connectionCode=" + getServiceCode();
             
-                console.log(wcfServiceUrl);
-            
                 if (connectionType == "none") {
                     //alert("No internet connection");
                     app.Alert.openAlertWindow("Connection Error", "No internet connection");

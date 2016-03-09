@@ -30,10 +30,16 @@ app.ItemOption = (function () {
             app.mobileApp.navigate(e + itemOptionItemBarcode);
         };
         
+         var navigateItemsHome = function(view) {
+            
+            document.location.href = view;
+        };
+        
         return {
             init : initial,
             show : show,
-            navigateItemOptions: navigateItemOptions
+            navigateItemOptions: navigateItemOptions,
+            navigateItemsHome : navigateItemsHome
             
         };
     }());

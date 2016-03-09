@@ -25,6 +25,8 @@ app.QuickItem = (function () {
             displayControl = x;
         };
         
+       
+        
         var getItemDetails = function() {
             var data = "barcode=" + quickItemItemBarcode;  
             

@@ -11,6 +11,7 @@ app.AppicationMenuControl = (function () {
     var appicationMenuControl = (function () {
         var drawerListPreLogin = function() {
             
+            var isSimulator = app.deviceInfo.deviceIsSimulator();
             
             var groupedData = [];
    
@@ -22,7 +23,6 @@ app.AppicationMenuControl = (function () {
             app.ListControl.applyDataTemplate(control, groupedData, "#templatelistviewsMenu");
             
             app.Login.show();
-            
         };
         
         var drawerListPostLogin = function() {

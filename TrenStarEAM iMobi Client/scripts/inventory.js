@@ -24,6 +24,7 @@ app.Inventory = (function () {
         
         var show = function (e) {
             var defaultTrackingProfile = app.User.userProfileDefaultTProfile();
+            
             document.getElementById(displayControl).innerHTML = defaultTrackingProfile
             document.getElementById(displayControlInventoryType).innerHTML = defaultTrackingProfile;
             document.getElementById(displayControlInventoryProfile).innerHTML = defaultTrackingProfile;
@@ -40,22 +41,26 @@ app.Inventory = (function () {
             var trackingProfileId = app.User.userProfileDefaultTProfileId();
             inventoryType = type;
             
-            app.consoleLog(document.getElementById("navbarInventory"));
-            if (type == "INBOUND") {
+            if (type === "INBOUND") {
                 document.getElementById("navbarInventory").innerHTML = "Inbound Inventory";
             }
-			
-            if (type == "OUTBOUND") {
-                document.getElementById("navbarInventory").innerHTML = "Outbound Inventory";
-            }
-			
-            if (type == "ONSITE") {
-                document.getElementById("navbarInventory").innerHTML = "Onsite Inventory";
+            else {
+                if (type === "OUTBOUND") {
+                    document.getElementById("navbarInventory").innerHTML = "Outbound Inventory";
+                }
+                else {
+                    if (type === "ONSITE") {
+                        document.getElementById("navbarInventory").innerHTML = "Onsite Inventory";
+                    }
+                }
             }
             
-            document.location.href = view;
+            //document.location.href = view;
+            app.mobileApp.navigate("#" + view);
             
-            getInventory(type, trackingProfileId);
+            if (type !== "HOME") {
+                getInventory(type, trackingProfileId);
+            }
         };
         
         var navigateInventoryProfile = function(itemTypeId, itemType, type, count) {
@@ -65,23 +70,25 @@ app.Inventory = (function () {
             document.getElementById("selectedItemType").innerHTML = itemType;
             document.getElementById("quantity").value = count;
             
-            if (type == "Inbound Inventory") {
+            if (type === "Inbound Inventory") {
                 type = "INBOUND";
                 inventoryType = type;
                 
                 getInventoryProfile(type, trackingProfileId, itemTypeId);
-                document.location.href = "#view-inventory-profiles";
+                //document.location.href = "#view-inventory-profiles";
+                app.mobileApp.navigate("#view-inventory-profiles");
             }
 			
-            if (type == "Outbound Inventory") {
+            if (type === "Outbound Inventory") {
                 type = "OUTBOUND";
                 inventoryType = type;
                 
                 getInventoryProfile(type, trackingProfileId, itemTypeId);
-                document.location.href = "#view-inventory-profiles";
+                //document.location.href = "#view-inventory-profiles";
+                app.mobileApp.navigate("#view-inventory-profiles");
             }
             
-            if (type == "Onsite Inventory") {
+            if (type === "Onsite Inventory") {
                 type = "ONSITE";
                 inventoryType = type;
             }

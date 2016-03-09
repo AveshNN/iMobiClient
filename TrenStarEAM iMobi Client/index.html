@@ -16,7 +16,7 @@
         <!-- app code -->
         <link rel="stylesheet" type="text/css" href="styles/app.css" />
         <script type="text/javascript" src="js/main.js"></script>
-        
+
         <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 
         <link href="styles/main.css" rel="stylesheet" />
@@ -26,7 +26,7 @@
         <script src="kendo/js/jquery.min.js"></script>
 
         <script src="kendo/js/kendo.mobile.min.js"></script>
-        
+
         <script src="js/swipe.js"></script>
 
         <script src="scripts/app.js"></script>
@@ -69,9 +69,7 @@
         <script src="amCharts/serial.js"></script>
         <script src="scripts/modalAlert.js"></script>
         <script src="scripts/../Plugins/cordova-secureudid-master/www/SecureDeviceIdentifier.js"></script>
-        
 
-        
     </head>
     <body>
 
@@ -97,17 +95,18 @@
 
                 <a data-role="button" id="btnLogin" data-rel="modalview" data-click="app.Login.openLoginWindow" class="transitions-button">Login</a>
                 <a data-role="button" id="btnConnections" data-rel="modalview" data-click="app.Login.openConnectionWindow" class="connections-button">Available Systems</a>
-
+                
                 <div id='slider' class='swipe'>
                     <div class='swipe-wrap'>
                         <div>
-                            <img id="img" class="innovationImage" src="views/images/slide/ALPAL_1024x640.png" />
+                            <img id="img" class="innovationImage" src="views/images/slide/Omega-Bin_1024x640.png" />
+                        </div>
+                        
+                         <div>
+                            <img id="img" class="innovationImage" src="views/images/slide/Omega-Cross-stacking_1024x640.png" />
                         </div>
                         <div>
                             <img id="img" class="innovationImage" src="views/images/slide/KLTSeries_1024x640.png" />
-                        </div>
-                        <div>
-                            <img id="img" class="innovationImage" src="views/images/slide/Omega-Rigid_1024x640.png" />
                         </div>
                         <div>
                             <img id="img" class="innovationImage" src="views/images/slide/plastic-bin-stacked_1024x640.png" />
@@ -121,14 +120,14 @@
                         </div>
                     </div>
                 </div>
+                
 
             </div>
-            
+
             <footer data-role="footer">
 
                 <div id='applicationVersion' style="display:block;font-size: 0.7em; font-style:italic;text-align:left;padding-left:3px"></div>
             </footer>
-
             <!--<footer data-role="footer">
             <a data-role="button" id="btnLogin" data-rel="modalview" data-click="app.Login.openLoginWindow" class="transitions-button">Login</a>
             <a data-role="button" id="btnConnections" data-rel="modalview" data-click="app.Login.openConnectionWindow" class="connections-button">Available Systems</a>
@@ -137,8 +136,9 @@
         </div>
 
         <div data-role="modalview" id="modalview-login" style="width: 95%; " data-transition="overlay:up" data-init="app.Login.init">
-               <p id="loginStatus" >Please Login
-                            <p id="loginStatusConnection" class="loginStatusCondition"></p>                 
+            <p id="loginStatus" >
+            Please Login
+            <p id="loginStatusConnection" class="loginStatusCondition"></p>
             <div data-role="header">
                 <div data-role="navbar" id="modelNavbar">
 

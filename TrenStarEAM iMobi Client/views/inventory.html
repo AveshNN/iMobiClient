@@ -11,7 +11,7 @@
             Inbound
             <ul>
                 <li>
-                    <a onclick="app.Inventory.navigateInventory('#view-inventory', 'INBOUND');" data-transition="slide">Expected Inventory</a>
+                    <a onclick="app.Inventory.navigateInventory('view-inventory', 'INBOUND');" data-transition="slide">Expected Inventory</a>
                 </li>
             </ul>
         </li>
@@ -19,7 +19,7 @@
             Outbound
             <ul>
                 <li>
-                    <a onclick="app.Inventory.navigateInventory('#view-inventory', 'OUTBOUND');" data-transition="slide">Dispatched Inventory</a>
+                    <a onclick="app.Inventory.navigateInventory('view-inventory', 'OUTBOUND');" data-transition="slide">Dispatched Inventory</a>
                 </li>
             </ul>
         </li>
@@ -27,7 +27,7 @@
             Onsite
             <ul>
                 <li>
-                    <a onclick="app.Inventory.navigateInventory('#view-inventory', 'ONSITE');" data-transition="slide">Onsite Volumes</a>
+                    <a onclick="app.Inventory.navigateInventory('view-inventory', 'ONSITE');" data-transition="slide">Onsite Volumes</a>
                 </li>
             </ul>
         </li>
@@ -38,7 +38,7 @@
     <header data-role="header">
         <div data-role="navbar">
             <div id='navbarInventory' style="display:block;font-size: 1em;color:white"></div>
-            <a data-align="right" data-role="button" href="#inventory" data-icon="drawer-button"></a>
+            <a data-align="right" data-role="button" onclick="app.Inventory.navigateInventory('inventory', 'HOME');"  data-icon="drawer-button"></a>
         </div>
         <ul data-role="listview" data-style="inset" data-type="group">
             <li>
@@ -67,7 +67,7 @@
 <div data-role="view" id="view-inventory-profiles" data-title="Inventory" data-model="app.Inventory" >
     <header data-role="header">
         <div data-role="navbar" id="navbarProfileInventory">
-            <a data-align="right" data-role="button" href="#view-inventory" data-icon="drawer-button"></a>
+            <a data-align="right" data-role="button" onclick="app.Inventory.navigateInventory('view-inventory', 'HOME');" data-icon="drawer-button"></a>
             <div id='pType' style="display:block;font-size: 1em;color:white"></div>
         </div>
         <ul data-role="listview" data-style="inset" data-type="group">
