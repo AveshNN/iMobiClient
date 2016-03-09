@@ -3,7 +3,7 @@
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
-            <a data-align="left" data-role="button" href="#transactions" data-icon="drawer-button" data-transition="slide"></a>
+            <a data-align="left" data-role="button" href="views/transactions.html" data-icon="drawer-button" data-transition="slide"></a>
         </div>
         <ul data-role="listview" data-style="inset" data-type="group">
             <li>
@@ -31,11 +31,11 @@
 </script>
 
 <!--Select the Next area-->
-<div data-role="view" id="transactionsNextArea" data-title="Transactions" data-model="app.TransactionsCreate">
+<div data-role="view" id="transactionsNextArea" data-title="Transactions" data-model="app.TransactionsCreate" >
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
-            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsCurrentArea?type=')" data-icon="drawer-button" data-transition="slide"></a>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsCurrentArea');" data-icon="drawer-button" data-transition="slide"></a>
         </div>
         <ul data-role="listview" data-style="inset" data-type="group">
             <li>
@@ -59,12 +59,12 @@
     </div>
 
     <div data-role="footer">
-        <a onclick="app.TransactionsCreate.selectNextArea('${TProfileId}', '${Description}')" style="display:block;text-align: center;background-color:red; color:white" data-role="button" >Skip</a>
+        <a onclick="app.TransactionsCreate.selectNextArea('${TProfileId}', '${Description}'); return false;" style="display:block;text-align: center;background-color:red; color:white" data-role="button" >Skip</a>
     </div>
 </div>
 
 <script type="text/x-kendo-template" id="customListViewTemplateNextArea">
-    <a onclick="app.TransactionsCreate.selectNextArea('${TProfileId}', '${Description}')" >${Description}</a>
+    <a onclick="app.TransactionsCreate.selectNextArea('${TProfileId}', '${Description}');return false;" >${Description}</a>
 </script>
 
 <!--Select the Details, Order Number, Vehicle Registration etc-->
@@ -72,7 +72,7 @@
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
-            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsNextArea?type=')" data-icon="drawer-button" data-transition="slide"></a>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsNextArea')" data-icon="drawer-button" data-transition="slide"></a>
         </div>
         <ul data-role="listview" data-style="inset" data-type="group">
             <li>
@@ -129,7 +129,7 @@
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
-            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsDetails?type=')" data-icon="drawer-button" data-transition="slide"></a>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsDetails')" data-icon="drawer-button" data-transition="slide"></a>
             <a data-align="right" data-role="button" id="scanCam" data-icon="camera" data-click="app.TransactionsCreate.scanCameraMain;">Scan</a>
         </div>
         <ul data-role="listview" data-style="inset" data-type="group">
@@ -290,7 +290,7 @@
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
-            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsScan?type=')" data-icon="drawer-button" data-transition="slide"></a>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsScan')" data-icon="drawer-button" data-transition="slide"></a>
         </div>
         <ul data-role="listview" data-style="inset" data-type="group">
             <li>
@@ -342,7 +342,7 @@
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
-            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsSummary?type=')" data-icon="drawer-button" data-transition="slide"></a>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsSummary')" data-icon="drawer-button" data-transition="slide"></a>
         </div>
         <ul data-role="listview" data-style="inset" data-type="group">
             <li>
