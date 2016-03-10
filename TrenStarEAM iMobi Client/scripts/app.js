@@ -8,7 +8,6 @@ var app = (function (win) {
     var deviceWidth;
     var longitude;
     var latitude;
-    var mySwipe;
     
     var onDeviceReady = function() {
         // hide the splash screen as soon as the app is ready. otherwise
@@ -190,7 +189,9 @@ var app = (function (win) {
     });
     
     var onError = function(tx, e) {
+        if (e != undefined){
         showError("Error: " + e.message);
+            }
     }; 
             
     var onSuccess = function(tx, r) {

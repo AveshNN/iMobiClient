@@ -24,14 +24,16 @@ app.Profile = (function () {
             
             if (app.User.userProfileIsMobiClientAdmin() === false) {
                 
-                disableSwitchProfile(false);
+                //disableSwitchProfile(false);
+                $("#switchProfile").data("kendoMobileButton").enable(false);
             }
             else {
-                disableSwitchProfile(true);
+                //disableSwitchProfile(true);
+                $("#switchProfile").data("kendoMobileButton").enable(true);
             }
             
            service = app.Service.getService() + "GetUserTrackingProfilesByUserId";
-           app.consoleLog(service);
+          
         };
         
         var initial = function(fname, lname, dprofile, email, dtprofileId) {
@@ -40,11 +42,11 @@ app.Profile = (function () {
             displayControlDefaultProfile = dprofile;
             displayControlEmail = email;
             
-            $("#switch").kendoMobileSwitch({
+            /*$("#switch").kendoMobileSwitch({
                                                checked: false,
                                                onLabel: "YES",
                                                offLabel: "NO"
-                                           });
+                                           });*/
         };
                 
        
@@ -55,6 +57,7 @@ app.Profile = (function () {
         
         var switchChange = function(e) {
             var check = e.checked;
+            console.log(check);
             if (check === true) {
                 $("#modalview-Profiles").kendoMobileModalView("open");  
                 document.getElementById("search").style.display = "none";
@@ -68,16 +71,26 @@ app.Profile = (function () {
             }
         };
         
+        var switchProfile = function(){
+             $("#modalview-Profiles").kendoMobileModalView("open");  
+                document.getElementById("search").style.display = "none";
+                document.getElementById("txtSearch").value = "";
+                
+                
+                app.Profile.scrollToTopProfile();
+                
+                groupedData = [];
+                app.Profile.getProfiles();
+        };
+        
         var closeProfilesWindow = function(TProfileId, TProfile) {
             $("#modalview-Profiles").kendoMobileModalView("close");  
             
-            var switchInstance = $("#switch").data("kendoMobileSwitch");
+           /* var switchInstance = $("#switch").data("kendoMobileSwitch");
 
             // get the checked state of the switch.
-            app.consoleLog(switchInstance.check());
             // set the checked state of the switch.
-            switchInstance.check(false);
-            app.consoleLog(switchInstance.check());
+            switchInstance.check(false);*/
             
             app.Profile.scrollToTopProfile();
             
@@ -89,14 +102,11 @@ app.Profile = (function () {
          var cancelProfilesWindow = function() {
             $("#modalview-Profiles").kendoMobileModalView("close");  
             
-            var switchInstance = $("#switch").data("kendoMobileSwitch");
+           /* var switchInstance = $("#switch").data("kendoMobileSwitch");
 
             // get the checked state of the switch.
-            app.consoleLog(switchInstance.check());
             // set the checked state of the switch.
-            switchInstance.check(false);
-            app.consoleLog(switchInstance.check());
-            
+            switchInstance.check(false);*/
             app.Profile.scrollToTopProfile();
         };
         
@@ -175,7 +185,8 @@ app.Profile = (function () {
             scrollToTopProfile : scrollToTopProfile,
             cancelProfilesWindow : cancelProfilesWindow,
             searchProfile : searchProfile,
-            searchProfileClick : searchProfileClick
+            searchProfileClick : searchProfileClick,
+            switchProfile: switchProfile
         };
     }());
     

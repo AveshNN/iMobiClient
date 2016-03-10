@@ -3,24 +3,11 @@
     <head>
         <title></title>
         <meta charset="utf-8" />
-
-        <!-- shims for backwards compatibility -->
-        <script type="text/javascript" src="js/functionPrototypeBind.js"></script>
-        <script type="text/javascript" src="js/classList.js"></script>
-        <script type="text/javascript" src="js/requestAnimationFrame.js"></script>
-
-        <!-- famous -->
-        <link rel="stylesheet" type="text/css" href="styles/famous.css" />
-        <script type="text/javascript" src="js/famous-global.min.js"></script>
-
-        <!-- app code -->
-        <link rel="stylesheet" type="text/css" href="styles/app.css" />
-        <script type="text/javascript" src="js/main.js"></script>
-
+        
         <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 
-        <link href="styles/main.css" rel="stylesheet" />
-
+        <link href="styles/main.css" rel="stylesheet" />       
+        
         <script src="cordova.js"></script>
 
         <script src="kendo/js/jquery.min.js"></script>
@@ -28,7 +15,7 @@
         <script src="kendo/js/kendo.mobile.min.js"></script>
 
         <script src="js/swipe.js"></script>
-
+        
         <script src="scripts/app.js"></script>
 
         <script src="scripts/database.js"></script>
@@ -135,7 +122,7 @@
             </footer>-->
         </div>
 
-        <div data-role="modalview" id="modalview-login" style="width: 95%; " data-transition="overlay:up" data-init="app.Login.init">
+        <div data-role="modalview" id="modalview-login" style="width: 95%; height:95%" data-transition="overlay:up" data-init="app.Login.init">
             <p id="loginStatus" >
             Please Login
             <p id="loginStatusConnection" class="loginStatusCondition"></p>
@@ -161,7 +148,7 @@
 
         </div>
 
-        <div data-role="modalview" id="modalview-Connection" style="width: 95%; " data-transition="overlay:up">
+        <div data-role="modalview" id="modalview-Connection" style="width: 95%; height:95%" data-transition="overlay:up">
 
             <div data-role="header">
                 <div data-role="navbar" id="modelNavbar">
