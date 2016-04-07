@@ -1,0 +1,29 @@
+<div data-role="view" data-title="Looking for Beacons" data-layout="main" data-model="app.Beacon" >
+    <div class="rounded">
+
+        <div class="subtitle">
+                Press the buttons below to start or stop listening for Beacons.
+                Make sure you've turned on Bluetooth otherwise not much will happen.
+            </div>
+            <div class="buttons">
+                <a data-role="button" onclick="app.Beacon.start()" class="button">Start</a>
+                <a data-role="button" onclick="app.Beacon.stop()" class="button">Stop</a>
+            </div>
+           <div id="beaconlog" style="text-align: left; font: 9px; margin-left: 5%; width:90%; border: 1px solid #DDD; border-radius: 5px; padding: 5px; color: #666">
+                When beacons come in range of this device, we will log their raw data here..
+            </div>
+    </div>
+    
+    
+    
+    <!--<div class="radar_wrapper">
+        <div class="bar"></div>
+        <div class="radial"></div>
+        <div class="hr"></div>
+        <div class="vr"></div>
+        <div class="back"></div>
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+        <div class="dot3"></div>
+    </div>-->
+</div>

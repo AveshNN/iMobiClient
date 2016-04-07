@@ -21,6 +21,7 @@ app.TransactionsCreate = (function () {
          
         var show = function (e) {
             document.getElementById(displayControl).innerHTML = 
+            document.getElementById('userProfileNameTransactionsFromArea').innerHTML = 
             document.getElementById('userProfileNametransactionsNextArea').innerHTML = 
             document.getElementById('userProfileNametransactionsDetails').innerHTML = 
             document.getElementById('userProfileNametransactionsScan').innerHTML =
@@ -64,6 +65,7 @@ app.TransactionsCreate = (function () {
             
             displayControlTransactionType = document.getElementById("transactionTypeCurrentArea");
             displayControlTransactionType.innerHTML = 
+            document.getElementById('transactionTypeFromArea').innerHTML =
             document.getElementById('transactionTypeNextArea').innerHTML = 
             document.getElementById('transactionTypeDetails').innerHTML = 
             document.getElementById('transactionTypeScan').innerHTML =
@@ -84,6 +86,32 @@ app.TransactionsCreate = (function () {
             console.log("init");
             displayControl = x;
         }
+        
+        var getFromArea = function(x) {
+            var data = "tpL1TProfileId=" + x;  
+            
+            app.Service.ajaxCall("GetNextTrackingProfile", data, "app.TransactionsCreate.setFromArea", "Getting Areas");
+        };
+        
+        var setFromArea = function(list) {
+            var groupedFromArea = [];
+            
+            if (list != null) {
+                for (var i = 0;i < list.length;i++) {
+                    var area = list[i];
+                
+                    groupedFromArea.push({ TProfileId: area.TProfileIdTo, Description: area.Description });    
+                }
+            }
+            if (groupedFromArea.length == 0) {
+                groupedFromArea.push({ TProfileId: -1, Description: "No Areas Available" });       
+            }
+            
+            var control = $("#grouped-listviewsFromArea");            
+            app.ListControl.removeListViewWrapper(control);
+        
+            app.ListControl.applyDataTemplate(control, groupedFromArea, "#customListViewTemplateFromArea");
+        };
         
         var getCurrentArea = function(x) {
             var data = "tpL1TProfileId=" + x;  
@@ -135,9 +163,11 @@ app.TransactionsCreate = (function () {
             app.ListControl.applyDataTemplate(control, groupedNextArea, "#customListViewTemplateNextArea");
         };
         
-        var selectCurrentArea = function (currentTProfileId, currentDescription) {
-            smartTransaction.AtTProfileId = currentTProfileId;
-            smartTransaction.AtTProfileDescription = currentDescription;
+        var selectFromArea = function (fromTProfileId, fromDescription) {
+            if ((fromTProfileId != "-1") && (fromTProfileId != "${TProfileId}")) {
+                smartTransaction.FromTProfileId = fromTProfileId;
+                smartTransaction.FromTProfileDescription = fromDescription;
+            }
             
             //Move forward to Next Area
             app.TransactionsCreate.resetAllItems();
@@ -153,6 +183,26 @@ app.TransactionsCreate = (function () {
             document.getElementById('userCurrentAreatransactionsNextArea').innerHTML = smartTransaction.AtTProfileDescription;
             
             app.TransactionsCreate.navigateTransactions("transactionsNextArea");
+        };
+        
+        var selectCurrentArea = function (currentTProfileId, currentDescription) {
+            smartTransaction.AtTProfileId = currentTProfileId;
+            smartTransaction.AtTProfileDescription = currentDescription;
+            
+            //Move forward to Next Area
+            app.TransactionsCreate.resetAllItems();
+            
+            var trackingProfileId = app.User.userProfileDefaultTProfileId();
+            if (smartTransaction.IsIn === false) {
+                app.TransactionsCreate.setFromArea(null);
+            }
+            else {
+                app.TransactionsCreate.getFromArea(trackingProfileId);
+            }
+            
+            document.getElementById('userCurrentAreatransactionsFromArea').innerHTML = smartTransaction.AtTProfileDescription;
+            
+            app.TransactionsCreate.navigateTransactions("transactionsFromArea");
         };
         
         var selectNextArea = function (nextTProfileId, nextDescription) {
@@ -246,6 +296,13 @@ app.TransactionsCreate = (function () {
             app.TransactionsCreate.navigateTransactions("transactionsSummary");
         };
         
+        var selectTransactionLicense = function() {
+            var image = document.getElementById('driversLicenseImage');
+                image.src = "";
+            app.TransactionsCreate.navigateTransactions("transactionsLicense");
+            
+        };
+        
         var selectTransactionSign = function(signTypeDescription, signType) {
             var nextAreaControl = document.getElementById('signTypeDescription');
             nextAreaControl.innerHTML = signTypeDescription;
@@ -268,6 +325,7 @@ app.TransactionsCreate = (function () {
             }
             
             app.TransactionsCreate.navigateTransactions("transactionsEnd");
+            
         };
         
         var selectTransactionSubmit = function(){
@@ -298,6 +356,7 @@ app.TransactionsCreate = (function () {
             app.Transactions.navigateTransactions('views/transactions.html');
             
             smartTransaction = null;
+            
         };
         
         var selectTransactionQuantity = function() {
@@ -546,16 +605,40 @@ app.TransactionsCreate = (function () {
             itemScannedListLinks = [];
             app.TransactionsCreate.displayItemsScanned(true, null);  
             app.TransactionsCreate.displayItemsScanned(false, null);
+            
+        };
+        
+        var takePicture = function(){
+             navigator.camera.getPicture(takePictureSuccess, takePictureFail, {
+                                                       quality: 50,
+                                                       destinationType: Camera.DestinationType.DATA_URL,
+                                                       //destinationType: Camera.DestinationType.FILE_URI,
+                                                       correctOrientation: true
+                                }); 
+        };
+        
+        var takePictureSuccess = function(imageData){
+            var image = document.getElementById('driversLicenseImage');
+                image.src = "data:image/jpeg;base64," + imageData;
+    
+                smartTransaction.DriversLicense = imageData;
+        };
+        
+        var takePictureFail = function(imageData){
+            smartTransaction.DriversLicense = "";
         };
         
         return {
             init : initial,
             show : show,
             navigateTransactions : navigateTransactions,
+            getFromArea: getFromArea,
+            setFromArea : setFromArea,
             getCurrentArea : getCurrentArea,
             setCurrentArea : setCurrentArea,
             getNextArea : getNextArea,
             setNextArea : setNextArea,
+            selectFromArea: selectFromArea,
             selectCurrentArea: selectCurrentArea,
             selectNextArea : selectNextArea,
             selectTransactionDetails : selectTransactionDetails,
@@ -574,7 +657,11 @@ app.TransactionsCreate = (function () {
             selectTransactionSaveSignature : selectTransactionSaveSignature,
             selectTransactionEnd : selectTransactionEnd,
             selectTransactionQuantity : selectTransactionQuantity,
-            selectTransactionSummary : selectTransactionSummary
+            selectTransactionSummary : selectTransactionSummary,
+            takePicture:takePicture,
+            takePictureSuccess:takePictureSuccess,
+            takePictureFail:takePictureFail,
+            selectTransactionLicense: selectTransactionLicense
         };
     }());
     

@@ -6,7 +6,7 @@
   "DisplayName": "iMobi Client",
   "Author": "TrenStar SA (Pty) Ltd",
   "Description": "iMobi Client",
-  "BundleVersion": "1.9.1.0",
+  "BundleVersion": "1.9.1.4",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
@@ -35,8 +35,7 @@
     "android.permission.VIBRATE"
   ],
   "DeviceOrientations": [
-    "Portrait",
-    "Landscape"
+    "Portrait"
   ],
   "AndroidHardwareAcceleration": "true",
   "iOSStatusBarStyle": "BlackOpaque",
@@ -53,6 +52,7 @@
     "ID_RESOLUTION_HD720P"
   ],
   "CorePlugins": [
+    "com.estimote.sdk@1.1.0",
     "com.phonegap.plugins.barcodescanner@2.0.0",
     "com.phonegap.plugins.sqlite@1.1.0",
     "cordova-plugin-camera",

@@ -9,7 +9,7 @@ var app = (function (win) {
     var longitude;
     var latitude;
     
-    var onDeviceReady = function() {
+    document.addEventListener('deviceready',function() {
         // hide the splash screen as soon as the app is ready. otherwise
         // Cordova will wait 5 very long seconds to do it for you.
         navigator.splashscreen.hide();
@@ -59,9 +59,11 @@ var app = (function (win) {
             }
         };
         
+        
         //app.Database.deleteTable();
         
         app.consoleLog("ready");
+        
         deviceWidth = $(window).width();
         /*deviceSecureUDID();
         var connectionType = app.deviceInfo.deviceConnection();
@@ -80,15 +82,15 @@ var app = (function (win) {
         app.deviceInfo.deviceGetCurrentPosition();
         StatusBar.overlaysWebView(true); //Turns off web view overlay.
         
-                    
-        
-    };
+    }, false);  
     
     // Handle "deviceready" event
-    document.addEventListener('deviceready', onDeviceReady, false);  
+    //document.addEventListener('deviceready', onDeviceReady, false);  
 
     var postDeviceReady = function() {
+        
         app.consoleLog("i am running post");
+        
         deviceSecureUDID();
         
         var connectionType = app.deviceInfo.deviceConnection();
@@ -106,6 +108,7 @@ var app = (function (win) {
         document.addEventListener("offline", app.deviceInfo.deviceOffline, false);
         document.addEventListener("online", app.deviceInfo.deviceOnline, false);
         document.addEventListener("resume", app.deviceInfo.deviceResume, false);
+        
         
         app.slideShow();
     };
@@ -441,4 +444,9 @@ var app = (function (win) {
         slideShow : slideShow,
         consoleLog: consoleLog
     };
+    
+    // wiring the fired event of the plugin to the callback function
+    document.addEventListener('beaconsReceived', onBeaconsReceived, false); 
+    
 }(window));
+

@@ -30,12 +30,51 @@
     <a onclick="app.TransactionsCreate.selectCurrentArea('${TProfileId}', '${Description}')" >${Description}</a>
 </script>
 
+<!--Select the from area-->
+<div data-role="view" id="transactionsFromArea" data-title="Transactions"  data-model="app.TransactionsCreate">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsCurrentArea');" data-icon="drawer-button" data-transition="slide"></a>
+        </div>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li id='headerProfile'>
+                        <div id='userProfileNameTransactionsFromArea' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='userCurrentAreatransactionsFromArea' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                    <li id='headerProfile'>
+                        <div id='transactionTypeFromArea' style="display:block;font-size: 1em;color:white"></div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+
+    <div data-role="content">
+        <div class="screenName" style="display:block;font-size: 1em;color:white">Select From Profile</div>
+        <ul id="grouped-listviewsFromArea"></ul>
+
+    </div>
+    
+    <div data-role="footer">
+        <a onclick="app.TransactionsCreate.selectFromArea('${TProfileId}', '${Description}'); return false;" style="display:block;text-align: center;background-color:red; color:white" data-role="button" >Skip</a>
+    </div>
+</div>
+
+<script type="text/x-kendo-template" id="customListViewTemplateFromArea">
+    <a onclick="app.TransactionsCreate.selectFromArea('${TProfileId}', '${Description}')" >${Description}</a>
+</script>
+
 <!--Select the Next area-->
 <div data-role="view" id="transactionsNextArea" data-title="Transactions" data-model="app.TransactionsCreate" >
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
-            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsCurrentArea');" data-icon="drawer-button" data-transition="slide"></a>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsFromArea');" data-icon="drawer-button" data-transition="slide"></a>
         </div>
         <ul data-role="listview" data-style="inset" data-type="group">
             <li>
@@ -317,7 +356,7 @@
     </div>
 
     <div data-role="footer">
-        <a onclick="app.TransactionsCreate.selectTransactionEnd()" style="display:block;text-align: center;background-color:red; color:white" data-role="button" >Next</a>
+        <a onclick="app.TransactionsCreate.selectTransactionLicense()" style="display:block;text-align: center;background-color:red; color:white" data-role="button" >Next</a>
     </div>
 </div>
 
@@ -336,13 +375,35 @@
 <script type="text/x-kendo-template" id="customListItemTransactionSummaryNoLink">
 
 </script>
+
+<!--Capture Drivers License-->
+<div data-role="view" id="transactionsLicense" data-title="Drivers License" data-model="app.TransactionsCreate">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsSummary')" data-icon="drawer-button" data-transition="slide"></a>
+        </div>
+    </header>
+    <div data-role="content">
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <img id="driversLicenseImage" style="width:100%;height:52%;background:white"/>
+            </li>
+        </ul>
+    </div>
+    <div data-role="footer">
+        <a data-role="button" id="scanPicture" class="scanButton" data-icon="camera" onclick="app.TransactionsCreate.takePicture();">Capture</a>
+        <a  data-role="button" onclick="app.TransactionsCreate.selectTransactionEnd();" style="display:block;text-align: center;;background-color:red; color:white" data-transition="slide">Next</a>
+    </div>
+</div>
+
     
 <!--End Transaction-->
 <div data-role="view" id="transactionsEnd" data-title="Transactions" data-model="app.TransactionsCreate">
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
-            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsSummary')" data-icon="drawer-button" data-transition="slide"></a>
+            <a data-align="left" data-role="button" onclick="app.TransactionsCreate.navigateTransactions('transactionsLicense')" data-icon="drawer-button" data-transition="slide"></a>
         </div>
         <ul data-role="listview" data-style="inset" data-type="group">
             <li>
@@ -408,3 +469,4 @@
         <a  data-role="button" onclick="app.TransactionsCreate.selectTransactionSaveSignature();" style="display:block;text-align: center;;background-color:red; color:white" data-transition="slide">Done</a>
     </div>
 </div>
+

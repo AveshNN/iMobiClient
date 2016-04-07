@@ -31,6 +31,8 @@ app.Transactions = (function () {
             this.Type = "SMARTMOVE";
             this.Origin = "SMARTDEVICE";
             this.DeviceName = app.getDeviceSecureUDID();
+            this.FromTProfileId = 0;
+            this.FromTProfileCode = "";
             this.AtTProfileId = 0;
             this.ToTProfileId = 0;
             this.AtTProfileCode = "";
@@ -48,6 +50,7 @@ app.Transactions = (function () {
             this.ClientSupervisorSignature = "";
             this.Longitude = app.deviceInfo.deviceGetCurrentLongitude();
             this.Latitude = app.deviceInfo.deviceGetCurrentLatitude();
+            this.DriversLicense = "";
             this.Items = [];
 
         };
