@@ -232,10 +232,17 @@ app.TransactionsCreate = (function () {
         };
         
         var selectTransactionDetails = function() {
-            smartTransaction.OrderNumber = document.getElementById('orderNumber').value;
+            smartTransaction.OrderNo = document.getElementById('orderNumber').value;
             smartTransaction.Waybill = document.getElementById('vehicleReg').value;
             smartTransaction.VehicleReg = document.getElementById('waybill').value;
             smartTransaction.PickSlip = document.getElementById('pickSlip').value;
+            
+            if ((smartTransaction.OrderNo === "") && (smartTransaction.Waybill === "") && (smartTransaction.VehicleReg === "") && (smartTransaction.PickSlip === ""))
+            {
+                app.Alert.openAlertWindow("Transaction Data", "You have not entered any transaction data");
+            }
+            else{
+            
             
             //Move forward to Scanning
             document.getElementById('userCurrentAreatransactionsScan').innerHTML = smartTransaction.AtTProfileDescription;
@@ -248,6 +255,7 @@ app.TransactionsCreate = (function () {
             
             app.TransactionsCreate.resetAllItems();            
             app.TransactionsCreate.navigateTransactions("transactionsScan");
+                }
         };
         
         var selectTransactionEnd = function() {
@@ -284,6 +292,7 @@ app.TransactionsCreate = (function () {
                 }
             }
             
+            if (itemSummary.length > 0){
             var control = $("#grouped-itemTransactionSummary");            
             app.ListControl.removeListViewWrapper(control);
             if (smartTransaction.Type === "SMARTMOVE") {        
@@ -294,6 +303,10 @@ app.TransactionsCreate = (function () {
             }
             
             app.TransactionsCreate.navigateTransactions("transactionsSummary");
+                }
+            else{
+                app.Alert.openAlertWindow("Scan", "Please scan a barcode");
+            }
         };
         
         var selectTransactionLicense = function() {
@@ -389,7 +402,7 @@ app.TransactionsCreate = (function () {
         };
         
         var navigateTransactions = function (e) {  
-            console.log("#" + e + "?type=" + type);
+            app.TransactionsCreate.scrollToTop();
             app.mobileApp.navigate("#" + e + "?type=" + type);
             //app.mobileApp.navigate("#" + e);
             
@@ -628,6 +641,10 @@ app.TransactionsCreate = (function () {
             smartTransaction.DriversLicense = "";
         };
         
+        var scrollToTop = function() {
+            $(".km-scroll-container").css("-webkit-transform", "");
+        };
+        
         return {
             init : initial,
             show : show,
@@ -661,7 +678,8 @@ app.TransactionsCreate = (function () {
             takePicture:takePicture,
             takePictureSuccess:takePictureSuccess,
             takePictureFail:takePictureFail,
-            selectTransactionLicense: selectTransactionLicense
+            selectTransactionLicense: selectTransactionLicense,
+            scrollToTop: scrollToTop
         };
     }());
     
