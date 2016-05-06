@@ -359,17 +359,28 @@ app.TransactionsCreate = (function () {
                 
                 smartTransaction.Items.push(sti);
             }
-            console.log(smartTransaction);
             
            var data = '{"transaction":' + JSON.stringify(smartTransaction) + '}';
             
             //data = '{transaction":"{Type":"SMARTMOVE","Origin":"SMARTDEVICE","DeviceName":"e0101010d38bde8e6740011221af335301010333","AtTProfileId":"5994","ToTProfileId":"0","AtTProfileCode":"","ToTProfileCode":"","AtTProfileDescription":"TSDROS2AwaitingParts","ToTProfileDescription":"","TransactionDate":"2016-01-29T130952.827Z","IsIn":"true","OrderNo":"","Waybill":"","VehicleReg":"","PickSlip":"","UserSignature":"","ClientSupervisorSignature":"","SmartTransactionItems":"[{Barcode":"RATT1A000002M","Kanban":"","SmartTransactionSubItems":"[]}]","OrderNumber":"}}';
             app.Service.ajaxCall("SubmitTransaction", data, "", "Submitting Transaction", "http://trenstaream.trenstar.co.za/TrenstarEAM.iMobile.Service.Client/Transaction.svc/");
             
-            app.Transactions.navigateTransactions('views/transactions.html');
+            /*app.Transactions.navigateTransactions('views/transactions.html');
             
-            smartTransaction = null;
+            smartTransaction = null;*/
             
+        };
+        
+        var callBackSubmitTransaction = function(result){
+            if (result === true){
+                app.TransactionsCreate.resetAllItems();
+                smartTransaction = null;
+                app.Transactions.navigateTransactions('views/transactions.html');
+                
+            }
+            else{
+                app.Alert.openAlertWindow("Transaction Error", "An error occurred. Please retry transaction");
+            }
         };
         
         var selectTransactionQuantity = function() {
@@ -679,7 +690,8 @@ app.TransactionsCreate = (function () {
             takePictureSuccess:takePictureSuccess,
             takePictureFail:takePictureFail,
             selectTransactionLicense: selectTransactionLicense,
-            scrollToTop: scrollToTop
+            scrollToTop: scrollToTop,
+            callBackSubmitTransaction: callBackSubmitTransaction
         };
     }());
     

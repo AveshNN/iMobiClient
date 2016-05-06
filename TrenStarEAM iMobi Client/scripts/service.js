@@ -44,7 +44,6 @@ app.Service = (function () {
                 //sets the new service
                 wcfServiceUrl = service;                
                 
-                
                 if (connectionType == "none") {
                     //alert("No internet connection");
                     app.Alert.openAlertWindow("Connection Error", "No internet connection");
@@ -67,12 +66,21 @@ app.Service = (function () {
                                      data: data,//JSON.stringify(data),
                                      contentType: "application/json; charset=utf-8",
                                      dataType: "json",
-                                     success: function(data) {
+                                     success: function() {
                                          if (app.spinnerService.viewModel.checkSimulator() == false) {
                                              app.spinnerService.viewModel.spinnerStop();
                                          }
-                                         return data;
-                                     }
+                                         
+                                         app.TransactionsCreate.callBackSubmitTransaction(true);
+                                         
+                                     },
+                                     error: function () {
+                                         if (app.spinnerService.viewModel.checkSimulator() == false) {
+                                             app.spinnerService.viewModel.spinnerStop();
+                                         }
+                                         
+                                         app.TransactionsCreate.callBackSubmitTransaction(false);
+                                     },
                                  });
                 }
             }

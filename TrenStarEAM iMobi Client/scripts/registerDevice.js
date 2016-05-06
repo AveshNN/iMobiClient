@@ -32,8 +32,7 @@ app.RegisterDevice = (function () {
         var sendDeviceData = function() {
             var userEmail = document.getElementById('email').value;
             
-            if (userEmail.value == "") {
-                app.hideLoading();    
+            if (userEmail === "") {
                 document.getElementById('status').innerHTML = "Email Required";
                 var el = document.getElementById('status');
                 var effect = kendo.fx(el).fadeOut().duration(6000);

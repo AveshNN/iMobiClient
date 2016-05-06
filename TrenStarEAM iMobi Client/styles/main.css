@@ -61,11 +61,15 @@
 }
 
 .summarySub{
-    display:block;font-size: 1em;text-align:center;
+    display:block;font-size: 1em;text-align:left;
 }
 
 .summaryQty{
     display:inline;font-size: 1em;color:green;text-align:right
+}
+
+.quantityInput{
+    display:inline;font-size: 1em;color:black;text-align:left;background-color: LightBlue;width:auto;
 }
 
 .subtitle {
