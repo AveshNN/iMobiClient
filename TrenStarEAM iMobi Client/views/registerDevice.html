@@ -11,7 +11,7 @@
                 <ul>
                     <li style="background-color:white">
                         <div id='divReg' style="display:block;font-size: 1em;color:red;font-weight:bold;text-align:center">EAM iMobi Device Registration</div>
-                        <div id='divRegStatus' style="display:block;font-size: .7em;color:red;font-weight:bold;text-align:center">You will receive an email on the status of registration</div>
+                        <div id='divRegStatus' style="display:block;font-size: .7em;color:red;font-weight:bold;text-align:center">Please supply a valid email address</div>
                     </li>
                 </ul>
             </li>
@@ -51,6 +51,8 @@
         <div data-role="navbar">
             <div id='status' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
         </div>
-        <a data-role="button" id="SendDeviceData" style="display:block" onclick="app.RegisterDevice.sendDeviceData();">Register</a>
+        <a data-role="button" id="SendDeviceData" style="display:block" onclick="app.RegisterDevice.registerValidateEmailAndGenerateOTP();">Validate</a>
     </div>
 </div>
+
+

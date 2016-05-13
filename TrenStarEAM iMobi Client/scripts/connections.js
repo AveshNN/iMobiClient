@@ -23,7 +23,6 @@ app.Connections = (function () {
                     for (var i = 0; i < rs.rows.length; i++) {
                         var connectionName = rs.rows.item(i).ConnectionName;
                         connectionSet = rs.rows.item(i).IsSet;
-                        app.consoleLog(connectionName + ":" + connectionSet);
                         if ((connectionSet == "true") || (connectionSet == "1")) {
                             app.Service.setServiceCode(rs.rows.item(i).ConnectionCode); 
                             //app.Service.setService(rs.rows.item(i).WCFConnection); 
@@ -54,6 +53,7 @@ app.Connections = (function () {
             });
             
             var renderdef = function (tx, rs) {
+                
                 if (rs.rows.length > 0) {
                     for (var i = 0; i < rs.rows.length; i++) {
                         if (rs.rows.item(i).ConnectionCode == connectionCode) {
@@ -74,6 +74,7 @@ app.Connections = (function () {
         };
         
         var defaultConnection = function(db) {
+            
             db.transaction(function(tx) {
                 tx.executeSql("INSERT INTO Connection(ConnectionName, ConnectionCode, WCFConnection, IsSet) VALUES (?,?,?,?)",
                               ["DEFAULT", "DEF", "http://trenstaream.trenstar.co.za/TrenstarEAM.iMobile.Service.Client/Service1.svc/", true],
@@ -91,9 +92,9 @@ app.Connections = (function () {
             });
             
             if (connectionCode != null) {
-                app.consoleLog("setNewConnection= " + connectionCode);
+                
                 var rendernew = function (tx, rs) {
-                    app.consoleLog("(rs.rows.length=" + rs.rows.length);
+                    
                     if (rs.rows.length > 0) {
                         /*for (var i = 0; i < rs.rows.length; i++) {
                         if (rs.rows.item(i).ConnectionCode == connectionCode) {
@@ -144,7 +145,7 @@ app.Connections = (function () {
             var found = false;
             
             if (app.spinnerService.viewModel.checkSimulator() == false) {
-            app.spinnerService.viewModel.withMessage("Applying User Connections");
+                app.spinnerService.viewModel.withMessage("Applying User Connections");
             }
             
             db.transaction(function(tx) {
@@ -152,11 +153,13 @@ app.Connections = (function () {
             });
             
             var renders = function (tx, rs) {
+                
                 if (rs.rows.length > 0) {
                     var connectionSet = false;
                     for (var i = 0;i < list.length;i++) {
+                        found = false;
                         availableConnections.push({ConnectionName:list[i].Connection, ConnectionCode:list[i].ConnectionCode});
-                            
+                        
                         for (var j = 0; j < rs.rows.length; j++) {
                             if (rs.rows.item(j).ConnectionCode == list[i].ConnectionCode) {
                                 found = true;
@@ -168,11 +171,26 @@ app.Connections = (function () {
                         if (found == false) {
                             app.Connections.insertConnection(list[i].Connection, list[i].ConnectionCode);
                             if (connectionSet == false) {
-                                app.consoleLog("set" + list[i].Connection);
                                 app.Connections.setNewConnection(list[i].Connection, list[i].ConnectionCode);
                                 connectionSet = true;
                             }
                         }
+                    }
+                    
+                    var listviewAvailableConnections = $("#grouped-listviewsAvailableConnections");
+                    app.ListControl.removeListViewWrapper(listviewAvailableConnections);
+
+                    app.ListControl.applyDataTemplate(listviewAvailableConnections, availableConnections, "#customListViewConnections");
+                }
+                else{
+                    var newConnectionSet = false;
+                    for (var i = 0;i < list.length;i++) {
+                        availableConnections.push({ConnectionName:list[i].Connection, ConnectionCode:list[i].ConnectionCode});
+                        app.Connections.insertConnection(list[i].Connection, list[i].ConnectionCode);
+                            if (newConnectionSet == false) {
+                                app.Connections.setNewConnection(list[i].Connection, list[i].ConnectionCode);
+                                newConnectionSet = true;
+                            }
                     }
                     
                     var listviewAvailableConnections = $("#grouped-listviewsAvailableConnections");
@@ -186,6 +204,8 @@ app.Connections = (function () {
                     app.Connections.defaultConnection(db);
                     
                     $('#loginStatusConnection').text("Sorry, No Access to EAM");
+                    $('#loginStatusConnectionForgotPassword').text("Sorry, No Access to EAM");
+                    
                 }
                 else {
                     db.transaction(function(txn) {
@@ -201,6 +221,8 @@ app.Connections = (function () {
                                     $('#' + rss.rows.item(i).ConnectionCode).addClass('connectionSelected');
                                 
                                     $('#loginStatusConnection').text(rss.rows.item(i).ConnectionName);
+                                    $('#loginStatusConnectionForgotPassword').text(rss.rows.item(i).ConnectionName);
+                                    
                                     app.Service.setServiceCode(rs.rows.item(i).ConnectionCode); 
                                 }
                             }

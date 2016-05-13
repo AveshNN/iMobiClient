@@ -59,6 +59,15 @@ app.Database = (function () {
             });
         };
         
+        var databaseRefresh = function(){
+            //Create the Database
+            
+            app.Database.openDB();
+            app.Database.deleteTable();
+            app.Database.createTable();
+            app.Connections.getUserConnnections(app.getDeviceSecureUDID());
+        };
+        
         var addVersion = function (version) {
             db().transaction(function(tx) {
                  app.consoleLog(version);
@@ -89,6 +98,15 @@ app.Database = (function () {
             });
         };
         
+         var addUserTransaction = function (userTxn) {
+            db().transaction(function(tx) {
+                tx.executeSql("INSERT INTO UserTransactions(TransactionData) VALUES (?)",
+                              [userTxn],
+                              app.onSuccess,
+                              app.onError);
+            });            
+        };
+        
         return{
             openDB:openDb,
             deleteTable: deleteTable,
@@ -96,7 +114,9 @@ app.Database = (function () {
             updateUserProfile:updateUserProfile,
             updateRecord:updateRecord,
             db:db,
-            addVersion:addVersion
+            addVersion:addVersion,
+            databaseRefresh: databaseRefresh,
+            addUserTransaction: addUserTransaction
         }
     }());
     

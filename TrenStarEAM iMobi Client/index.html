@@ -3,30 +3,28 @@
     <head>
         <title></title>
         <meta charset="utf-8" />
-        
+
         <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
 
-        <link href="styles/main.css" rel="stylesheet" />       
-        <link href="styles/radar.css" rel="stylesheet" />      
-        
+        <link href="styles/main.css" rel="stylesheet" />
+        <link href="styles/radar.css" rel="stylesheet" />
+
         <script src="cordova.js"></script>
 
         <script src="kendo/js/jquery.min.js"></script>
 
         <script src="kendo/js/kendo.mobile.min.js"></script>
 
-        
         <script src="js/swipe.js"></script>
-        
+
         <script src="scripts/beacons.js"></script>
         <script src="scripts/app.js"></script>
-        
+
         <script src="scripts/database.js"></script>
 
         <script src="scripts/connections.js"></script>
 
-        
-
+        <script src="scripts/forgotPassword.js"></script>
         <script src="scripts/login.js"></script>
         <script src="scripts/user.js"></script>
         <script src="scripts/spinner.js"></script>
@@ -36,12 +34,11 @@
 
         <script src="scripts/profile.js"></script>
         <script src="scripts/applicationMenuControl.js"></script>
-        
-        
+
         <script src="scripts/clientLiason.js"></script>
         <script src="scripts/listControl.js"></script>
         <script src="scripts/contacts.js"></script>
-        
+
         <script src="scripts/barcodeValidation.js"></script>
         <script src="scripts/scanBarcode.js"></script>
         <script src="scripts/quickItem.js"></script>
@@ -53,7 +50,7 @@
         <script src="scripts/transactions.js"></script>
         <script src="scripts/transactionscreate.js"></script>
         <script src="scripts/service.js"></script>
-        
+
         <script src="js/modernizer.js"></script>
         <script src="js/signatureCapture.js"></script>
         <script src="canvasjs/canvasjs.min.js"></script>
@@ -87,14 +84,14 @@
 
                 <a data-role="button" id="btnLogin" data-rel="modalview" data-click="app.Login.openLoginWindow" class="transitions-button">Login</a>
                 <a data-role="button" id="btnConnections" data-rel="modalview" data-click="app.Login.openConnectionWindow" class="connections-button">Available Systems</a>
-                
+
                 <div id='slider' class='swipe'>
                     <div class='swipe-wrap'>
                         <div>
                             <img id="img" class="innovationImage" src="views/images/slide/Omega-Bin_1024x640.png" />
                         </div>
-                        
-                         <div>
+
+                        <div>
                             <img id="img" class="innovationImage" src="views/images/slide/Omega-Cross-stacking_1024x640.png" />
                         </div>
                         <div>
@@ -112,12 +109,13 @@
                         </div>
                     </div>
                 </div>
-                
 
             </div>
 
             <footer data-role="footer">
-
+                <div data-role="navbar">
+                    <div id='statusHome' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+                </div>
                 <div id='applicationVersion' style="display:block;font-size: 0.7em; font-style:italic;text-align:left;padding-left:3px"></div>
             </footer>
             <!--<footer data-role="footer">
@@ -129,7 +127,7 @@
 
         <div data-role="modalview" id="modalview-login" style="width: 95%; height:95%" data-transition="overlay:up" data-init="app.Login.init">
             <p id="loginStatus" >
-            Please Login
+
             <p id="loginStatusConnection" class="loginStatusCondition"></p>
             <div data-role="header">
                 <div data-role="navbar" id="modelNavbar">
@@ -140,8 +138,11 @@
                 </div>
             </div>
             <ul data-role="listview" data-style="inset">
+
                 <li>
-                    <div id='deviceUUID' style="display:block;font-size: 0.7em;text-align:center"></div>
+                    <label for="loginname">Username:</label>
+                    <input type="text" id="loginname" required="required" placeholder="EAM Username" />
+
                 </li>
                 <li>
                     <label for="password">Password:</label>
@@ -150,9 +151,44 @@
             </ul>
 
             <a id="modalview-login-button" class="modalview-login-button" data-click="app.Login.login"  data-role="button">Continue</a><br />
-
+            <div style="display:block;font-size: 0.8em;text-align:center;padding-bottom:1em">EAM Secure Id</div>
+            <div id='deviceUUID' style="display:block;font-size: 0.7em;text-align:center;"></div>
+                <br />
+            <a id="forgotPassword" class="modalview-login-forgotPasswordbutton" data-click="app.ForgotPassword.openForgotPassword"  data-role="button">I forgot my password</a>
         </div>
 
+        <div data-role="modalview" id="modalview-ForgotPassword" style="width: 95%; height:95%" data-transition="overlay:up" data-init="app.ForgotPassword.init" data-show="app.ForgotPassword.show">
+            <p id="loginStatusConnectionForgotPassword" class="loginStatusCondition"></p>
+            <div data-role="header">
+                <div data-role="navbar" id="modelNavbar">
+
+                    <span>Password</span>
+
+                    <a data-click="app.ForgotPassword.closeForgotPassword" data-role="button" data-align="right">Close</a>
+                </div>
+            </div>
+            <ul data-role="listview" data-style="inset">
+
+                <li>
+                    <label for="loginname">Username:</label>
+                    <input type="text" id="loginnameForgotPassword" required="required" placeholder="EAM Username" />
+                     </li>
+                <li>
+                    <label for="email">Email:</label>
+                    <input type="text" id="emailaddress" required="required" placeholder="Email" />
+
+                </li>
+            </ul>
+
+            <a id="modalview-login-button" class="modalview-login-button" data-click="app.ForgotPassword.requestPassword"  data-role="button">Request Password</a><br />
+            
+            <div data-role="footer">
+                <div data-role="navbar">
+                    <div id='statusForgotPassword' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+                </div>
+            </div>
+        </div>
+                
         <div data-role="modalview" id="modalview-Connection" style="width: 95%; height:95%" data-transition="overlay:up">
 
             <div data-role="header">
@@ -162,6 +198,39 @@
                 </div>
             </div>
             <ul id="grouped-listviewsAvailableConnections"></ul>
+            <footer data-role="footer">
+                <a data-role="button" id="btnRefreshDB" style="display:block;text-align: center;background-color:red; color:white" onclick="app.Database.databaseRefresh();">Refresh Database</a>
+            </footer>
+        </div>
+
+        <div data-role="modalview" id="modalview-OTP" style="width: 95%; height:75%; opacity: 1.0;" data-transition="overlay:up">
+
+            <div data-role="header" style="background-color: rgba(36, 189, 255, 1);">
+
+                <div data-role="navbar" id="modelNavbar">
+                    <a data-align="left" data-role="button" data-icon="reply" onclick="app.RegisterDevice.closeOTPWindow();"></a>
+                    <span>EAM OTP</span>
+                </div>
+                <ul data-role="listview" data-style="inset">
+                    <li>
+                        <div>An EAM OTP has been sent to your email address</div>
+                    </li>
+                </ul>
+            </div>
+            <ul data-role="listview" data-style="inset">
+                <li>
+                    <label for="loginname">EAM OTP:</label>
+                    <input type="text" id="otp" required="required" placeholder="EAM OTP" />
+                </li>
+                <a data-role="button" id="requestNewOTP" style="display:block" onclick="app.RegisterDevice.requestNewOTP();">Request New OTP</a>
+            </ul>
+
+            <div data-role="footer">
+                <div data-role="navbar">
+                    <div id='statusOTP' style="display:block;font-size: 1em;color:white;font-weight:bold;text-align:center"></div>
+                </div>
+                <a data-role="button" id="SendDeviceData" style="display:block" onclick="app.RegisterDevice.registerValidateOTP();">Register</a>
+            </div>
         </div>
 
         <div data-role="modalview" id="modalview-Alert" style="width: 95%;" data-model="app.Alert" data-transition="overlay:up">

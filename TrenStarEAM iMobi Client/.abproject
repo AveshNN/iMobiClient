@@ -6,7 +6,7 @@
   "DisplayName": "iMobi Client",
   "Author": "TrenStar SA (Pty) Ltd",
   "Description": "iMobi Client",
-  "BundleVersion": "1.9.1.5",
+  "BundleVersion": "1.9.1.6",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",

@@ -9,13 +9,25 @@ app.Login = (function () {
 
     var loginViewModel = (function () {
         var $password;
+        var $loginname;
+        var security;
+        
+        var Security = function () {
+            this.IsOTPValidated = false;
+            this.IsApproved = false;
+            this.IsValid = false;      
+        };
+        
         
         var init = function () {
             $password = $('#password');
+            $loginname = $('#loginname');
         };
         
         var show = function () {
             $password.val('');
+            $loginname.val('');
+            document.location.href = "#view-transitions";
         };
         
         var getYear = function () {
@@ -23,12 +35,6 @@ app.Login = (function () {
             return currentTime.getFullYear();
         };
 
-        var validateUDID = function(secureUDID) {
-            var data = "uuid=" + secureUDID;
-            
-            app.Service.ajaxCall("ValidateUUID", data, "app.Login.validateLogin", "Validating Device");
-        };
-        
         var ValidateSecureUUID = function(secureUDID) {
             var data = "uuid=" + secureUDID;
             
@@ -38,9 +44,9 @@ app.Login = (function () {
         // Authenticate to use Everlive as a particular user
         var login = function () {
             var password = $password.val();
-            
+            var loginname = $loginname.val();
             var UDID = app.getDeviceSecureUDID();
-            var data = "smartPhoneDeviceUUID=" + UDID + "&password=" + password;
+            var data = "smartPhoneDeviceUUID=" + UDID + "&userName=" + loginname + "&password=" + password;
             
             app.Service.ajaxCall("ValidateLoginJSONP", data, "app.Login.setUserData","Validating Login");
         };
@@ -65,55 +71,100 @@ app.Login = (function () {
                 }
                 else {
                     show();
-                    document.getElementById('loginStatus').innerHTML = 'Incorrect password';
+                    document.getElementById('loginStatus').innerHTML = 'Incorrect Username or password';
                     navigator.notification.vibrate(3000);
                 }
             }
         };
         
         var validateLogin = function(list) {
-            navigator.notification.vibrate(3000);
+            //navigator.notification.vibrate(3000);
             
             var secure = list[0];
-           
-            if (secure.IsValid == false) {
+            security = new app.Login.Security();
+            security.IsValid = secure.IsValid;
+            security.IsOTPValidated = secure.IsOTPValidated;
+            security.IsApproved = secure.IsApproved;
+            
+            if (security.IsValid == false) {
                 $('#btnLogin').text('Register');
             }
             else {
-                if (secure.IsApproved == false) {
-                    $('#btnLogin').text('Reg Pending - Reload');
+                if (security.IsOTPValidated === false) {
+                    $('#btnLogin').text('Enter OTP');
                 }
                 else {
-                    $('#btnLogin').text('Login');
+                    if (security.IsApproved == false) {
+                        $('#btnLogin').text('Not Approved - Reload');
+                        document.getElementById('statusHome').innerHTML = "Account awaiting approval";
+                        var el = document.getElementById('statusHome');
+                        var effect = kendo.fx(el).fadeOut().duration(3000);
+                        effect.play();
+                    }
+                    else {
+                        $('#btnLogin').text('Login');
                     
-                    //var connectionButton = document.getElementById("btnConnections");
-                    //connectionButton.style.visibility = "visible";
+                        //var connectionButton = document.getElementById("btnConnections");
+                        //connectionButton.style.visibility = "visible";
                     
-                    app.Connections.getUserConnnections(app.getDeviceSecureUDID());
-                    //app.Connections.connection();
+                        app.Connections.getUserConnnections(app.getDeviceSecureUDID());
+                        //app.Connections.connection();
+                    }
                 }
             }
         };
         
         var openLoginWindow = function() {
-            var deviceStatus = $('#btnLogin').text();
-            if (deviceStatus == "Login") {
+            //var deviceStatus = $('#btnLogin').text();
+            //if (deviceStatus == "Login") {
+            if (security.IsValid === false) {
+                app.mobileApp.navigate("views/registerDevice.html", "");    
+            }
+            else {
+                if (security.IsOTPValidated === false) {
+                    $("#modalview-OTP").kendoMobileModalView("open");  
+                }
+                else {
+                    //if (deviceStatus == "Not Approved - Reload") {
+                    if (security.IsApproved === false) {
+                        $('#btnLogin').text('Not Approved - Reload');
+                        
+                        var UDID = app.getDeviceSecureUDID();
+                        app.Login.ValidateSecureUUID(UDID, "DEF");
+                    }
+                    else {
+                        $("#modalview-login").kendoMobileModalView("open");  
+                        document.getElementById('loginStatus').innerHTML = 'Please Login';
+                        app.loadDeviceSecureUDID();
+                    }
+                }
+            }
+            
+            /*if (security.IsValid === true) {
                 $("#modalview-login").kendoMobileModalView("open");  
                 app.loadDeviceSecureUDID();
             }
             else {
-                if (deviceStatus == "Register") {
+                //if (deviceStatus == "Register") {
+                if (security.IsValid === false) {
                     app.mobileApp.navigate("views/registerDevice.html", "");
                 }
                 else {
-                    if (deviceStatus == "Reg Pending - Reload") {
-                        $('#btnLogin').text('Reg Pending - Reload');
+                    //if (deviceStatus == "Register") {
+                    if (security.IsOTPValidated === false) {
+                        app.mobileApp.navigate("views/registerDevice.html", "");
+                    }
+                    else {
+                        //if (deviceStatus == "Not Approved - Reload") {
+                        if (security.IsApproved === false) {
+                            $('#btnLogin').text('Not Approved - Reload');
                         
-                        var UDID = app.getDeviceSecureUDID();
-                                app.Login.ValidateSecureUUID(UDID, "DEF");
+                            var UDID = app.getDeviceSecureUDID();
+                            app.Login.ValidateSecureUUID(UDID, "DEF");
+                        }
                     }
                 }
-            }
+            }*/
         };
         
         var closeLoginWindow = function() {
@@ -136,7 +187,6 @@ app.Login = (function () {
             init: init,
             show: show,
             getYear: getYear,
-            validateUDID:validateUDID,
             ValidateSecureUUID: ValidateSecureUUID,
             login: login,
             validateLogin: validateLogin,
@@ -144,7 +194,8 @@ app.Login = (function () {
             openLoginWindow: openLoginWindow,
             closeLoginWindow:closeLoginWindow,
             openConnectionWindow:openConnectionWindow,
-            closeConnectionWindow:closeConnectionWindow
+            closeConnectionWindow:closeConnectionWindow,
+            Security: Security
         };
     }());
 
